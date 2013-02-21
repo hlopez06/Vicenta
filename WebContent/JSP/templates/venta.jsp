@@ -13,15 +13,15 @@
 <!-- Cuerpo -->
 
 <!-- panel contenido principal( semillas + izquierdo + central + derecho) -->
-<div class="outer-center pane pane-center" id="outer-center" style="position: absolute; margin: 0px; left: 0px; right: 0px; top: 72px; bottom: 0px; height: 293px; width: 1366px; z-index: 1; visibility: visible; display: block; overflow: hidden;">
+<div id="outer-center" class="outer-center pane pane-center" style="position: absolute; top: 72px; bottom: 0px; width: 1366px; z-index: 1; visibility: visible; display: block; overflow: hidden;">
 
-	<div class="pane pane-center" id="mainContent" style="position: absolute; margin: 0px; left: 240px; right: 0px; top: 34px; bottom: 0px; height: 259px; width: 1126px; z-index: 1; visibility: visible; display: block;">                            
-	    <div class="content" id="docContent" style="position: relative; height: 259px; visibility: visible;">
+	<div id="mainContent" class="pane pane-center" style="position: absolute; left: 240px; top: 34px; bottom: 0px; width: 1126px; z-index: 1; visibility: visible; display: block;">                            
+	    <div class="content" id="docContent" style="position: relative; visibility: visible;">
 	<!-- panel contenido principal(central) -->  
 	        <div class="layout-content" id="ui-layout-content">
 	<!--cuerpo -->
 			
-				<div class="cabCentral" id="cabCentral">
+				<div id="cabCentral" class="cabCentral" >
 					<div style="font-size: 2.4em; margin-bottom: 0.25em; font-family: Arial,Helvetica,sans-serif; font-weight: bold;" id="titulo-pag">
 					   Facturador
 					</div>
@@ -30,14 +30,14 @@
 <!-- 				formulario de facturacion -->
 				<div id="formularioDeVentas">
 					<form action="mode/venta/facturar" method="POST" name="venta">
-						<div id="clientes" style="border-bottom:1.0em;">
-							<ul>
+						<div id="clientes" >
+							<ul class="formFactura">
 								<li>
 									<span>Nombre de cliente:</span>
 									<input type="text" maxlength="20" size="20" name="cl-nombre" value="cliente 01"/>
 								</li>
 								<li>
-									<span>Tipo:</span>S.A.
+									<span>Tipo:</span>
 									<input type="text" maxlength="20" size="20" name="cl-tipo" value="S.A."/>
 								</li>
 								<li>
@@ -51,8 +51,8 @@
 							</ul>
 						</div>
 						
-						<div id="info">
-							<ul>
+						<div id="info" style="">
+							<ul  class="formFactura">
 								<li>
 									<span>Dia:</span>
 									<input type="text" maxlength="20" size="20" name="inf-dia" value="06/05/1985"/>
@@ -68,18 +68,18 @@
 							</ul>
 						</div>
 						
-						<div id="productos">
-							<ul>
+						<div id="productos" style="">
+							<ul  class="formFactura">
 								<li></li>
 							</ul>
 						</div>
 						
-						<div id="total">
-							<ul>
+						<div id="total" style="">
+							<ul  class="formFactura">
 								<li></li>
 							</ul>
 						</div>
-						<input type="buttom" >
+						<input type="Button" name="Facturar" value="Facturar">
 					</form>
 				</div>
 				
@@ -94,14 +94,14 @@
                            
 <!-- panel contenido principal(izquierdo) -->  
                    
-    <div class="ui-layout-west pane pane-west" id="layout-west" style="position: absolute; right: auto; top: 34px; height: auto; z-index: 1; width: 239px; visibility: visible; display: block;">
+    <div class="ui-layout-west pane pane-west" id="layout-west" style="position: absolute; right: auto; top: 34px; height: 500px; z-index: 1; width: 239px; visibility: visible; display: block;">
 		<span id="west-closer" class="button-close button-close-west" title="Cerrar panel">&nbsp;</span>
-		<div class="header" id="westheader"></div>
-		<div class="content" id="westcontent" style="position: relative; visibility: visible;">
+		<div id="westheader" class="header" ></div>
+		<div id="westcontent" class="content" style="position: relative; visibility: visible;">
 							    	
 			<div id="subpanel-terminos-buscados" class="subpanel">
 				<h3 class="titulo-subpanel">
-					<a href="#" id="TermBus" class="opened">
+					<a id="TermBus" class="opened" href="#">
 						<img title="Lupa" alt="Lupa" src="../images/magnifier.png">
 						Buscar Cliente
 						</a>
