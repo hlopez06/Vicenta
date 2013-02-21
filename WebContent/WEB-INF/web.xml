@@ -3,11 +3,8 @@
   <display-name>K1</display-name>
   <welcome-file-list>
     <welcome-file>JSP/index.jsp</welcome-file>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
+    <welcome-file>indexError.html</welcome-file>
     <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
 	<servlet>
