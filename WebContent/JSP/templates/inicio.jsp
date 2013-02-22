@@ -23,7 +23,7 @@
 
 	<ul class="menuSup">
 
-		<li>		<a href="mode/venta" title="Ver carpetas y documentos guardados" alt="Hacer facturas">Factura</a>   			 	</li>
+		<li>		<a href="mode/facturador" title="Ver carpetas y documentos guardados" alt="Hacer facturas">Factura</a>   			 	</li>
 		<li>		<a href="mode/notaCredito" title="Ver/recuperar últimas sesiones" alt="Hacer nota de credito">Nota de credito</a>		</li>
 		<li>		<a href="mode/remito" title="Ver/recuperar últimas sesiones" alt="Hacer remitos">Remito</a>						</li>
 		

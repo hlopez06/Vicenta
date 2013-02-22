@@ -46,7 +46,7 @@
 								</li>
 								<li>
 									<span>Credito: $</span>
-									<input type="text" maxlength="20" size="20" name="cl-credito" value="200"/>
+									<input type="text" maxlength="4" size="4" name="cl-credito" value="200"/>
 								</li>
 							</ul>
 						</div>
@@ -68,9 +68,21 @@
 							</ul>
 						</div>
 						
-						<div id="productos" style="">
-							<ul  class="formFactura">
-								<li></li>
+						<div id="productos">
+						<a>Lista de productos</a>
+							<ul id=listaProductos>
+								
+								
+							</ul>
+											
+							<ul class="formFactura ">
+								<li>
+								<a>Id de Producto:</a>
+								<input type="text" maxlength="10" size="10" name="idProducto" value="1234"/>
+								<a>Cantidad:</a>
+								<input type="text" maxlength="3" size="1" name="cantidad" value="2"/>
+								<input type="Button" size="4" name="cargar" value="cargar"/>
+								</li>
 							</ul>
 						</div>
 						

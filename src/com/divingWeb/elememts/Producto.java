@@ -2,23 +2,37 @@ package com.divingWeb.elememts;
 
 public class Producto {
 	
-	public Integer idProducto;
-	public Integer cantidad;
+	public int idProducto;
+	public int cantidad;
 	
-	public Producto(Integer idPro, Integer cant)
+	public Producto(int idPro, int cant)
 	{
 		idProducto = idPro;
 		cantidad = cant;
 	}
 	
-	public Integer getIdProducto()
+	public int sumarCant(int cant)
+	{
+		cantidad += cant;
+		
+		return cantidad;
+	}
+	
+	public int borrarCant(int cant)
+	{
+		cantidad -= cant;
+		
+		return cantidad;
+	}
+		
+	public int getIdProducto()
 	{
 		return idProducto;
 	}
 	
-	public Integer getCantidad()
+	public int getCantidad()
 	{
-		return idProducto;
+		return cantidad;
 	}
 
 }

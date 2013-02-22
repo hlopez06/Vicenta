@@ -7,7 +7,7 @@ import com.divingWeb.elememts.Producto;
 
 public class Factura {
 	
-	private static Double iva = 0.21;
+	private float iva = 0.21F;
 	
 	public List<Producto> lProductos;
 	public Integer total = 0;
@@ -18,11 +18,34 @@ public class Factura {
 		lProductos = new LinkedList<Producto>();
 	}
 	
-	public List<Producto> setProduct(Integer idProduto, Integer cantidad)
+	public List<Producto> setProduct(int idProducto, int cantidad)
 	{
-		lProductos.add(new Producto(idProduto, cantidad));
+		if (lProductos.contains(idProducto)){
+			
+			Producto prodGuardado = lProductos.get(idProducto);
+			prodGuardado.sumarCant(cantidad);
+			
+		} else {
+		
+			lProductos.add(new Producto(idProducto, cantidad));
+		}
 		
 		return lProductos;
+	}
+	
+	public float totalSinIva(){
+		float total = 0;
+		
+		for (Producto miProducto : lProductos) {
+			total += miProducto.cantidad;
+		};
+		
+		return total;
+	}
+	
+	public float totalConIva(){
+		
+		return this.totalSinIva()+( this.totalSinIva() * iva );
 	}
 
 }

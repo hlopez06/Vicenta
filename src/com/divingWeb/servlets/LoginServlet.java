@@ -30,11 +30,11 @@ public class LoginServlet extends HttpServlet {
 		RequestDispatcher disp;
 		
 		if ("hernan".equals(user) && "hernan".equals(pass)) {
-			response(resp, "login ok");
+			//response(resp, "login ok");
 			disp = getServletContext().getRequestDispatcher("/JSP/templates/inicio.jsp");
 			
 		} else {
-			response(resp, "invalid login");
+			//response(resp, "invalid login");
 			disp = getServletContext().getRequestDispatcher("/JSP/login/noLogin.jsp");
 		}
 		

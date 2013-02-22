@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.divingWeb.facturador.Factura;
 
@@ -20,7 +21,8 @@ public class ModeFacturador extends HttpServlet {
 				
 //				cargar clientes
 				
-				setAttribute("factura", new Factura());
+				HttpSession session = req.getSession();
+				session.setAttribute("factura", new Factura());
 				
 				disp = getServletContext().getRequestDispatcher("/JSP/templates/venta.jsp");
 				

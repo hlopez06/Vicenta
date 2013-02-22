@@ -1,0 +1,11 @@
+		
+		for (Producto miProducto : lProductos) {
+			total += miProducto.cantidad;
+		};
+		
+		
+		Iterator<Producto> itProduct = lProductos.iterator();
+		while(itProduct.hasNext()){
+			Producto unProducto = itProduct.next();
+			total += unProducto.cantidad;
+		}
