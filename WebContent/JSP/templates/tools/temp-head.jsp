@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-    <html style="height: 100%; overflow: hidden;">
-<head>
-        <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
-        <title>Proyecto 01</title>
-		
-		<link href="../css/layout.css" rel="stylesheet" type="text/css">
-		<link href="../css/style.css" rel="stylesheet" type="text/css">
-	
-</head>
-
-<body role="application" style="position: relative; height: 100%; overflow: hidden; margin: 0px; padding: 0px; border: medium none; cursor: auto;">
 
 <div  id="ui-layout-north" class="ui-layout-north pane pane-north" style="position: absolute; margin: 0px; top: 0px; bottom: auto; left: 0px; right: 0px; width: auto; z-index: 1; height: 72px; visibility: visible; display: block;">  
 

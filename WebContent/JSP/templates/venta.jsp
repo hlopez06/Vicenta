@@ -1,12 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html style="height: 100%; overflow: hidden;">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Proyecto 01 - Facturador</title>
+        <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+        <title>Proyecto 01 - Facturador</title>
+		
+		<link href="../css/layout.css" rel="stylesheet" type="text/css">
+		<link href="../css/style.css" rel="stylesheet" type="text/css">
+		
+		
+		<script type="text/javascript" src="../JS/jQuery/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="../JS/facturador.js"></script>	
+			
 </head>
-<body>
+
+<body role="application" style="position: relative; height: 100%; overflow: hidden; margin: 0px; padding: 0px; border: medium none; cursor: auto;">
+
 
 <jsp:include page="tools/temp-head.jsp"></jsp:include>
 
@@ -29,7 +40,7 @@
 				
 <!-- 				formulario de facturacion -->
 				<div id="formularioDeVentas">
-					<form action="mode/venta/facturar" method="POST" name="venta">
+					<form action="/mode/facturador" method="POST" name="venta">
 						<div id="clientes" >
 							<ul class="formFactura">
 								<li>
@@ -71,17 +82,16 @@
 						<div id="productos">
 						<a>Lista de productos</a>
 							<ul id=listaProductos>
-								
-								
+									
 							</ul>
 											
 							<ul class="formFactura ">
 								<li>
-								<a>Id de Producto:</a>
-								<input type="text" maxlength="10" size="10" name="idProducto" value="1234"/>
-								<a>Cantidad:</a>
-								<input type="text" maxlength="3" size="1" name="cantidad" value="2"/>
-								<input type="Button" size="4" name="cargar" value="cargar"/>
+										<a>Id de Producto:</a>
+										<input id="idProducto" type="text" maxlength="10" size="10" name="idProducto" value="1234"/>
+										<a>Cantidad:</a>
+										<input id="cantidad" type="text" maxlength="3" size="1" name="cantidad" value="2"/>
+										<a type="button" size="4" name="cargar" value="cargar" href="javascript:facturar.newProduct();">CARGAR</a>
 								</li>
 							</ul>
 						</div>

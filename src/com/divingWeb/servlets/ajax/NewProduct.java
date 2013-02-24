@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.divingWeb.facturador.Factura;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class NewProduct
@@ -21,47 +22,43 @@ public class NewProduct extends HttpServlet {
      * Default constructor. 
      */
     public NewProduct() {
-        // TODO Auto-generated constructor stub
+
     }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		resp.setContentType("application/json");
 		
 		int idProducto = Integer.parseInt (req.getParameter("idProducto").trim() );
 		int cantidad = Integer.parseInt( req.getParameter("cantidad").trim() );
 		
-		if (idProducto > 0 && cantidad > 0) {
+		if ( idProducto > 0 ) {
 			
 			Factura factura = (Factura)req.getSession().getAttribute("factura");
 			
-			
 			factura.setProduct(idProducto, cantidad);
 			
+			Gson gson = new Gson();
+			String jsonOutput = gson.toJson(factura);
 			
+			System.out.println(jsonOutput);
+					
+			PrintWriter pw = resp.getWriter();
 			
-			responseJson(resp, "save ok");
+			pw.print("{\"objFactura\":".concat(jsonOutput).concat("}"));
+			
+			pw.flush();
+			
+			pw.close();
+
 			
 		} else {
-			responseJson(resp, "invalid");
+			resp.getWriter().print("invalid");
 		}
 		
-		
 	}
-	
-	private void responseJson(HttpServletResponse resp, String msg)
-			throws IOException {
-		
-		PrintWriter out = resp.getWriter();
-		out.println("<html>");
-		out.println("<body>");
-		out.println("<t1>" + msg + "</t1>");
-		out.println("</body>");
-		out.println("</html>");
-			             
-	}
-
 
 }

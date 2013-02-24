@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.divingWeb.elememts.Producto;
+import com.google.gson.Gson;
 
 public class Factura {
 	
@@ -20,24 +21,34 @@ public class Factura {
 	
 	public List<Producto> setProduct(int idProducto, int cantidad)
 	{
-		if (lProductos.contains(idProducto)){
-			
-			Producto prodGuardado = lProductos.get(idProducto);
-			prodGuardado.sumarCant(cantidad);
-			
-		} else {
+		boolean encontrado = false;
 		
+		for (Producto unProducto : lProductos) {
+			if(unProducto.idProducto == idProducto)
+			{
+				unProducto.cantidad += cantidad;
+				encontrado = true;
+			}
+		}
+		
+		if( !encontrado ){
 			lProductos.add(new Producto(idProducto, cantidad));
 		}
 		
 		return lProductos;
 	}
 	
+	public List<Producto> listProductosJson()
+	{	
+		return lProductos;
+	}
+	
+	
 	public float totalSinIva(){
 		float total = 0;
 		
-		for (Producto miProducto : lProductos) {
-			total += miProducto.cantidad;
+		for (Producto unProducto : lProductos) {
+			total += unProducto.cantidad;
 		};
 		
 		return total;

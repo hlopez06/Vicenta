@@ -38,6 +38,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>NewProduct</servlet-name>
-    <url-pattern>/NewProduct</url-pattern>
+    <url-pattern>/mode/facturador/newProduct</url-pattern>
   </servlet-mapping>
 </web-app>
