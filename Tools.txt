@@ -9,3 +9,9 @@
 			Producto unProducto = itProduct.next();
 			total += unProducto.cantidad;
 		}
+		
+		
+		query qry
+		
+		SELECT texto FROM ejemplo WHERE texto LIKE '%clave%';
+		SELECT texto FROM ejemplo Where MATCH texto AGAIN 'clave';

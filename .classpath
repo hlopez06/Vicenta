@@ -10,6 +10,5 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/dev-tools/servlet-api.jar"/>
-	<classpathentry kind="lib" path="C:/dev-tools/hibernate-core-4.1.9.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
