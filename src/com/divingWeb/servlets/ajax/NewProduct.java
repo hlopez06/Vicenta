@@ -39,7 +39,7 @@ public class NewProduct extends HttpServlet {
 			
 			Factura factura = (Factura)req.getSession().getAttribute("factura");
 			
-			factura.setProduct(idProducto, cantidad);
+			factura.setProducto(idProducto, cantidad);
 			
 			Gson gson = new Gson();
 			String jsonOutput = gson.toJson(factura);

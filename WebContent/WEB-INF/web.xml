@@ -40,4 +40,14 @@
     <servlet-name>NewProduct</servlet-name>
     <url-pattern>/mode/facturador/newProduct</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Devuelve en listado de clientes</description>
+    <display-name>ListClients</display-name>
+    <servlet-name>ListClients</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ajax.ListClients</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListClients</servlet-name>
+    <url-pattern>/ListClients</url-pattern>
+  </servlet-mapping>
 </web-app>

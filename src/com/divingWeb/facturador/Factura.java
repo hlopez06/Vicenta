@@ -3,60 +3,117 @@ package com.divingWeb.facturador;
 import java.util.LinkedList;
 import java.util.List;
 
+
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.Session;
+
+import com.divingWeb.elememts.Cliente;
+import com.divingWeb.elememts.Empleado;
 import com.divingWeb.elememts.Producto;
-import com.google.gson.Gson;
+import com.divingWeb.hibernate.HibernateUtil;
 
 public class Factura {
 	
 	private float iva = 0.21F;
 	
-	public List<Producto> lProductos;
-	public Integer total = 0;
-	public Integer totalMasIva = 0;
+	private List<Producto> lProductos;
+	private List<Cliente> lClientes;
+	private Empleado cajero;
+	private int nroFactura;
+	private float totalBruto;
+	private float totalMasIva;
+	private String tipo;
 	
 	public Factura()
 	{
+		totalBruto = 0;
+		totalMasIva = 0;
 		lProductos = new LinkedList<Producto>();
+		lClientes = new LinkedList<Cliente>();
+		
 	}
 	
-	public List<Producto> setProduct(int idProducto, int cantidad)
+	public List<Cliente> setCliente(Cliente unCliente)
+	{
+		if (lClientes.get(unCliente.guid) == null){
+
+			lClientes.add(unCliente.guid, unCliente);
+		}
+		
+		return lClientes;
+	}
+	public List<Producto> setProducto(int idProducto, int cantidad)
 	{
 		boolean encontrado = false;
-		
+		Producto nuevoProducto = null;
+
 		for (Producto unProducto : lProductos) {
-			if(unProducto.idProducto == idProducto)
+			if(unProducto.getIdProducto() == idProducto)
 			{
-				unProducto.cantidad += cantidad;
+				unProducto.setCantidad(unProducto.getCantidad() + cantidad);
+				nuevoProducto = unProducto;
 				encontrado = true;
 			}
 		}
 		
 		if( !encontrado ){
-			lProductos.add(new Producto(idProducto, cantidad));
+			nuevoProducto = new Producto(idProducto, cantidad);
+			lProductos.add(nuevoProducto);
+			
 		}
 		
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		
+		session.saveOrUpdate(nuevoProducto);
+		
+		transaction.commit();
+		session.close();
+		
+		
+		totalBruto += cantidad;
+		totalMasIva = (totalBruto * iva) + totalBruto;
+			
 		return lProductos;
 	}
 	
-	public List<Producto> listProductosJson()
+	public List<Producto> listProductos()
 	{	
 		return lProductos;
 	}
 	
-	
-	public float totalSinIva(){
-		float total = 0;
-		
-		for (Producto unProducto : lProductos) {
-			total += unProducto.cantidad;
-		};
-		
-		return total;
+	public float getTotalBruto(){
+		return this.totalBruto;
 	}
 	
-	public float totalConIva(){
-		
-		return this.totalSinIva()+( this.totalSinIva() * iva );
+	public float getTotalMasIva(){
+		return this.totalMasIva;
 	}
 
+	public float getIva() {
+		return iva;
+	}
+
+	public void setIva(float iva) {
+		this.iva = iva;
+	}
+
+	public int getNroFactura() {
+		return nroFactura;
+	}
+
+	public void setNroFactura(int nroFactura) {
+		this.nroFactura = nroFactura;
+	}
+
+	public void setTotalBruto(float totalBruto) {
+		this.totalBruto = totalBruto;
+	}
+
+	public void setTotalMasIva(float totalMasIva) {
+		this.totalMasIva = totalMasIva;
+	}
+	
 }
