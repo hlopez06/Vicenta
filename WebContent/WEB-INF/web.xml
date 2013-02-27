@@ -56,6 +56,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>NewClient</servlet-name>
-    <url-pattern>mode/util/NewClient</url-pattern>
+    <url-pattern>/NewClient</url-pattern>
   </servlet-mapping>
 </web-app>
