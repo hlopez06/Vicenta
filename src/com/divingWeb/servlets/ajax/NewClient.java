@@ -50,11 +50,11 @@ public class NewClient extends HttpServlet {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		
-		session.saveOrUpdate(cliente);
-		session.saveOrUpdate(cliente1);
-		session.saveOrUpdate(cliente2);
-		session.saveOrUpdate(cliente3);
-		session.saveOrUpdate(cliente4);
+		session.save(cliente);
+		session.save(cliente1);
+		session.save(cliente2);
+		session.save(cliente3);
+		session.save(cliente4);
 		
 		transaction.commit();
 		session.close();

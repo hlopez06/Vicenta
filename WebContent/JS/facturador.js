@@ -10,19 +10,22 @@ facturar = {
 				async: false,
 				success: function(json_respuesta){
 					
-					var div = "<ul>";
+					var div = '<ul><ul class="formProducto"><li>Id Producto</li>' + '<li>Cantidad </li></ul>';
 					
 					json_respuesta.objFactura.lProductos.forEach(logArrayElements);
 		
-					div += "</ul>";
+					div += '<ul class="formProducto"><li>Total bruto: '+ json_respuesta.objFactura.totalBruto +'</li>' +
+							'<li>Total: '+ json_respuesta.objFactura.totalMasIva +'</li></ul> </ul>';
 					
 					$("#listaProductos").empty();
 					$("#listaProductos").append(div);
 					
 					function logArrayElements(element, index, array) {
 						
-						div += 	'<ul class="formFactura"><li>id Producto &nbsp; '+ element.idProducto +'</li>' +
-						'<li>cantidad &nbsp; '+ element.cantidad +'</li></ul>';
+						div += 	'<ul class="formProducto">' +
+									'<li>'+ element.idProducto 	+ '</li>' +
+									'<li>'+ element.cantidad 	+ '</li>' + 
+								'</ul>';
 					}
 				},	
 				error: function(){

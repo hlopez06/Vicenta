@@ -20,7 +20,7 @@
         <property name="hbm2ddl.auto">update</property>
 
         <mapping resource="mappings/Producto.hbm.xml"/>
-<!--         <mapping resource="mappings/Factura.hbm.xml"/> -->
+        <mapping resource="mappings/Cliente.hbm.xml"/>
 
     </session-factory>
 

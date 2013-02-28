@@ -5806,3 +5806,17 @@ ul.formFactura li {
 	position: relative;
 	float: left;
 }
+
+ul.formProducto {
+	margin: 0 0 0em 0em;
+	border-bottom: 1px solid #CFCFCF;
+	padding: 6px;
+	overflow: auto;
+}
+
+ul.formProducto li {
+	position: relative;
+	float: left;
+	padding-right: 50px;
+	width: 100px;
+}

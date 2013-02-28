@@ -15,3 +15,8 @@
 		
 		SELECT texto FROM ejemplo WHERE texto LIKE '%clave%';
 		SELECT texto FROM ejemplo Where MATCH texto AGAIN 'clave';
+		
+		
+localhost:8080/Vicenta/NewClient?nombre=hernan2&apellido=Lopez&razonSocial=divingWeb&tipo=monotribu&credito=200
+
+http://localhost:8080/Vicenta/ListClients?termino=ma
