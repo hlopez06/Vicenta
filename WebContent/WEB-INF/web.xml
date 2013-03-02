@@ -38,7 +38,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AddProduct</servlet-name>
-    <url-pattern>/mode/facturador/AddProduct</url-pattern>
+    <url-pattern>/mode/documento/AddProduct</url-pattern>
   </servlet-mapping>
   <servlet>
     <display-name>SearchClients</display-name>
@@ -66,7 +66,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AddClient</servlet-name>
-    <url-pattern>/mode/facturador/AddClient</url-pattern>
+    <url-pattern>/mode/documento/AddClient</url-pattern>
   </servlet-mapping>
   <servlet>
     <description>Crea un nuevo producto y lo almacena en la base de datos</description>
@@ -77,5 +77,25 @@
   <servlet-mapping>
     <servlet-name>NewProduct</servlet-name>
     <url-pattern>/mode/product/NewProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Recibe un formulario con la factura lista.</description>
+    <display-name>Facturar</display-name>
+    <servlet-name>Facturar</servlet-name>
+    <servlet-class>com.divingWeb.servlets.Facturar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Facturar</servlet-name>
+    <url-pattern>/mode/facturador/Facturar</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModeRemito</display-name>
+    <servlet-name>ModeRemito</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ModeRemito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModeRemito</servlet-name>
+    <url-pattern>/mode/remito</url-pattern>
   </servlet-mapping>
 </web-app>

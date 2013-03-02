@@ -28,7 +28,7 @@ public class NewProduct extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int guid = Integer.parseInt( request.getParameter("guid").trim() );
+
 		String nombre = request.getParameter("nombre").trim();
 		String detalle = request.getParameter("detalle").trim();
 		int categoria = Integer.parseInt( request.getParameter("categoria").trim() );
@@ -42,16 +42,16 @@ public class NewProduct extends HttpServlet {
 			cantidad = Integer.parseInt( request.getParameter("cantidad").trim() );
 		}
 
-		Producto producto = new Producto(guid ,nombre, detalle, categoria, precio, cantidad);
+		Producto producto = new Producto(nombre, detalle, categoria, precio, cantidad);
 		
 		ProductDAO.nuevoProducto(producto);
 
 		if ( request.getParameter("comp") != null && request.getParameter("comp").trim().equals("true") )
 		{
-			Producto producto1 = new Producto(1231,"producto 1", "detalles del producto 1", 1, 100, 1);
-			Producto producto2 = new Producto(1232,"producto 2", "detalles del producto 2", 2, 150, 1);
-			Producto producto3 = new Producto(1233,"producto 3", "detalles del producto 3", 1, 300, 1);
-			Producto producto4 = new Producto(1234,"producto 4", "detalles del producto 4", 2, 350, 1);
+			Producto producto1 = new Producto("producto 1", "detalles del producto 1", 1, 100, 1);
+			Producto producto2 = new Producto("producto 2", "detalles del producto 2", 2, 150, 1);
+			Producto producto3 = new Producto("producto 3", "detalles del producto 3", 1, 300, 1);
+			Producto producto4 = new Producto("producto 4", "detalles del producto 4", 2, 350, 1);
 			
 			ProductDAO.nuevoProducto(producto1);
 			ProductDAO.nuevoProducto(producto2);

@@ -11,7 +11,6 @@
             <generator class="native" />
         </id>
 
-        <property name="guid" />
         <property name="nombre" />
         <property name="detalle" />
         <property name="categoria" />

@@ -91,7 +91,7 @@
 							<ul class="formFactura ">
 								<li>
 										<a>Id de Producto</a>
-										<input id="idProducto" type="text" step="1" maxlength="10" size="15" name="idProducto" value="1"/>
+										<input id="idProducto" type="text" step="1" maxlength="10" size="15" name="idProducto" value="1234"/>
 								<li>
 										<a>Cantidad </a>
 										<input id="cantidad" type="text" step="2" maxlength="7" size="15" name="cantidad" value="2"/>
@@ -105,7 +105,7 @@
 						<div id="totalFactura" style="">
 
 						</div>
-						<input id="btnFacturar" type="Button" name="Facturar" value="Facturar" href="javascript:Factura.facturar();">
+						<input id="btnFacturar" type="Button" name="Facturar" value="Facturar">
 					</form>
 				</div>
 				
@@ -173,6 +173,8 @@
 			</div>	
         </div>
     </div>
+    
+    
     
 </div>
 

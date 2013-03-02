@@ -14,19 +14,17 @@ import com.divingWeb.facturador.Factura;
 
 public class ModeFacturador extends HttpServlet {
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 				RequestDispatcher disp;
 				
-//				cargar clientes
-				
-				HttpSession session = req.getSession();
-				session.setAttribute("factura", new Factura());
+				HttpSession session = request.getSession();
+				session.setAttribute("documento", new Factura());
 				
 				disp = getServletContext().getRequestDispatcher("/JSP/templates/venta.jsp");
 				
-				disp.forward(req, resp);
+				disp.forward(request, response);
 	}
 
 }

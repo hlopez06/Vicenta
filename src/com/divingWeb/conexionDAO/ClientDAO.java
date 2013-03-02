@@ -40,7 +40,7 @@ public class ClientDAO extends ConexionDAO {
 		try 
         { 
             iniciaOperacion(); 
-            cl = (Cliente)sesion.get(Cliente.class, idCliente);
+            cl = (Cliente)sesion.get(Cliente.class, (long)idCliente);
             tx.commit(); 
         } catch (HibernateException he) 
         { 

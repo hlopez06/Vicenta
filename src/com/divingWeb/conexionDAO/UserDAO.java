@@ -1,20 +1,23 @@
 package com.divingWeb.conexionDAO;
 
+import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.criterion.Restrictions;
 
-import com.divingWeb.elememts.Producto;
+import com.divingWeb.elememts.Cliente;
+import com.divingWeb.elememts.Usuario;
 
-
-public class ProductDAO extends ConexionDAO{
+public class UserDAO extends ConexionDAO{
 	
-	public static long nuevoProducto(Producto unProducto){
+	public static long nuevoUsuario(Usuario usuario){
 		Long id = null;
 		
 		try 
         { 
             iniciaOperacion(); 
-            id = (Long) sesion.save(unProducto); 
+            id = (Long) sesion.save(usuario); 
             tx.commit(); 
         } catch (HibernateException he) 
         { 
@@ -25,20 +28,41 @@ public class ProductDAO extends ConexionDAO{
             sesion.close(); 
         }  
 		
-		return id;	
-	}	
-	
-	public static Producto buscarProducto(int idProducto){
+		return id;
+	}
+	public static Usuario buscarCliente(int idUsuario){
 		
-		Producto pr = null;
+		Usuario us = null;
 		
 		try 
         { 
             iniciaOperacion(); 
-            
-            pr = (Producto) sesion.get(Producto.class, (long)idProducto);
-//            Query query = sesion.createQuery("FROM com.divingWeb.elememts.Producto WHERE guid=" + idProducto);
-//            pr = (Producto)query.uniqueResult();
+            us = (Usuario)sesion.get(Usuario.class, (long)idUsuario);
+            tx.commit(); 
+        } catch (HibernateException he) 
+        { 
+            manejaExcepcion(he); 
+            throw he; 
+        } finally 
+        { 
+            sesion.close(); 
+        } 
+		
+		return us;
+	}
+	
+	public static List<Usuario> obtenerListaClientes(String termino){
+		
+		List<Usuario> lResultados = null;
+
+		try 
+        { 
+            iniciaOperacion(); 
+
+    		Criteria criterio = sesion.createCriteria(Usuario.class);
+    		criterio.add(Restrictions.like("nombre",termino + "%"));
+
+    		lResultados = criterio.list();
             
             tx.commit(); 
         } catch (HibernateException he) 
@@ -50,27 +74,7 @@ public class ProductDAO extends ConexionDAO{
             sesion.close(); 
         } 
 		
-		return pr;
+		return lResultados;
 	}
-	
-	public static boolean addProdutoToTest(Producto unProducto){
-		
-		try 
-        { 
-            iniciaOperacion(); 
-            
-            sesion.saveOrUpdate(unProducto);
-            
-            tx.commit(); 
-        } catch (HibernateException he) 
-        { 
-            manejaExcepcion(he); 
-            throw he; 
-        } finally 
-        { 
-            sesion.close(); 
-        } 
-		
-		return true;
-	}
+
 }

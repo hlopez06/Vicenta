@@ -1,9 +1,29 @@
 Factura = {
+		facturar : function(){
+			document.getElementsByName("cl-id").item(0).value = cliente.id;
+			
+			$.ajax({
+				url: "facturador/Facturar",
+				data: "idCliente=" + cliente.id,
+				type: "GET",
+				typedata: "json",
+				async: false,
+				beforeSend : function () {	},
+				success: function(jsResp){
+						
+				},
+				complete : function () {	},
+				error: function(){
+					alert("Error al iniciar facturacion. La tranferencia salio MAL.");
+				}
+			});
+		},
+		
 		addProduct : function(){
 			var idProducto = $("#idProducto").val();
 			var cantidad = $("#cantidad").val();
 			$.ajax({
-				url: "facturador/AddProduct",
+				url: "documento/AddProduct",
 				data: "idProducto="+idProducto+"&cantidad="+cantidad,
 				type: "POST",
 				typedata: "json",
@@ -19,9 +39,9 @@ Factura = {
 					'<td>Cantidad </li>' 	+
 					'</tr>';
 					
-					jsResp.objFactura.lProductos.forEach(function (element, index, array) {						
+					jsResp.objDocumento.lProductos.forEach(function (element, index, array) {						
 						div += 	'<tr class="formProducto">' +
-						'<td>'+ element.guid 		+ '</td>' +
+						'<td>'+ element.id 		+ '</td>' +
 						'<td>'+ element.nombre 		+ '</td>' +
 						'<td>'+ element.detalle		+ '</td>' +
 						'<td>'+ element.precio 		+ '</td>' +
@@ -34,8 +54,9 @@ Factura = {
 					$("#listaProductos").empty();
 					$("#listaProductos").append(div);
 
-					var divTotal = '<ul class="formTotal"><li>Total bruto: '+ jsResp.objFactura.totalBruto +'</li>' +
-					'<li>Total: '+ jsResp.objFactura.totalMasIva +'</li></ul>';
+					var divTotal = '<ul class="formTotal">' +
+						'<li>Total: '+ jsResp.objDocumento.totalMasIva +'</li>' +
+						'<li>Total bruto: '+ jsResp.objDocumento.totalBruto +'</li> </ul>';
 					
 					$("#totalFactura").empty();
 					$("#totalFactura").append(divTotal);
@@ -53,13 +74,28 @@ Factura = {
 		agregarCliente : function(numeroDeIndex){
 			var cliente = Clientes.obtenerCliente(numeroDeIndex);
 			
+			document.getElementsByName("cl-id").item(0).value = cliente.id;
 			document.getElementsByName("cl-nombre").item(0).value = cliente.nombre;
 			document.getElementsByName("cl-apellido").item(0).value = cliente.apellido;
 			document.getElementsByName("cl-tipo").item(0).value = cliente.tipo;
 			document.getElementsByName("cl-razonSocial").item(0).value = cliente.razonSocial;
 			document.getElementsByName("cl-credito").item(0).value = cliente.credito;
 			
-//			enviar cliente
+			$.ajax({
+				url: "documento/AddClient",
+				data: "idCliente=" + cliente.id,
+				type: "GET",
+				typedata: "json",
+				async: false,
+				beforeSend : function () {	},
+				success: function(jsResp){
+		
+				},
+				complete : function () {	},
+				error: function(){
+					alert("Error al iniciar cargar cliente. La tranferencia salio MAL.");
+				}
+			});
 		}
 };
 Clientes = {
@@ -134,7 +170,7 @@ Clientes = {
 					$("#searchingClients").hide();
 					},
 				error: function(){
-					alert("Error al iniciar cargar productos. La tranferencia salio MAL.");
+					alert("Error al iniciar buscar clientes. La tranferencia salio MAL.");
 				}	
 			}); //Fin de ajax
 		}		

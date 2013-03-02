@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.divingWeb.conexionDAO.ClientDAO;
+import com.divingWeb.facturador.Documento;
+import com.divingWeb.facturador.EconomicDocument;
 import com.divingWeb.facturador.Factura;
 import com.google.gson.Gson;
 
@@ -23,7 +25,6 @@ public class AddClient extends HttpServlet {
      */
     public AddClient() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -37,12 +38,12 @@ public class AddClient extends HttpServlet {
 		
 		if ( idCliente > 0 ) {
 			
-			Factura factura = (Factura)request.getSession().getAttribute("factura");
+			EconomicDocument ecoDocument = (EconomicDocument)request.getSession().getAttribute("documento");
 			
-			factura.setCliente(ClientDAO.buscarCliente(idCliente));
+			ecoDocument.setCliente(ClientDAO.buscarCliente(idCliente));
 			
 			Gson gson = new Gson();
-			String jsonOutput = gson.toJson(factura);
+			String jsonOutput = gson.toJson(ecoDocument);
 			
 			System.out.println(jsonOutput);
 					
@@ -53,7 +54,6 @@ public class AddClient extends HttpServlet {
 			pw.flush();
 			
 			pw.close();
-
 			
 		} else {
 			response.getWriter().print("invalid");

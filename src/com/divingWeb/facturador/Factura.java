@@ -3,25 +3,12 @@ package com.divingWeb.facturador;
 import java.util.LinkedList;
 import java.util.List;
 
-
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.Session;
-
-import com.divingWeb.conexionDAO.ProductDAO;
 import com.divingWeb.elememts.Cliente;
-import com.divingWeb.elememts.Empleado;
+import com.divingWeb.elememts.Usuario;
 import com.divingWeb.elememts.Producto;
-import com.divingWeb.hibernate.HibernateUtil;
 
-public class Factura {
+public class Factura extends EconomicDocument{
 	
-	private float iva = 0.21F;
-	
-	private List<Producto> lProductos;
-	private List<Cliente> lClientes;
-	private Cliente cliente;
-	private Empleado cajero;
 	private int nroFactura;
 	private float totalBruto;
 	private float totalMasIva;
@@ -29,42 +16,34 @@ public class Factura {
 	
 	public Factura()
 	{
+		lClientes = new LinkedList<Cliente>();
+		lProductos = new LinkedList<Producto>();
 		totalBruto = 0;
 		totalMasIva = 0;
-		lProductos = new LinkedList<Producto>();
-		lClientes = new LinkedList<Cliente>();
+		cantidadProductos = 0;
 		cliente = null;
+		tipoDocumento = "factura";
 	}
 	
-	public boolean addProductos(int getGuid, int cantidad)
-	{
-		boolean encontrado = false;
-		Producto nuevoProducto = null;
-
-		for (Producto unProducto : lProductos) {
-			if(unProducto.getGuid() == getGuid)
-			{
-				unProducto.setCantidad(unProducto.getCantidad() + cantidad);
-				nuevoProducto = unProducto;
-				encontrado = true;
-			}
-		}
+	public boolean checkCreditoCliente(){
 		
-		if( !encontrado ){
-			nuevoProducto = ProductDAO.buscarProducto(getGuid);
-			
-			if (nuevoProducto != null) {
-				nuevoProducto.setCantidad(cantidad);
-			}else{
-				return false;
-			}
-			lProductos.add(nuevoProducto);
-		}
+		if (totalMasIva == cliente.getCredito() )
+			return true;
+		
+		return false;
+	}
+	
+	public Producto addProducto(int getGuid, int cantidad)
+	{
+		Producto nuevoProducto = super.addProducto(getGuid, cantidad);
+		
+		if (nuevoProducto == null)
+			return null;
 		
 		totalBruto += nuevoProducto.getPrecio();
-		totalMasIva = (totalBruto * iva) + totalBruto;
+		totalMasIva = (totalBruto * IVA) + totalBruto;
 			
-		return true;
+		return nuevoProducto;
 	}
 	
 	public List<Producto> listProductos()
@@ -78,14 +57,6 @@ public class Factura {
 	
 	public float getTotalMasIva(){
 		return this.totalMasIva;
-	}
-
-	public float getIva() {
-		return iva;
-	}
-
-	public void setIva(float iva) {
-		this.iva = iva;
 	}
 
 	public int getNroFactura() {
@@ -120,19 +91,12 @@ public class Factura {
 		this.lClientes = lClientes;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public Empleado getCajero() {
+	public Usuario getCajero() {
 		return cajero;
 	}
 
-	public void setCajero(Empleado cajero) {
+	public void setCajero(Usuario cajero) {
 		this.cajero = cajero;
 	}
 

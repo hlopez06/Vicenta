@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.HibernateException;
 
 import com.divingWeb.conexionDAO.ProductDAO;
+import com.divingWeb.facturador.Documento;
 import com.divingWeb.facturador.Factura;
 import com.google.gson.Gson;
 
@@ -38,19 +39,19 @@ public class AddProduct extends HttpServlet {
 		int idProducto = Integer.parseInt (request.getParameter("idProducto").trim() );
 		int cantidad = Integer.parseInt( request.getParameter("cantidad").trim() );
 		
-		if ( idProducto > 0 ) {
+		if ( idProducto > 0 && cantidad > 0 ) {
 			
 			Gson gson = new Gson();
 			String jsonOutput;
 			
-			Factura factura = (Factura)request.getSession().getAttribute("factura");
+			Documento documento = (Documento)request.getSession().getAttribute("documento");
 			
 			PrintWriter pw = response.getWriter();
 
-			if(factura.addProductos(idProducto, cantidad)){				
-				jsonOutput = gson.toJson(factura);
+			if(documento.addProducto(idProducto, cantidad) != null){				
+				jsonOutput = gson.toJson(documento);
 				System.out.println(jsonOutput);
-				pw.print("{\"estado\":\"ok\",\"objFactura\":" + jsonOutput + "}");
+				pw.print("{\"estado\":\"ok\",\"objDocumento\":" + jsonOutput + "}");
 			}else{
 				pw.print("{\"estado\":\"error\",\"msjError\":\"Error al ingresar el producto\"}");
 			}
