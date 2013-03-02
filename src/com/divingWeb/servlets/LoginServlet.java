@@ -13,33 +13,38 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String user = req.getParameter("user");
-		String pass = req.getParameter("password");
+		String user = request.getParameter("user");
+		String pass = request.getParameter("password");
 		if ("hernan".equals(user) && "hernan".equals(pass)) {
-			response(resp, "login ok");
+			response(response, "login ok");
 		} else {
-			response(resp, "invalid login");
+			response(response, "invalid login");
 		}
 	}
 	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
-		String user = req.getParameter("user");
-		String pass = req.getParameter("password");
+		String user = request.getParameter("user");
+		String pass = request.getParameter("password");
 		RequestDispatcher disp;
 		
 		if ("hernan".equals(user) && "hernan".equals(pass)) {
-			//response(resp, "login ok");
-			disp = getServletContext().getRequestDispatcher("/JSP/templates/inicio.jsp");
+			
+			request.setAttribute("documento", "facturador");
+			request.setAttribute("titulo_html", "Vicenta - Facturador");
+			request.setAttribute("titulo_mainContent", "Facturador");
+			request.setAttribute("pane_rigth", false);
+			
+			disp = getServletContext().getRequestDispatcher("/JSP/templates/general.jsp");
 			
 		} else {
-			//response(resp, "invalid login");
+			//response(request, "invalid login");
 			disp = getServletContext().getRequestDispatcher("/JSP/login/noLogin.jsp");
 		}
 		
-		disp.forward(req, resp);
+		disp.forward(request, response);
 	}
 
 	private void response(HttpServletResponse resp, String msg)

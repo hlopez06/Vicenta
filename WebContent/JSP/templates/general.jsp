@@ -3,9 +3,9 @@
 	
 <%	
 	String documento = (String)request.getAttribute("documento");
-	String titulo = (String)request.getAttribute("titulo");
+	String titulo = (String)request.getAttribute("titulo_html");
 	String titulo_mainContent = (String)request.getAttribute("titulo_mainContent");
-
+	Boolean pane_rigth = (Boolean) request.getAttribute("pane_rigth");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,7 +16,6 @@
 	
 	<link href="../css/layout.css" rel="stylesheet" type="text/css">
 	<link href="../css/style.css" rel="stylesheet" type="text/css">
-	
 	
 	<script type="text/javascript" src="../JS/jQuery/jquery-1.7.2.js"></script>
 	<script type="text/javascript" src="../JS/document.js"></script>
@@ -102,9 +101,9 @@
 							name="searchClientes" size="25" maxlength="10"
 							onblur="if(this.value=='') this.value='Buscar cliente...';"
 							onfocus="if(this.value=='Buscar cliente...') this.value='';"
-							onkeypress="Clientes.searchClientsKeyEnter(event, this)" /> <a
+							onkeypress="Client.searchClientsKeyEnter(event, this)" /> <a
 							id="lupaSearchCliente"
-							href="javascript:Clientes.searchClients();"> <img
+							href="javascript:Client.searchClients();"> <img
 							src="../images/magnifier.png" title="Lupa">
 						</a> <a id="searchingClients" style="display: none;"> <img
 							src="../images/progress.gif" title="buscando...">
@@ -119,7 +118,7 @@
 					</h3>
 				</div>
 		</div>
-
+		<% if (pane_rigth){ %><jsp:include page="pane_rigth.jsp"></jsp:include><% }%>
 	</div>
 
 </body>

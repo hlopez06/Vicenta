@@ -12,7 +12,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/login</url-pattern>
+    <url-pattern>/mode/inicio</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>mode</servlet-name>

@@ -19,10 +19,15 @@ public class ModeFacturador extends HttpServlet {
 
 				RequestDispatcher disp;
 				
+				request.setAttribute("documento", "factura");
+				request.setAttribute("titulo_html", "Vicenta - Factura");
+				request.setAttribute("titulo_mainContent", "Factura");
+				request.setAttribute("pane_rigth", false);
+				
 				HttpSession session = request.getSession();
 				session.setAttribute("documento", new Factura());
 				
-				disp = getServletContext().getRequestDispatcher("/JSP/templates/venta.jsp");
+				disp = getServletContext().getRequestDispatcher("/JSP/templates/general.jsp");
 				
 				disp.forward(request, response);
 	}

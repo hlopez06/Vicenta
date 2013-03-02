@@ -32,10 +32,15 @@ public class ModeRemito extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher disp;
 		
+		request.setAttribute("documento", "remito");
+		request.setAttribute("titulo_html", "Vicenta - Remito");
+		request.setAttribute("titulo_mainContent", "Remito");
+		request.setAttribute("pane_rigth", true);
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("documento", new Remito());
 		
-		disp = getServletContext().getRequestDispatcher("/JSP/templates/remito.jsp");
+		disp = getServletContext().getRequestDispatcher("/JSP/templates/general.jsp");
 		
 		disp.forward(request, response);
 
