@@ -18,7 +18,7 @@ public class Principal {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		
-		Producto nuevoProducto = new Producto(122, 2);
+		Producto nuevoProducto = new Producto();
 
 		long id = (Long) session.save(nuevoProducto);
 

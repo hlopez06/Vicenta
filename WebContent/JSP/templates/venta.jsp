@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html style="height: 100%; overflow: hidden;">
+<html style="height: 100%;">
 <head>
         <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
         <title>Proyecto 01 - Facturador</title>
@@ -16,7 +16,7 @@
 			
 </head>
 
-<body role="application" style="position: relative; height: 100%; overflow: hidden; margin: 0px; padding: 0px; border: medium none; cursor: auto;">
+<body role="application">
 
 
 <jsp:include page="tools/temp-head.jsp"></jsp:include>
@@ -24,9 +24,9 @@
 <!-- Cuerpo -->
 
 <!-- panel contenido principal( semillas + izquierdo + central + derecho) -->
-<div id="outer-center" class="outer-center pane pane-center" style="position: absolute; top: 72px; bottom: 0px; width: 1366px; z-index: 1; visibility: visible; display: block; overflow: hidden;">
+<div id="outer-center" class="outer-center pane pane-center">
 
-	<div id="mainContent" class="pane pane-center" style="position: absolute; left: 240px; top: 34px; bottom: 0px; width: 1126px; z-index: 1; visibility: visible; display: block;">                            
+	<div id="mainContent" class="pane pane-center" style="overflow:visible; position: absolute; left: 240px; display: block; width: auto; visibility: visible;">                            
 	    <div class="content" id="docContent" style="position: relative; visibility: visible;">
 	<!-- panel contenido principal(central) -->  
 	        <div class="layout-content" id="ui-layout-content">
@@ -44,36 +44,40 @@
 						<div id="clientes" >
 							<ul class="formFactura">
 								<li>
-									<span>Nombre de cliente:</span>
-									<input type="text" maxlength="20" size="20" name="cl-nombre" value="cliente 01"/>
+									<span>Nombre de cliente</span>
+									<input type="text" disabled="disabled" size="20" name="cl-nombre" value=""/>
 								</li>
 								<li>
-									<span>Tipo:</span>
-									<input type="text" maxlength="20" size="20" name="cl-tipo" value="S.A."/>
+									<span>Apellido</span>
+									<input type="text" disabled="disabled" size="20" name="cl-apellido" value=""/>
 								</li>
 								<li>
-									<span>RS :</span>
-									<input type="text" maxlength="20" size="20" name="cl-RS" value="cliente 01"/>
+									<span>Tipo</span>
+									<input type="text" disabled="disabled" size="20" name="cl-tipo" value=""/>
 								</li>
 								<li>
-									<span>Credito: $</span>
-									<input type="text" maxlength="4" size="4" name="cl-credito" value="200"/>
+									<span>RS &nbsp;</span>
+									<input type="text" disabled="disabled" size="20" name="cl-razonSocial" value=""/>
+								</li>
+								<li>
+									<span>Credito &nbsp;</span>
+									<input type="text" disabled="disabled" size="20" name="cl-credito" value=""/>
 								</li>
 							</ul>
 						</div>
 						
-						<div id="info" style="">
+						<div id="info" style="display:none;">
 							<ul  class="formFactura">
 								<li>
-									<span>Dia:</span>
+									<span>Dia</span>
 									<input type="text" maxlength="20" size="20" name="inf-dia" value="06/05/1985"/>
 								</li>
 								<li>
-									<span>Hora:</span>
+									<span>Hora</span>
 									<input type="text" maxlength="20" size="20" name="inf-hora" value="19:00"/>
 								</li>
 								<li>
-									<span>Tipo:</span>
+									<span>Tipo</span>
 									<input type="text" maxlength="20" size="20" name="inf-nose" value="nose"/>
 								</li>
 							</ul>
@@ -81,27 +85,26 @@
 						
 						<div id="productos">
 						<a>Lista de productos</a>
-							<ul id=listaProductos>
-									
-							</ul>
+							<ul id=listaProductos></ul>
 											
 							<ul class="formFactura ">
 								<li>
-										<a>Id de Producto:</a>
-										<input id="idProducto" type="text" maxlength="10" size="10" name="idProducto" value="1234"/>
-										<a>Cantidad:</a>
-										<input id="cantidad" type="text" maxlength="3" size="1" name="cantidad" value="2"/>
-										<a type="button" size="4" name="cargar" value="cargar" href="javascript:facturar.newProduct();">CARGAR</a>
+										<a>Id de Producto</a>
+										<input id="idProducto" type="text" step="1" maxlength="10" size="15" name="idProducto" value="1234"/>
+								<li>
+										<a>Cantidad </a>
+										<input id="cantidad" type="text" step="2" maxlength="7" size="15" name="cantidad" value="2"/>
+								</li>
+								<li>
+										<a type="button" size="4" name="cargar" step="3" value="cargar" href="javascript:Factura.addProduct();">CARGAR</a>
 								</li>
 							</ul>
 						</div>
 						
-						<div id="total" style="">
-							<ul  class="formFactura">
-								<li></li>
-							</ul>
+						<div id="totalFactura" style="">
+
 						</div>
-						<input type="Button" name="Facturar" value="Facturar">
+						<input id="btnFacturar" type="Button" name="Facturar" value="Facturar">
 					</form>
 				</div>
 				
@@ -116,27 +119,36 @@
                            
 <!-- panel contenido principal(izquierdo) -->  
                    
-    <div class="ui-layout-west pane pane-west" id="layout-west" style="position: absolute; right: auto; top: 34px; height: 500px; z-index: 1; width: 239px; visibility: visible; display: block;">
+    <div id="panel-izquierdo" class="ui-layout-west pane pane-west" style="position: absolute; right: auto; top: 72px; height: 500px; z-index: 1; width: 239px; visibility: visible; display: block;">
 		<span id="west-closer" class="button-close button-close-west" title="Cerrar panel">&nbsp;</span>
 		<div id="westheader" class="header" ></div>
 		<div id="westcontent" class="content" style="position: relative; visibility: visible;">
 							    	
 			<div id="subpanel-terminos-buscados" class="subpanel">
 				<h3 class="titulo-subpanel">
-					<a id="TermBus" class="opened" href="#">
-						<img title="Lupa" alt="Lupa" src="../images/magnifier.png">
-						Buscar Cliente
-						</a>
+					<a href="javascript:">Buscar Cliente</a>
 				</h3>
-				<div class="conClientBus contenido-subpanel" style="display: none;">
-					<ul class="listado-terminos"> 
-						<li><span class="SearchTerm SearchTermRel">----------</span></li>
-					</ul>
-					<div class="acciones-subpanel">  
-						<span class="guardar-alerta-left" title="Guardar búsqueda" alt="Guardar búsqueda" ><img src="../images/guardaralerta.png">
-							<a>Usar</a>
-						</span>
-					</div>  
+
+				<div id="formBuscaCliente">
+				    <input id="searchClientes" type="text" value="Buscar cliente..." name="searchClientes" size="25" maxlength="10"
+				   			onblur="if(this.value=='') this.value='Buscar cliente...';" 
+				   			onfocus="if(this.value=='Buscar cliente...') this.value='';"
+				   			 onkeypress="Clientes.searchClientsKeyEnter(event, this)"/>
+					<a id="lupaSearchCliente" href="javascript:Clientes.searchClients();">
+						<img src="../images/magnifier.png" alt="Lupa" title="Lupa">
+					</a>
+				   	<a id="searchingClients" style="display: none;">
+						<img src="../images/progress.gif" title="buscando...">
+					</a>
+				</div>
+				
+				<div id="listClientsSearched" style="display:none;"></div>
+
+				<div id="crearCliente">
+					<h3 class="titulo-subpanel">
+						<a href="javascript:">Agendar cliente</a>
+					</h3>
+					
 				</div>
 			</div>
 
@@ -144,7 +156,7 @@
     </div>
 				                 
 <!-- panel contenido principal(derecho) -->         
-    <div class="ui-layout-east pane pane-east" id="layout-east" style="position: absolute; margin: 0px; left: auto; right: 0px; top: 34px; bottom: 0px; height: 258px; z-index: 1; width: 239px; visibility: visible; display:block;">
+    <div id="panel-derecho" class="ui-layout-east pane pane-east" style="position: absolute; margin: 0px; left: auto; right: 0px; top: 34px; bottom: 0px; height: 258px; z-index: 1; width: 239px; visibility: visible; display:none;">
 		<div class="header" id="eastheader">
 			<span id="east-closer" class="button-close button-close-east" title="Cerrar panel">&nbsp;</span>
 		</div>
@@ -164,20 +176,6 @@
     
     
 </div>
-
-	<strong>...........................</strong>
-	<h2>
-	<%
-		String user = request.getParameter("user");
-		String pass = request.getParameter("password");
-		if ("hernan".equals(user) && "hernan".equals(pass)) {
-			out.println("login ok");
-		} else {
-			out.println("invalid login");
-		}
-	%>
-	</h2>
-	
 
 </body>
 </html>

@@ -10,30 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.map.LinkedMap;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
-
+import com.divingWeb.conexionDAO.ClientDAO;
 import com.divingWeb.elememts.Cliente;
-import com.divingWeb.hibernate.HibernateUtil;
 import com.google.gson.Gson;
 
 /**
  * Servlet implementation class ListClients
  */
-public class ListClients extends HttpServlet {
+public class SearchClients extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListClients() {
+    public SearchClients() {
         super();
-        
         
     }
 
@@ -45,7 +36,7 @@ public class ListClients extends HttpServlet {
 		
 		String termino = request.getParameter("termino").trim();
 		
-		List<Cliente> lClientes = obtenerListaClientes(termino);
+		List<Cliente> lClientes = ClientDAO.obtenerListaClientes(termino);
 		
 		Gson gson = new Gson();
 		String jsonOutput = gson.toJson(lClientes);
@@ -59,28 +50,6 @@ public class ListClients extends HttpServlet {
 		pw.flush();
 		
 		pw.close();
-	}
-	
-	private List<Cliente> obtenerListaClientes(String termino){
-		
-		List<Cliente> lResultados = null;
-		
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		
-		Criteria criterio = session.createCriteria(Cliente.class);
-		criterio.add(Restrictions.like("nombre",termino + "%"));
-
-		lResultados = criterio.list();
-		/*Query query = session.createQuery("FROM producto WHERE %".concat(termino).concat("%"));
-		
-		lResultados = (List<Cliente>)query.list();
-		*/
-		transaction.commit();
-		session.close();
-		
-		return lResultados;
 	}
 
 }

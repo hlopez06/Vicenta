@@ -101,7 +101,7 @@ h6 {
     font-size: 1.2em;
 }
 table {
-    border-bottom: 2px solid #666666;
+/*     border-bottom: 2px solid #666666; */
     border-collapse: collapse;
     padding-bottom: 0.1em;
     width: 100%;
@@ -569,7 +569,7 @@ div.outer-center div.ui-layout-north {
     height: auto !important;
 }
 div#pie {
-    background: url("../images/thomsonreuters_peq.gif") no-repeat scroll right top transparent;
+/*     background: url("../images/tr_peq2.gif") no-repeat scroll right top transparent; */
     border-top: 3px double #CCCCCC;
     clear: both;
     margin: 1em 0 0;
@@ -581,6 +581,7 @@ div#pie ul {
 }
 div#pie ul {
     width: 66%;
+    float: right;
 }
 div#pie ul li {
     border-right: 1px solid #CFCFCF;
@@ -589,6 +590,7 @@ div#pie ul li {
     line-height: 1.5em;
     margin-right: 0.25em;
     padding: 0 0.75em 0 0;
+    float: right;
 }
 div.subpanel {
     border-bottom: 1px solid #CFCFCF;
@@ -604,7 +606,7 @@ h3.titulo-subpanel a, h3.titulo-subpanel span {
     background: none repeat scroll 0 0 #F1F1F1;
     display: block;
     font-weight: bold;
-    padding: 0.5em 0.8em 0.4em;
+    padding: 0.5em 0em 0.4em;
     text-transform: uppercase;
 }
 h3.titulo-subpanel a:hover {
@@ -5112,9 +5114,6 @@ body span.button-pin, span.button-close {
 body div.caja-desplegable, body div#personalizar-desplegable, body #navegacion-documentos {
     z-index: 3 !important;
 }
-body div.pane-north, body div.cabCentral, body div#cabecera-documento {
-    z-index: 3 !important;
-}
 body ul.ui-autocomplete {
     z-index: 4 !important;
 }
@@ -5795,6 +5794,17 @@ div#ui-layout-content div.form-indexes {
 
 /* hernan */
 
+#btnFacturar {
+	background: none repeat scroll 0 0 orange;
+    float: right;
+    font-size: x-large;
+    margin: 10px;
+}
+
+#listClientsSearched {
+	border-bottom: 1px solid #CFCFCF;
+}
+
 ul.formFactura {
 	margin: 0 0 0.5em 2em;
 	border-bottom: 1px solid #CFCFCF;
@@ -5805,6 +5815,7 @@ ul.formFactura {
 ul.formFactura li {
 	position: relative;
 	float: left;
+	width: 140px;
 }
 
 ul.formProducto {
@@ -5819,4 +5830,21 @@ ul.formProducto li {
 	float: left;
 	padding-right: 50px;
 	width: 100px;
+}
+
+ul.formTotal {
+	margin: 0 0 0em 0em;
+	border-bottom: 1px solid #CFCFCF;
+	overflow: auto;
+}
+
+ul.formTotal li {
+	position: relative;
+    float: right;
+	padding-right: 50px;
+	width: 100px;
+}
+
+ul#listaProductos{
+	margin: 0 0 0.5em 2em;
 }

@@ -16,7 +16,12 @@
 		SELECT texto FROM ejemplo WHERE texto LIKE '%clave%';
 		SELECT texto FROM ejemplo Where MATCH texto AGAIN 'clave';
 		
+		/*Query query = session.createQuery("FROM producto WHERE %".concat(termino).concat("%"));
 		
-localhost:8080/Vicenta/NewClient?nombre=hernan2&apellido=Lopez&razonSocial=divingWeb&tipo=monotribu&credito=200
+		lResultados = (List<Cliente>)query.list();
+		*/
+		
+		
+localhost:8080/Vicenta/mode/client/NewClient?nombre=hernan2&apellido=Lopez&razonSocial=divingWeb&tipo=monotribu&credito=200
 
-http://localhost:8080/Vicenta/ListClients?termino=ma
+localhost:8080/Vicenta/mode/product/NewProduct?guid=1235&nombre=producto 00&detalle=detalles del producto 00&categoria=1&precio=50&cantidad=1&comp=true

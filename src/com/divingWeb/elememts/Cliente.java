@@ -1,11 +1,5 @@
 package com.divingWeb.elememts;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-
-import com.divingWeb.hibernate.HibernateUtil;
-
 public class Cliente {
 	
 
@@ -28,15 +22,6 @@ public class Cliente {
 		razonSocial = sRazonSocial;
 		tipo = sTipo;
 		credito = sCredito;
-		
-//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//		Session session = sessionFactory.openSession();
-//		Transaction transaction = session.beginTransaction();
-//		
-//		session.save(this);
-//		
-//		transaction.commit();
-//		session.close();
 		
 	}
 	

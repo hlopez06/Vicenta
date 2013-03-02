@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.Session;
 
+import com.divingWeb.conexionDAO.ProductDAO;
 import com.divingWeb.elememts.Cliente;
 import com.divingWeb.elememts.Empleado;
 import com.divingWeb.elememts.Producto;
@@ -19,6 +20,7 @@ public class Factura {
 	
 	private List<Producto> lProductos;
 	private List<Cliente> lClientes;
+	private Cliente cliente;
 	private Empleado cajero;
 	private int nroFactura;
 	private float totalBruto;
@@ -31,25 +33,16 @@ public class Factura {
 		totalMasIva = 0;
 		lProductos = new LinkedList<Producto>();
 		lClientes = new LinkedList<Cliente>();
-		
+		cliente = null;
 	}
 	
-	public List<Cliente> setCliente(Cliente unCliente)
-	{
-		if (lClientes.get(unCliente.guid) == null){
-
-			lClientes.add(unCliente.guid, unCliente);
-		}
-		
-		return lClientes;
-	}
-	public List<Producto> setProducto(int idProducto, int cantidad)
+	public List<Producto> addProductos(int getGuid, int cantidad)
 	{
 		boolean encontrado = false;
 		Producto nuevoProducto = null;
 
 		for (Producto unProducto : lProductos) {
-			if(unProducto.getIdProducto() == idProducto)
+			if(unProducto.getGuid() == getGuid)
 			{
 				unProducto.setCantidad(unProducto.getCantidad() + cantidad);
 				nuevoProducto = unProducto;
@@ -58,22 +51,13 @@ public class Factura {
 		}
 		
 		if( !encontrado ){
-			nuevoProducto = new Producto(idProducto, cantidad);
-			lProductos.add(nuevoProducto);
+			nuevoProducto = ProductDAO.buscarProducto(getGuid);
+			nuevoProducto.setCantidad(cantidad);
 			
+			lProductos.add(nuevoProducto);
 		}
 		
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		
-		session.saveOrUpdate(nuevoProducto);
-		
-		transaction.commit();
-		session.close();
-		
-		
-		totalBruto += cantidad;
+		totalBruto += nuevoProducto.getPrecio();
 		totalMasIva = (totalBruto * iva) + totalBruto;
 			
 		return lProductos;
@@ -114,6 +98,46 @@ public class Factura {
 
 	public void setTotalMasIva(float totalMasIva) {
 		this.totalMasIva = totalMasIva;
+	}
+
+	public List<Producto> getlProductos() {
+		return lProductos;
+	}
+
+	public void setlProductos(List<Producto> lProductos) {
+		this.lProductos = lProductos;
+	}
+
+	public List<Cliente> getlClientes() {
+		return lClientes;
+	}
+
+	public void setlClientes(List<Cliente> lClientes) {
+		this.lClientes = lClientes;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Empleado getCajero() {
+		return cajero;
+	}
+
+	public void setCajero(Empleado cajero) {
+		this.cajero = cajero;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 }

@@ -1,64 +1,63 @@
 package com.divingWeb.servlets.ajax;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.divingWeb.facturador.Factura;
-import com.google.gson.Gson;
+import com.divingWeb.conexionDAO.ClientDAO;
+import com.divingWeb.conexionDAO.ProductDAO;
+import com.divingWeb.elememts.Producto;
 
 /**
  * Servlet implementation class NewProduct
  */
 public class NewProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
     public NewProduct() {
-
+        super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int guid = Integer.parseInt( request.getParameter("guid").trim() );
+		String nombre = request.getParameter("nombre").trim();
+		String detalle = request.getParameter("detalle").trim();
+		int categoria = Integer.parseInt( request.getParameter("categoria").trim() );
+		int precio = Integer.parseInt( request.getParameter("precio").trim() );
 		
-		resp.setContentType("application/json");
+		int cantidad;
 		
-		int idProducto = Integer.parseInt (req.getParameter("idProducto").trim() );
-		int cantidad = Integer.parseInt( req.getParameter("cantidad").trim() );
-		
-		if ( idProducto > 0 ) {
-			
-			Factura factura = (Factura)req.getSession().getAttribute("factura");
-			
-			factura.setProducto(idProducto, cantidad);
-			
-			Gson gson = new Gson();
-			String jsonOutput = gson.toJson(factura);
-			
-			System.out.println(jsonOutput);
-					
-			PrintWriter pw = resp.getWriter();
-			
-			pw.print("{\"objFactura\":".concat(jsonOutput).concat("}"));
-			
-			pw.flush();
-			
-			pw.close();
-
-			
-		} else {
-			resp.getWriter().print("invalid");
+		if(request.getAttribute("cantidad") == null){
+			cantidad = 1;
+		}else{
+			cantidad = Integer.parseInt( request.getParameter("cantidad").trim() );
 		}
+
+		Producto producto = new Producto(guid ,nombre, detalle, categoria, precio, cantidad);
 		
+		ProductDAO.nuevoProducto(producto);
+
+		if ( request.getParameter("comp") != null && request.getParameter("comp").trim().equals("true") )
+		{
+			Producto producto1 = new Producto(1231,"producto 1", "detalles del producto 1", 1, 100, 1);
+			Producto producto2 = new Producto(1232,"producto 2", "detalles del producto 2", 2, 150, 1);
+			Producto producto3 = new Producto(1233,"producto 3", "detalles del producto 3", 1, 300, 1);
+			Producto producto4 = new Producto(1234,"producto 4", "detalles del producto 4", 2, 350, 1);
+			
+			ProductDAO.nuevoProducto(producto1);
+			ProductDAO.nuevoProducto(producto2);
+			ProductDAO.nuevoProducto(producto3);
+			ProductDAO.nuevoProducto(producto4);
+		}
 	}
 
 }

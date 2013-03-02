@@ -7,14 +7,6 @@
     <welcome-file>default.html</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>mode</servlet-name>
-    <servlet-class>com.divingWeb.servlets.ModeServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>modeFacturador</servlet-name>
-    <servlet-class>com.divingWeb.servlets.ModeFacturador</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.divingWeb.servlets.LoginServlet</servlet-class>
   </servlet>
@@ -22,32 +14,40 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>mode</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ModeServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>mode</servlet-name>
     <url-pattern>/mode</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Facturador</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ModeFacturador</servlet-class>
+  </servlet>
   <servlet-mapping>
-    <servlet-name>modeFacturador</servlet-name>
+    <servlet-name>Facturador</servlet-name>
     <url-pattern>/mode/facturador</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>NewProduct</display-name>
-    <servlet-name>NewProduct</servlet-name>
-    <servlet-class>com.divingWeb.servlets.ajax.NewProduct</servlet-class>
+    <display-name>AddProduct</display-name>
+    <servlet-name>AddProduct</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ajax.AddProduct</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>NewProduct</servlet-name>
-    <url-pattern>/mode/facturador/newProduct</url-pattern>
+    <servlet-name>AddProduct</servlet-name>
+    <url-pattern>/mode/facturador/AddProduct</url-pattern>
   </servlet-mapping>
   <servlet>
-    <display-name>ListClients</display-name>
-    <servlet-name>ListClients</servlet-name>
-    <servlet-class>com.divingWeb.servlets.ajax.ListClients</servlet-class>
+    <display-name>SearchClients</display-name>
+    <servlet-name>SearchClients</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ajax.SearchClients</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ListClients</servlet-name>
-    <url-pattern>/ListClients</url-pattern>
+    <servlet-name>SearchClients</servlet-name>
+    <url-pattern>/mode/client/SearchClients</url-pattern>
   </servlet-mapping>
   <servlet>
     <display-name>NewClient</display-name>
@@ -56,6 +56,26 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>NewClient</servlet-name>
-    <url-pattern>/NewClient</url-pattern>
+    <url-pattern>/mode/client/NewClient</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Agrega un cliente a una factura, nota de credito o remito.</description>
+    <display-name>AddClient</display-name>
+    <servlet-name>AddClient</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ajax.AddClient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddClient</servlet-name>
+    <url-pattern>/mode/facturador/AddClient</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Crea un nuevo producto y lo almacena en la base de datos</description>
+    <display-name>NewProduct</display-name>
+    <servlet-name>NewProduct</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ajax.NewProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewProduct</servlet-name>
+    <url-pattern>/mode/product/NewProduct</url-pattern>
   </servlet-mapping>
 </web-app>

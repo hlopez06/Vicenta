@@ -11,7 +11,11 @@
             <generator class="native" />
         </id>
 
-        <property name="idProducto" />
+        <property name="guid" />
+        <property name="nombre" />
+        <property name="detalle" />
+        <property name="categoria" />
+        <property name="precio" />
         <property name="cantidad" />
 
     </class>

@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.divingWeb.conexionDAO.ClientDAO;
 import com.divingWeb.elememts.Cliente;
 import com.divingWeb.hibernate.HibernateUtil;
 
@@ -40,24 +41,20 @@ public class NewClient extends HttpServlet {
 
 		Cliente cliente = new Cliente(nombre, apellido, razonSocial, tipo, credito);
 		
+		ClientDAO.nuevoCliente(cliente);
 
+		if (request.getParameter("completa").trim() == "true" )
+		{
 		Cliente cliente1 = new Cliente("matias", "di Natale", "Matias corporation", "capo", 1000);
 		Cliente cliente2 = new Cliente("Martin", "garga", "garga nation", "gilun", 200);
 		Cliente cliente3 = new Cliente("Sebastian", "Checho", "Checho android", "gilun", 300);
 		Cliente cliente4 = new Cliente("Mago", "Coperfi", "Pedro gil", "gilun", 200);
-
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
 		
-		session.save(cliente);
-		session.save(cliente1);
-		session.save(cliente2);
-		session.save(cliente3);
-		session.save(cliente4);
-		
-		transaction.commit();
-		session.close();
+		ClientDAO.nuevoCliente(cliente1);
+		ClientDAO.nuevoCliente(cliente2);
+		ClientDAO.nuevoCliente(cliente3);
+		ClientDAO.nuevoCliente(cliente4);
+		}
 		
 	}
 

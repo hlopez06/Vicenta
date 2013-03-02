@@ -2,19 +2,19 @@
     pageEncoding="ISO-8859-1"%>
 
 
-<div  id="ui-layout-north" class="ui-layout-north pane pane-north" style="position: absolute; margin: 0px; top: 0px; bottom: auto; left: 0px; right: 0px; width: auto; z-index: 1; height: 72px; visibility: visible; display: block;">  
+<div  id="ui-layout-north" class="ui-layout-north pane pane-north" style="">  
 
 	<h1>
 		<a href="index.jsp" tabindex="1">
-			<img src="../images/logo_Proyecto_01.png" alt="Proyecto01" title="Proyecto 01">
+<!-- 			<img src="../images/logo_Proyecto_01.png" alt="Vicenta" title="Vicenta"> -->
 		</a>
 	</h1>
 
 	<ul class="menuSup">
 
-		<li>		<a href="mode/venta" title="Ver carpetas y documentos guardados" alt="Hacer facturas">Factura</a>   			 	</li>
-		<li>		<a href="mode/notaCredito" title="Ver/recuperar últimas sesiones" alt="Hacer nota de credito">Nota de credito</a>		</li>
-		<li>		<a href="mode/remito" title="Ver/recuperar últimas sesiones" alt="Hacer remitos">Remito</a>						</li>
+		<li>		<a href="facturador" title="Ver carpetas y documentos guardados" alt="Hacer facturas">Factura</a>   			 	</li>
+		<li>		<a href="notaCredito" title="Ver/recuperar últimas sesiones" alt="Hacer nota de credito">Nota de credito</a>		</li>
+		<li>		<a href="remito" title="Ver/recuperar últimas sesiones" alt="Hacer remitos">Remito</a>						</li>
 		
 		<li id="HistorialDesplegable">
 			<a class="abreDesplegable" title="Historico de movimientos" href="#">Historial</a>

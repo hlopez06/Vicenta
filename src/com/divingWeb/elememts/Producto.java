@@ -3,17 +3,25 @@ package com.divingWeb.elememts;
 public class Producto {
 
 	private long id;
-	public int guid;
-	private int idProducto;
+	private int guid;
+	private String nombre;
+	private String detalle;
+	private int categoria;
+	private int precio;
 	private int cantidad;
 
 	public Producto() {
 
 	}
 
-	public Producto(int idPro, int cant) {
-		idProducto = idPro;
-		cantidad = cant;
+	public Producto(int intGuid, String strNombre, String strDetalle, int intCategoria, int intPrecio, int intCantidad) {
+		guid = intGuid;
+		nombre = strNombre;
+		detalle = strDetalle;
+		categoria = intCategoria;
+		precio = intPrecio;
+		cantidad = intCantidad;
+		
 	}
 
 	public int sumarCant(int cant) {
@@ -44,20 +52,44 @@ public class Producto {
 		this.guid = guid;
 	}
 
-	public void setIdProducto(int idProducto) {
-		this.idProducto = idProducto;
-	}
-
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
 
-	public int getIdProducto() {
-		return idProducto;
-	}
-
 	public int getCantidad() {
 		return cantidad;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDetalle() {
+		return detalle;
+	}
+
+	public void setDetalle(String detalle) {
+		this.detalle = detalle;
+	}
+
+	public int getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(int categoria) {
+		this.categoria = categoria;
+	}
+
+	public int getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(int precio) {
+		this.precio = precio;
 	}
 
 }
