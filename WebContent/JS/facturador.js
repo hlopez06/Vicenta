@@ -9,7 +9,8 @@ Factura = {
 				typedata: "json",
 				async: false,
 				success: function(jsResp){
-					
+				
+				if(jsResp.estado == "ok"){	
 					var div = '<table><tr class="formProducto">' + 
 					'<td>Id Producto</td>' 	+ 
 					'<td>Nombre </td>' 		+
@@ -18,14 +19,7 @@ Factura = {
 					'<td>Cantidad </li>' 	+
 					'</tr>';
 					
-					jsResp.objFactura.lProductos.forEach(logArrayElements);
-					
-					div += '</table>';
-					
-					$("#listaProductos").empty();
-					$("#listaProductos").append(div);
-
-					function logArrayElements(element, index, array) {						
+					jsResp.objFactura.lProductos.forEach(function (element, index, array) {						
 						div += 	'<tr class="formProducto">' +
 						'<td>'+ element.guid 		+ '</td>' +
 						'<td>'+ element.nombre 		+ '</td>' +
@@ -33,14 +27,23 @@ Factura = {
 						'<td>'+ element.precio 		+ '</td>' +
 						'<td>'+ element.cantidad	+ '</td>' + 
 						'</tr>';
+					});
+					
+					div += '</table>';
+					
+					$("#listaProductos").empty();
+					$("#listaProductos").append(div);
 
 					var divTotal = '<ul class="formTotal"><li>Total bruto: '+ jsResp.objFactura.totalBruto +'</li>' +
-							'<li>Total: '+ jsResp.objFactura.totalMasIva +'</li></ul>';
-
+					'<li>Total: '+ jsResp.objFactura.totalMasIva +'</li></ul>';
+					
 					$("#totalFactura").empty();
 					$("#totalFactura").append(divTotal);
-					
-					}
+
+				}else{
+					alert(jsResp.msjError);
+				}
+	
 				},	
 				error: function(){
 					alert("Error al iniciar cargar productos. La tranferencia salio MAL.");
@@ -109,7 +112,11 @@ Clientes = {
 						div = '<ul class="lista" style="margin: 3px 10px;">' +
 								'<li>Resultado de la busqueda <i>' + termino + '</i></li>';
 						
-						jsResp.objListaClientes.forEach(creaListaCliente);
+						jsResp.objListaClientes.forEach(function (element, index, array) {
+							div += '<li><a name=' + index + ' onclick="Factura.agregarCliente('+index+')" href="#">'
+							+ element.apellido + ', ' + element.nombre + 
+							'</a></li>';
+						});
 						
 						div += '</ul>';
 						
@@ -121,11 +128,6 @@ Clientes = {
 					$("#listClientsSearched").append(div);
 					$("#listClientsSearched").show();
 					
-					function creaListaCliente(element, index, array) {
-						div += '<li><a name=' + index + ' onclick="Factura.agregarCliente('+index+')" href="#">'
-							+ element.apellido + ', ' + element.nombre + 
-							'</a></li>';
-					}
 				},
 				complete : function () {
 					$("#lupaSearchCliente").show();

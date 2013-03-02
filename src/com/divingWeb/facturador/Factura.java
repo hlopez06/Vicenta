@@ -36,7 +36,7 @@ public class Factura {
 		cliente = null;
 	}
 	
-	public List<Producto> addProductos(int getGuid, int cantidad)
+	public boolean addProductos(int getGuid, int cantidad)
 	{
 		boolean encontrado = false;
 		Producto nuevoProducto = null;
@@ -52,15 +52,19 @@ public class Factura {
 		
 		if( !encontrado ){
 			nuevoProducto = ProductDAO.buscarProducto(getGuid);
-			nuevoProducto.setCantidad(cantidad);
 			
+			if (nuevoProducto != null) {
+				nuevoProducto.setCantidad(cantidad);
+			}else{
+				return false;
+			}
 			lProductos.add(nuevoProducto);
 		}
 		
 		totalBruto += nuevoProducto.getPrecio();
 		totalMasIva = (totalBruto * iva) + totalBruto;
 			
-		return lProductos;
+		return true;
 	}
 	
 	public List<Producto> listProductos()
