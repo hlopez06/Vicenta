@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.divingWeb.facturador.Factura;
 import com.divingWeb.facturador.Remito;
 
 /**
@@ -35,7 +34,12 @@ public class ModeRemito extends HttpServlet {
 		request.setAttribute("documento", "remito");
 		request.setAttribute("titulo_html", "Vicenta - Remito");
 		request.setAttribute("titulo_mainContent", "Remito");
-		request.setAttribute("pane_rigth", true);
+		request.setAttribute("pane_left", true);
+		request.setAttribute("pane_rigth", false);
+		request.setAttribute("form_client", false);
+		request.setAttribute("form_provider", true);
+		request.setAttribute("pane_left_client", true);
+		request.setAttribute("pane_left_provider", true);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("documento", new Remito());

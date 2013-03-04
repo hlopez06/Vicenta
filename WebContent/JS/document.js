@@ -22,8 +22,15 @@ Factura = {
 
 Product = {		
 		addProduct : function(){
-			var idProducto = $("#idProducto").val();
+			var idProducto = $("#inputIdProducto").val();
+								$("#inputIdProducto").val("");
 			var cantidad = $("#cantidad").val();
+							$("#cantidad").val("1");
+			
+			if(idProducto == "" || cantidad == "" || idProducto <= 0 || cantidad <= 0){
+				return;
+				}
+								
 			$.ajax({
 				url: "documento/AddProduct",
 				data: "idProducto="+idProducto+"&cantidad="+cantidad,
@@ -62,16 +69,20 @@ Product = {
 					
 					$("#totalFactura").empty();
 					$("#totalFactura").append(divTotal);
-
+					
 				}else{
 					alert(jsResp.msjError);
 				}
 	
 				},	
 				error: function(){
-					alert("Error al iniciar cargar productos. La tranferencia salio MAL.");
+					alert("Error al cargar productos. La tranferencia salio MAL.");
+					$("#inputIdProducto").val(idProducto);
+					$("#cantidad").val(cantidad);
 				}	
 			}); //Fin de ajax
+			
+			$("#inputIdProducto").focus();
 		}
 };
 
@@ -111,7 +122,7 @@ Client = {
 				async: false,
 				beforeSend : function () {
 					$("#lupaSearchCliente").hide();	
-					$("#listClientsSearched").show();
+					$("#searchingClients").show();
 					},
 				success: function(jsResp){
 					Client.listaDeClientes = jsResp;
@@ -175,6 +186,110 @@ Client = {
 				complete : function () {	},
 				error: function(){
 					alert("Error al iniciar cargar cliente. La tranferencia salio MAL.");
+				}
+			});
+		}
+};
+
+Provider = {
+		
+		listaDeProviders : null,
+		
+		abrirFormCrearProveedor : function (){
+			
+		},
+		
+		crearProveedor : function(){
+			
+		},
+		
+		obtenerProveedor : function(numeroDeIndex){
+			var proveedor = Provider.listaDeProviders.objListaProviders[numeroDeIndex];
+			if(proveedor != undefined)
+				return Provider.listaDeProviders.objListaProviders[numeroDeIndex];
+		},
+		
+		searchProvidersKeyEnter : function(e, elemento) {
+				tecla=(document.all) ? e.keyCode : e.which; 
+				if(tecla == 13) Provider.searchProviders();
+		},
+			
+		searchProviders : function(){
+			var termino = $("#searchProviders").val();
+			if (termino == "Buscar proveedor...")
+				termino = "";
+
+			$.ajax({
+				url: "provider/SearchProviders",
+				data: "termino=" + termino,
+				type: "GET",
+				typedata: "json",
+				async: false,
+				beforeSend : function () {
+					$("#lupaSearchProviders").hide();	
+					$("#searchingProviders").show();
+					},
+				success: function(jsResp){
+					Provider.listaDeProviders = jsResp;
+					var div;
+					
+					if (jsResp.objListaProviders.length > 0)
+					{
+						if(termino == "")
+							termino = "<strong>TODO</strong>";
+							
+						div = '<ul class="lista" style="margin: 3px 10px;">' +
+								'<li>Resultado de la busqueda <i>' + termino + '</i></li>';
+						
+						jsResp.objListaProviders.forEach(function (element, index, array) {
+							div += '<li><a name=' + index + ' onclick="Provider.agregarProveedor('+index+')" href="#">'
+							+ element.razonSocial + 
+							'</a></li>';
+						});
+						
+						div += '</ul>';
+						
+					}else{
+						div = '<a style="margin: 2px 22px;" >No hay resultados para <i>"' + termino + '"</i><a>';
+					}
+
+					$("#listProvidersSearched").empty();
+					$("#listProvidersSearched").append(div);
+					$("#listProvidersSearched").show();
+					
+				},
+				complete : function () {
+					$("#lupaSearchProviders").show();
+					$("#searchingProviders").hide();
+					},
+				error: function(){
+					alert("Error al iniciar buscar proveedores. La tranferencia salio MAL.");
+				}	
+			}); //Fin de ajax
+		},
+		
+		agregarProveedor : function(numeroDeIndex){
+			var proveedor = Provider.obtenerProveedor(numeroDeIndex);
+			
+			document.getElementsByName("pr-id").item(0).value = proveedor.id;
+			document.getElementsByName("pr-nombre").item(0).value = proveedor.nombre;
+			document.getElementsByName("pr-direccion").item(0).value = proveedor.direccion;
+			document.getElementsByName("pr-tipo").item(0).value = proveedor.tipo;
+			document.getElementsByName("pr-razonSocial").item(0).value = proveedor.razonSocial;
+			
+			$.ajax({
+				url: "documento/AddProvider",
+				data: "idProveedor=" + proveedor.id,
+				type: "GET",
+				typedata: "json",
+				async: false,
+				beforeSend : function () {	},
+				success: function(jsResp){
+		
+				},
+				complete : function () {	},
+				error: function(){
+					alert("Error al iniciar cargar proveedor. La tranferencia salio MAL.");
 				}
 			});
 		}

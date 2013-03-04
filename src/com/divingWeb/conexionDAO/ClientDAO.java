@@ -4,13 +4,9 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.divingWeb.elememts.Cliente;
-import com.divingWeb.hibernate.HibernateUtil;
 
 public class ClientDAO extends ConexionDAO {
 
@@ -63,9 +59,9 @@ public class ClientDAO extends ConexionDAO {
             iniciaOperacion(); 
 
     		Criteria criterio = sesion.createCriteria(Cliente.class);
-    		criterio.add(Restrictions.like("nombre",termino + "%"));
+    		criterio.add(Restrictions.like("nombre","%" + termino + "%"));
 
-    		lResultados = criterio.list();
+    		lResultados = (List<Cliente>) criterio.list();
             
             tx.commit(); 
         } catch (HibernateException he) 

@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.divingWeb.conexionDAO.ClientDAO;
 import com.divingWeb.conexionDAO.ProductDAO;
 import com.divingWeb.elememts.Producto;
 

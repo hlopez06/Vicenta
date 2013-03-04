@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.divingWeb.facturador.Factura;
-import com.divingWeb.facturador.Facturador;
 import com.google.gson.Gson;
 
 /**
@@ -23,7 +22,6 @@ public class Facturar extends HttpServlet {
      */
     public Facturar() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,18 +33,17 @@ public class Facturar extends HttpServlet {
 		Gson gson = new Gson();
 		String jsonOutput;
 		
-		int idCliente = Integer.parseInt( request.getParameter("cl-id").trim() );
-//		int precio = Integer.parseInt( request.getParameter("precio").trim() );
+		long idCliente = Integer.parseInt( request.getParameter("cl-id").trim() );
 		
-		Factura factura = (Factura)request.getAttribute("factura");
+		Factura factura = (Factura)request.getAttribute("documento");
 
 		if (factura.getCliente().getId() == idCliente){
-			Facturador.facturar(factura);
+			factura.ejecutate(idCliente);
 			
 			jsonOutput = gson.toJson(factura);
 			
 		}else{
-			jsonOutput = "Error";
+			jsonOutput = "error";
 		}
 		
 		System.out.println(jsonOutput);

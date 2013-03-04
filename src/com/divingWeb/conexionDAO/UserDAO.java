@@ -6,7 +6,6 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 
-import com.divingWeb.elememts.Cliente;
 import com.divingWeb.elememts.Usuario;
 
 public class UserDAO extends ConexionDAO{
@@ -62,7 +61,7 @@ public class UserDAO extends ConexionDAO{
     		Criteria criterio = sesion.createCriteria(Usuario.class);
     		criterio.add(Restrictions.like("nombre",termino + "%"));
 
-    		lResultados = criterio.list();
+    		lResultados = (List<Usuario>) criterio.list();
             
             tx.commit(); 
         } catch (HibernateException he) 

@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.divingWeb.conexionDAO.ClientDAO;
 import com.divingWeb.facturador.Documento;
-import com.divingWeb.facturador.EconomicDocument;
-import com.divingWeb.facturador.Factura;
 import com.google.gson.Gson;
 
 /**
@@ -38,7 +36,7 @@ public class AddClient extends HttpServlet {
 		
 		if ( idCliente > 0 ) {
 			
-			EconomicDocument ecoDocument = (EconomicDocument)request.getSession().getAttribute("documento");
+			Documento ecoDocument = (Documento)request.getSession().getAttribute("documento");
 			
 			ecoDocument.setCliente(ClientDAO.buscarCliente(idCliente));
 			

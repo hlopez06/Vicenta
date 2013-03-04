@@ -1,13 +1,14 @@
 package com.divingWeb.facturador;
 
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.divingWeb.elememts.Cliente;
+import com.divingWeb.conexionDAO.TransactionDAO;
 import com.divingWeb.elememts.Usuario;
 import com.divingWeb.elememts.Producto;
 
-public class Factura extends EconomicDocument{
+public class Factura extends Documento{
 	
 	private int nroFactura;
 	private float totalBruto;
@@ -16,13 +17,25 @@ public class Factura extends EconomicDocument{
 	
 	public Factura()
 	{
-		lClientes = new LinkedList<Cliente>();
 		lProductos = new LinkedList<Producto>();
+		cliente = null;
 		totalBruto = 0;
 		totalMasIva = 0;
 		cantidadProductos = 0;
-		cliente = null;
 		tipoDocumento = "factura";
+	}
+	
+	public boolean ejecutate(long idCliente){
+		
+		if (cliente.getId() == idCliente){
+			setDia(new Date(0));
+			
+			checkCreditoCliente();
+			
+			TransactionDAO.guardarFactura(this);			
+		}
+		
+		return true;
 	}
 	
 	public boolean checkCreditoCliente(){
@@ -82,15 +95,6 @@ public class Factura extends EconomicDocument{
 	public void setlProductos(List<Producto> lProductos) {
 		this.lProductos = lProductos;
 	}
-
-	public List<Cliente> getlClientes() {
-		return lClientes;
-	}
-
-	public void setlClientes(List<Cliente> lClientes) {
-		this.lClientes = lClientes;
-	}
-
 
 	public Usuario getCajero() {
 		return cajero;

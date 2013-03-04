@@ -3,17 +3,12 @@ package com.divingWeb.servlets.ajax;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.HibernateException;
-
-import com.divingWeb.conexionDAO.ProductDAO;
 import com.divingWeb.facturador.Documento;
-import com.divingWeb.facturador.Factura;
 import com.google.gson.Gson;
 
 /**

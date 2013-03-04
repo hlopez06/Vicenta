@@ -375,8 +375,21 @@ div#panel-derecho {
 	border-bottom: 1px solid #CFCFCF;
 }
 
-ul.formFactura {
+ul.formFactura ul.formProvider{
 	margin: 0 0 0.5em 2em;
+	border-bottom: 1px solid #CFCFCF;
+	padding: 6px;
+	overflow: auto;
+}
+
+ul.formProvider li {
+	position: relative;
+	float: left;
+	width: 140px;
+}
+
+ul.formProvider {
+	margin: 0 0 0em 0em;
 	border-bottom: 1px solid #CFCFCF;
 	padding: 6px;
 	overflow: auto;

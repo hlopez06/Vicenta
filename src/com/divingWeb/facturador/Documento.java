@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.divingWeb.conexionDAO.ProductDAO;
+import com.divingWeb.elememts.Cliente;
 import com.divingWeb.elememts.Producto;
 import com.divingWeb.elememts.Usuario;
 
@@ -17,6 +18,8 @@ public abstract class Documento {
 	protected int cantidadProductos;
 	protected Date dia;
 	protected String tipoDocumento;
+	protected Cliente cliente;
+	protected Usuario cajero;
 
 	public Producto addProducto(int getId, int cantidad)
 	{
@@ -48,8 +51,6 @@ public abstract class Documento {
 			
 		return nuevoProducto;
 	}
-	
-	
 	
 	protected float getIva() {
 		return IVA;
@@ -84,6 +85,12 @@ public abstract class Documento {
 	}
 	protected void setDia(Date dia) {
 		this.dia = dia;
+	}	
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 }

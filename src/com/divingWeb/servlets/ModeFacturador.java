@@ -1,6 +1,5 @@
 package com.divingWeb.servlets;
 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +13,11 @@ import com.divingWeb.facturador.Factura;
 
 public class ModeFacturador extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -22,7 +26,12 @@ public class ModeFacturador extends HttpServlet {
 				request.setAttribute("documento", "factura");
 				request.setAttribute("titulo_html", "Vicenta - Factura");
 				request.setAttribute("titulo_mainContent", "Factura");
+				request.setAttribute("pane_left", true);
 				request.setAttribute("pane_rigth", false);
+				request.setAttribute("form_client", true);
+				request.setAttribute("form_provider", false);
+				request.setAttribute("pane_left_client", true);
+				request.setAttribute("pane_left_provider", false);
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("documento", new Factura());

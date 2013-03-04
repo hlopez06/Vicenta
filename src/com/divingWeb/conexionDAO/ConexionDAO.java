@@ -4,7 +4,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.divingWeb.hibernate.HibernateUtil;
 
 abstract class ConexionDAO {
     protected static Session sesion; 

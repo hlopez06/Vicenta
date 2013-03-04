@@ -2,7 +2,6 @@ package com.divingWeb.servlets.ajax;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletException;

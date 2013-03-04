@@ -44,5 +44,77 @@ public class Usuario {
 		lClFavoritos = new LinkedList<Cliente>();
 		lClHistorico = new LinkedList<Cliente>();
 	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public String getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(String sucursal) {
+		this.sucursal = sucursal;
+	}
+
+	public Usuario getObjSupervisor() {
+		return objSupervisor;
+	}
+
+	public void setObjSupervisor(Usuario objSupervisor) {
+		this.objSupervisor = objSupervisor;
+	}
+
+	public String getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(String supervisor) {
+		this.supervisor = supervisor;
+	}
+
+	public List<Cliente> getlClFavoritos() {
+		return lClFavoritos;
+	}
+
+	public void setlClFavoritos(List<Cliente> lClFavoritos) {
+		this.lClFavoritos = lClFavoritos;
+	}
+
+	public List<Cliente> getlClHistorico() {
+		return lClHistorico;
+	}
+
+	public void setlClHistorico(List<Cliente> lClHistorico) {
+		this.lClHistorico = lClHistorico;
+	}
 	
 }

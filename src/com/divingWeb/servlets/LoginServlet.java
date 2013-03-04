@@ -35,7 +35,12 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("documento", "facturador");
 			request.setAttribute("titulo_html", "Vicenta - Facturador");
 			request.setAttribute("titulo_mainContent", "Facturador");
+			request.setAttribute("pane_left", true);
 			request.setAttribute("pane_rigth", false);
+			request.setAttribute("form_client", true);
+			request.setAttribute("form_provider", false);
+			request.setAttribute("pane_left_client", true);
+			request.setAttribute("pane_left_provider", false);
 			
 			disp = getServletContext().getRequestDispatcher("/JSP/templates/general.jsp");
 			
