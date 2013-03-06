@@ -22,7 +22,7 @@
 
 		<li id="HistorialDesplegable"><a class="abreDesplegable"
 			title="Historico de movimientos" href="#">Historial</a>
-			<ul class="menuDesplegable oculto">
+			<ul id="menuDesplegable" class="menuDesplegable oculto">
 
 				<li><a class="historico-ventas-basicos"
 					href="mode/historico-ventas">de Ventas</a></li>

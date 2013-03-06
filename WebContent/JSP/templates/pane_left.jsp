@@ -31,7 +31,7 @@
 		
 		<div id="crearCliente" class="subpanel">
 			<h3 class="titulo-subpanel">
-					<a href="javascript:">Agendar cliente</a>
+					<a href="elementFactory?element=cliente">Agendar cliente</a>
 			</h3>
 		</div>
 <% }if (pane_left_provider){ %>
@@ -58,7 +58,7 @@
 		
 		<div id="crearProveedor" class="subpanel">
 			<h3 class="titulo-subpanel">
-					<a href="javascript:">Agendar proveedor</a>
+					<a href="elementFactory?element=proveedor">Agendar proveedor</a>
 			</h3>
 		</div>
 

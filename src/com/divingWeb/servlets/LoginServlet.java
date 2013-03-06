@@ -16,30 +16,19 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String user = request.getParameter("user");
-		String pass = request.getParameter("password");
-		if ("hernan".equals(user) && "hernan".equals(pass)) {
-			response(response, "login ok");
-		} else {
-			response(response, "invalid login");
-		}
-	}
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
 		String user = request.getParameter("user");
 		String pass = request.getParameter("password");
 		RequestDispatcher disp;
 	
-		long idUsuario = UserDAO.getIdUsuario(user, pass);
+//		long idUsuario = UserDAO.getIdUsuario(user, pass);
 		
 		if ("hernan".equals(user) && "hernan".equals(pass)) {
 			
-			HttpSession session = request.getSession();
+//			HttpSession session = request.getSession();
 			
-			session.setAttribute("usuario", UserDAO.buscarCliente(idUsuario));
+//			session.setAttribute("usuario", UserDAO.buscarCliente(idUsuario));
 			
 			request.setAttribute("documento", "facturador");
 			request.setAttribute("titulo_html", "Vicenta - Facturador");
@@ -54,22 +43,11 @@ public class LoginServlet extends HttpServlet {
 			disp = getServletContext().getRequestDispatcher("/JSP/general.jsp");
 			
 		} else {
-			//response(request, "invalid login");
+			
 			disp = getServletContext().getRequestDispatcher("/JSP/login/noLogin.jsp");
 		}
 		
 		disp.forward(request, response);
 	}
 
-	private void response(HttpServletResponse resp, String msg)
-			throws IOException {
-		
-		PrintWriter out = resp.getWriter();
-		out.println("<html>");
-		out.println("<body>");
-		out.println("<t1>" + msg + "</t1>");
-		out.println("</body>");
-		out.println("</html>");
-			             
-	}
 }

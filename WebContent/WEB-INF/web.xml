@@ -100,12 +100,12 @@
   </servlet-mapping>
   <servlet>
     <description>Permite agregar elementos nuevas (productos, clientes, proveedores)</description>
-    <display-name>AddIdentity</display-name>
-    <servlet-name>AddIdentity</servlet-name>
-    <servlet-class>com.divingWeb.servlets.AddElement</servlet-class>
+    <display-name>ElementFactory</display-name>
+    <servlet-name>ElementFactory</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ElementFactory</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddIdentity</servlet-name>
-    <url-pattern>/mode/addElement</url-pattern>
+    <servlet-name>ElementFactory</servlet-name>
+    <url-pattern>/mode/elementFactory</url-pattern>
   </servlet-mapping>
 </web-app>

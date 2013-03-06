@@ -2,7 +2,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.event.SaveOrUpdateEvent;
 
 import com.divingWeb.elememts.Producto;
 
@@ -20,7 +19,7 @@ public class Principal {
 		
 		Producto nuevoProducto = new Producto();
 
-		long id = (Long) session.save(nuevoProducto);
+		session.save(nuevoProducto);
 
 		transaction.commit();
 		session.close();

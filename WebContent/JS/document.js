@@ -294,3 +294,9 @@ Provider = {
 			});
 		}
 };
+
+menu = {
+		HistorialDesplegable : function (){
+			document.getElementById("menuDesplegable").style["display"]="block";
+			}	
+};

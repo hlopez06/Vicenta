@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.divingWeb.documents.ElementFactory;
+import com.divingWeb.documents.ElementHistory;
 import com.divingWeb.elememts.Usuario;
 
 /**
  * Servlet implementation class AddIdentity
  */
-public class AddElement extends HttpServlet {
+public class ElementFactory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddElement() {
+    public ElementFactory() {
         super();
     }
 
@@ -29,7 +29,7 @@ public class AddElement extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String identity = request.getParameter("identity").trim();
+		String identity = request.getParameter("element").trim();
 		
 		RequestDispatcher disp;		
 
@@ -39,31 +39,30 @@ public class AddElement extends HttpServlet {
 			HttpSession session = request.getSession();
 			Usuario objUsuario = (Usuario) session.getAttribute("usuario");
 			
+			request.setAttribute("titulo_html", "Vicenta - error");
+			request.setAttribute("titulo_mainContent", "error 404");
+
 			if (identity.equals("producto")){
 				request.setAttribute("titulo_html", "Vicenta - Crear producto");
 				request.setAttribute("titulo_mainContent", "Crear un producto nuevo");
 				
 			} if (identity.equals("cliente")){
-				request.setAttribute("titulo_html", "Vicenta - Crear producto");
-				request.setAttribute("titulo_mainContent", "Crear un producto nuevo");
+				request.setAttribute("titulo_html", "Vicenta - Crear cliente");
+				request.setAttribute("titulo_mainContent", "Crear un cliente nuevo");
 				
 			} if (identity.equals("proveedor")){
-				request.setAttribute("titulo_html", "Vicenta - Crear producto");
-				request.setAttribute("titulo_mainContent", "Crear un producto nuevo");
+				request.setAttribute("titulo_html", "Vicenta - Crear proveedor");
+				request.setAttribute("titulo_mainContent", "Crear un proveedor nuevo");
 			
 			} if (identity.equals("usuario") && objUsuario.isAdministrador()){
 				request.setAttribute("titulo_html", "Vicenta - Crear usuario");
 				request.setAttribute("titulo_mainContent", "Crear un usuario nuevo");
 					
-			} else {
-				request.setAttribute("titulo_html", "Vicenta - error");
-				request.setAttribute("titulo_mainContent", "error 404");
-				
 			}
 	
-			session.setAttribute("identity", new ElementFactory(identity, objUsuario));
+			session.setAttribute("identity", new ElementHistory(identity, objUsuario));
 	
-			disp = getServletContext().getRequestDispatcher("/JSP/addElement.jsp");
+			disp = getServletContext().getRequestDispatcher("/JSP/elementFactory.jsp");
 		} else {
 			request.setAttribute("titulo_html", "Vicenta - Error");
 			request.setAttribute("titulo_error", "Error acceder a la carga de elementos.");
