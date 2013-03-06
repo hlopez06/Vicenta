@@ -1,4 +1,4 @@
-package com.divingWeb.facturador;
+package com.divingWeb.documents;
 
 import java.util.LinkedList;
 

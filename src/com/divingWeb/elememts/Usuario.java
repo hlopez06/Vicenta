@@ -5,12 +5,15 @@ import java.util.List;
 
 public class Usuario {
 	private long id;
+	private String usuario;
+	private String pass;
 	private String nombre;
 	private String apellido;
 	private String categoria;
 	private String sucursal;
 	private Usuario objSupervisor;
 	private String supervisor;
+	private boolean administrador;
 	List<Cliente> lClFavoritos;
 	List<Cliente> lClHistorico;
 	
@@ -43,6 +46,22 @@ public class Usuario {
 		
 		lClFavoritos = new LinkedList<Cliente>();
 		lClHistorico = new LinkedList<Cliente>();
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 	public long getId() {
@@ -99,6 +118,14 @@ public class Usuario {
 
 	public void setSupervisor(String supervisor) {
 		this.supervisor = supervisor;
+	}
+
+	public boolean isAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(boolean administrador) {
+		this.administrador = administrador;
 	}
 
 	public List<Cliente> getlClFavoritos() {

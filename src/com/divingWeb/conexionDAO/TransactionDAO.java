@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 import org.hibernate.HibernateException;
 
+import com.divingWeb.documents.Factura;
 import com.divingWeb.elememts.Producto;
-import com.divingWeb.facturador.Factura;
 
 public class TransactionDAO extends ConexionDAO {
 

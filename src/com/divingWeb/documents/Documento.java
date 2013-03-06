@@ -1,4 +1,4 @@
-package com.divingWeb.facturador;
+package com.divingWeb.documents;
 
 import java.sql.Date;
 import java.util.List;
@@ -12,6 +12,7 @@ public abstract class Documento {
 	
 	static float IVA = 0.21F;
 	
+	protected long id;
 	protected List<Producto> lProductos;
 	protected Usuario usuario;
 	protected int nroDocumento;

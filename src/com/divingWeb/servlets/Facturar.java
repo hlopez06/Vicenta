@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.divingWeb.facturador.Factura;
+import com.divingWeb.documents.Factura;
 import com.google.gson.Gson;
 
 /**

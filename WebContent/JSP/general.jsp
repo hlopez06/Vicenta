@@ -46,8 +46,8 @@
 					<div id="formDocument">
 <!-- 						<form action="" method="POST" name="formPrincipal"> -->
 							
-							<% if (form_client){ %><jsp:include page="form_client.jsp"></jsp:include><% }%>
-							<% if (form_provider){ %><jsp:include page="form_provider.jsp"></jsp:include><% }%>
+							<% if (form_client){ %><jsp:include page="templates/form_client.jsp"></jsp:include><% }%>
+							<% if (form_provider){ %><jsp:include page="templates/form_provider.jsp"></jsp:include><% }%>
 							
 							<div id="productos">
 								<a>Lista de productos</a>
@@ -75,9 +75,9 @@
 
 		<!-- panel contenido principal(izquierdo) -->
 		
-		<% if (pane_left){ %><jsp:include page="pane_left.jsp"></jsp:include><% }%>
+		<% if (pane_left){ %><jsp:include page="templates/pane_left.jsp"></jsp:include><% }%>
 
-		<% if (pane_rigth){ %><jsp:include page="pane_rigth.jsp"></jsp:include><% }%>
+		<% if (pane_rigth){ %><jsp:include page="templates/pane_rigth.jsp"></jsp:include><% }%>
 	</div>
 
 </body>

@@ -8,6 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.divingWeb.conexionDAO.UserDAO;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,8 +32,14 @@ public class LoginServlet extends HttpServlet {
 		String user = request.getParameter("user");
 		String pass = request.getParameter("password");
 		RequestDispatcher disp;
+	
+		long idUsuario = UserDAO.getIdUsuario(user, pass);
 		
 		if ("hernan".equals(user) && "hernan".equals(pass)) {
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("usuario", UserDAO.buscarCliente(idUsuario));
 			
 			request.setAttribute("documento", "facturador");
 			request.setAttribute("titulo_html", "Vicenta - Facturador");
@@ -42,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("pane_left_client", true);
 			request.setAttribute("pane_left_provider", false);
 			
-			disp = getServletContext().getRequestDispatcher("/JSP/templates/general.jsp");
+			disp = getServletContext().getRequestDispatcher("/JSP/general.jsp");
 			
 		} else {
 			//response(request, "invalid login");

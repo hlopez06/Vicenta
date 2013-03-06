@@ -86,7 +86,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Facturar</servlet-name>
-    <url-pattern>/mode/facturador/Facturar</url-pattern>
+    <url-pattern>/mode/facturador/facturar</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -97,5 +97,15 @@
   <servlet-mapping>
     <servlet-name>ModeRemito</servlet-name>
     <url-pattern>/mode/remito</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Permite agregar elementos nuevas (productos, clientes, proveedores)</description>
+    <display-name>AddIdentity</display-name>
+    <servlet-name>AddIdentity</servlet-name>
+    <servlet-class>com.divingWeb.servlets.AddElement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddIdentity</servlet-name>
+    <url-pattern>/mode/addElement</url-pattern>
   </servlet-mapping>
 </web-app>

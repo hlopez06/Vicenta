@@ -1,0 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%
+	Boolean pane_left_client = (Boolean) request.getAttribute("pane_left_client");
+	Boolean pane_left_provider = (Boolean) request.getAttribute("pane_left_provider");
+%>    
+<div id="panel-izquierdo" class="ui-layout-west pane pane-west">
+
+
+<% if (pane_left_client){ %>
+		<div id="subpanel-terminos-buscados" class="subpanel">
+			<h3 class="titulo-subpanel">
+				<a href="javascript:">Buscar Cliente</a>
+			</h3>
+
+			<div id="formBuscaCliente">
+				<input id="searchClientes" type="text" value="Buscar cliente..."
+					name="searchClientes" size="25" maxlength="20"
+					onblur="if(this.value=='') this.value='Buscar cliente...';"
+					onfocus="if(this.value=='Buscar cliente...') this.value='';"
+					onkeypress="Client.searchClientsKeyEnter(event, this)" /> <a
+					id="lupaSearchCliente"
+					href="javascript:Client.searchClients();"> <img
+					src="../images/magnifier.png" title="Buscar">
+				</a> <a id="searchingClients" style="display: none;"> <img
+					src="../images/progress.gif" title="buscando...">
+				</a>
+			</div>
+			<div id="listClientsSearched" style="display: none;"></div>
+		</div>
+		
+		<div id="crearCliente" class="subpanel">
+			<h3 class="titulo-subpanel">
+					<a href="javascript:">Agendar cliente</a>
+			</h3>
+		</div>
+<% }if (pane_left_provider){ %>
+		<div id="subpanel-terminos-buscados" class="subpanel">
+			<h3 class="titulo-subpanel">
+				<a href="javascript:">Buscar Proveedor</a>
+			</h3>
+
+			<div id="formBuscaProveedor">
+				<input id="searchProveedors" type="text" value="Buscar proveedor..."
+					name="searchProveedors" size="25" maxlength="20"
+					onblur="if(this.value=='') this.value='Buscar proveedor...';"
+					onfocus="if(this.value=='Buscar proveedor...') this.value='';"
+					onkeypress="Provider.searchProvidersKeyEnter(event, this)" /> <a
+					id="lupaSearchProviders"
+					href="javascript:Provider.searchProviders();"> <img
+					src="../images/magnifier.png" title="Buscar">
+				</a> <a id="searchingProviders" style="display: none;"> <img
+					src="../images/progress.gif" title="buscando...">
+				</a>
+			</div>
+			<div id="listProviderSearched" style="display: none;"></div>
+		</div>
+		
+		<div id="crearProveedor" class="subpanel">
+			<h3 class="titulo-subpanel">
+					<a href="javascript:">Agendar proveedor</a>
+			</h3>
+		</div>
+
+<% } %>
+</div>

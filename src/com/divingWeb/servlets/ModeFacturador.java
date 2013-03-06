@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.divingWeb.facturador.Factura;
+import com.divingWeb.documents.Factura;
 
 public class ModeFacturador extends HttpServlet {
 
@@ -36,7 +36,7 @@ public class ModeFacturador extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("documento", new Factura());
 				
-				disp = getServletContext().getRequestDispatcher("/JSP/templates/general.jsp");
+				disp = getServletContext().getRequestDispatcher("/JSP/general.jsp");
 				
 				disp.forward(request, response);
 	}

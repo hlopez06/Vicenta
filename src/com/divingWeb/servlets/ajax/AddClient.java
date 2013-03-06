@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.divingWeb.conexionDAO.ClientDAO;
-import com.divingWeb.facturador.Documento;
+import com.divingWeb.documents.Documento;
 import com.google.gson.Gson;
 
 /**

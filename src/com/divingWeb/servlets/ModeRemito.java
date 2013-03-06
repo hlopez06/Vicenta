@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.divingWeb.facturador.Remito;
+import com.divingWeb.documents.Remito;
 
 /**
  * Servlet implementation class ModeRemito
@@ -44,7 +44,7 @@ public class ModeRemito extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("documento", new Remito());
 		
-		disp = getServletContext().getRequestDispatcher("/JSP/templates/general.jsp");
+		disp = getServletContext().getRequestDispatcher("/JSP/general.jsp");
 		
 		disp.forward(request, response);
 
