@@ -49,7 +49,6 @@ input[type="checkbox"] {
 :root [type="checkbox"] {
 }
 
-
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5em;
 }
@@ -173,6 +172,7 @@ div#ui-layout-north ul.menuSup li a.abreDesplegable {
     padding-right: 19px;
 }
 div#ui-layout-north ul.menuSup ul.menuDesplegable {
+	background: none repeat scroll 0 0 white;
     border-bottom: 2px solid #BABABA;
     border-left: 2px solid #BABABA;
     border-right: 2px solid #BABABA;
@@ -181,7 +181,9 @@ div#ui-layout-north ul.menuSup ul.menuDesplegable {
     padding: 0.25em 0;
     position: absolute;
     top: 1.8em;
+    width: -moz-max-content !important;
     width: 15em;
+    
 }
 div#ui-layout-north ul.menuSup ul.menuDesplegable li {
     background: none repeat scroll 0 0 transparent;
@@ -373,6 +375,23 @@ div#panel-derecho {
 
 #listClientsSearched {
 	border-bottom: 1px solid #CFCFCF;
+}
+
+#formFactoryElem{
+	width: 550px;
+	border-top: medium groove whitesmoke;
+	padding: 1em;
+}
+
+#formElem{
+	width: 50%;
+	margin: 1em;
+}
+
+ul.formElem li {
+/* 	float: left; */
+    position: relative;
+/*     width: auto; */
 }
 
 ul.formFactura ul.formProvider{

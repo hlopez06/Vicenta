@@ -30,17 +30,48 @@
 		<div id="mainContent">
 			<div class="content" id="docContent">
 				<!-- panel contenido principal(central) -->
-				<div id="ui-layout-content">
 					<!--cuerpo -->
 					
 					<div id="titulo-pag"><%=titulo_mainContent%></div>
 
 					<!-- formulario de Remito -->
 
+					<div id="formFactoryElem">
+							<a>Formulario para ingreso de productos</a>
+						<form action="">
+					
+							<ul id="formElem">
+								<li>
+									<ul class="formElem">
+										<li><span>Nombre de producto</span></li>
+										<li><input type="text" size="20" name="pr-nombre" value="" /></li>
+									</ul>	
+								</li>
+								<li>
+									<ul class="formElem">
+										<li><span>Detalles</span></li>
+										<li><input type="text" size="20" name="pr-detalles" value="" /></li>
+									</ul>	
+								</li>	
+								<li>
+									<ul class="formElem">
+										<li><span>Categoria</span></li>
+										<li><input type="text" size="20" name="pr-categoria" value="" /></li>
+									</ul>	
+								</li>
+								<li>
+									<ul class="formElem">
+										<li><span>Precio</span></li>
+										<li><input type="text" size="20" name="pr-precio" value="" /></li>
+									</ul>	
+								</li>
 
-
-
-				</div>
+							</ul>
+							<input type="hidden" size="20" name="pr-id"
+								value="" />
+		
+						</form>
+					</div>
 
 			</div>
 				<jsp:include page="tools/temp-pie.jsp"></jsp:include>

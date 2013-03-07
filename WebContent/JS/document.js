@@ -296,7 +296,29 @@ Provider = {
 };
 
 menu = {
-		HistorialDesplegable : function (){
-			document.getElementById("menuDesplegable").style["display"]="block";
-			}	
+		historialDespAbre : function (){
+			document.getElementById("menuDespHisto").style["display"] = "block";
+			document.getElementById("HistorialDesplegable").className = "abreDesplegableAbierto menuDesplegable";
+			document.getElementById("HistorialDesplegable").onclick = function () {menu.historialDespCierra();};
+
+				},
+		historialDespCierra : function (){
+				document.getElementById("menuDespHisto").style["display"] = "none";
+				document.getElementById("HistorialDesplegable").className = "abreDesplegable";
+				document.getElementById("HistorialDesplegable").onclick = function () {menu.historialDespAbre();};
+				
+				},
+		altaDespAbre : function (){
+			document.getElementById("menuDespAlta").style["display"] = "block";
+			document.getElementById("AltaDesplegable").className = "abreDesplegableAbierto menuDesplegable";
+			document.getElementById("AltaDesplegable").onclick = function () {menu.AltaDespCierra();};
+
+				},
+		altaDespCierra : function (){
+				document.getElementById("menuDespAlta").style["display"] = "none";
+				document.getElementById("AltaDesplegable").className = "abreDesplegable";
+				document.getElementById("AltaDesplegable").onclick = function () {menu.AltaDespAbre();};
+				
+				},
+
 };
