@@ -366,7 +366,14 @@ div#panel-derecho {
 
 /* hernan */
 
-#btnFacturar {
+#btn-Ejecutar {
+	background: none repeat scroll 0 0 orange;
+    float: right;
+    font-size: x-large;
+    margin: 10px;
+}
+
+#btn-Facturar {
 	background: none repeat scroll 0 0 orange;
     float: right;
     font-size: x-large;

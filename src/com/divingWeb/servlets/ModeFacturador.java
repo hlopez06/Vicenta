@@ -24,6 +24,7 @@ public class ModeFacturador extends HttpServlet {
 				RequestDispatcher disp;
 				
 				request.setAttribute("documento", "factura");
+				request.setAttribute("claseJS", "Factura");
 				request.setAttribute("titulo_html", "Vicenta - Factura");
 				request.setAttribute("titulo_mainContent", "Factura");
 				request.setAttribute("pane_left", true);
@@ -32,6 +33,8 @@ public class ModeFacturador extends HttpServlet {
 				request.setAttribute("form_provider", false);
 				request.setAttribute("pane_left_client", true);
 				request.setAttribute("pane_left_provider", false);
+				request.setAttribute("actionBool", true);
+				request.setAttribute("actionName", "Facturar");
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("documento", new Factura());

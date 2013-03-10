@@ -3,12 +3,15 @@
 	
 <%	
 	String documento = (String)request.getAttribute("documento");
+	String claseJS = (String)request.getAttribute("claseJS");
 	String titulo = (String)request.getAttribute("titulo_html");
 	String titulo_mainContent = (String)request.getAttribute("titulo_mainContent");
 	Boolean pane_rigth = (Boolean) request.getAttribute("pane_rigth");
 	Boolean pane_left = (Boolean) request.getAttribute("pane_left");
 	Boolean form_client = (Boolean) request.getAttribute("form_client");
 	Boolean form_provider = (Boolean) request.getAttribute("form_provider");
+	Boolean actionBool = (Boolean) request.getAttribute("actionBool");
+	String actionName = (String)request.getAttribute("actionName");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -65,7 +68,13 @@
 									</li>
 								</ul>
 							</div>
-<!-- 						</form> -->
+							<% if (documento.contains("factura")){ %>
+								<div id="totalFactura"></div>
+							<%} %>
+		<!-- 						</form> -->
+							<% if (actionBool){ %>
+								<button id="btn-<%=actionName%>" onclick="<%=claseJS%>.action()"><%=actionName%></button>
+							<%} %>
 					</div>
 				</div>
 

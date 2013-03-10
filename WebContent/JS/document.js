@@ -1,24 +1,41 @@
 Factura = {
-		facturar : function(){
-			document.getElementsByName("cl-id").item(0).value = cliente.id;
+		action : function(){
 			
-			$.ajax({
-				url: "facturador/Facturar",
-				data: "idCliente=" + cliente.id,
-				type: "GET",
-				typedata: "json",
-				async: false,
-				beforeSend : function () {	},
-				success: function(jsResp){
-						
-				},
-				complete : function () {	},
-				error: function(){
-					alert("Error al iniciar facturacion. La tranferencia salio MAL.");
-				}
-			});
+			if (document.getElementsByName("cl-id").item(0).value != ""){
+				var idCliente = document.getElementsByName("cl-id").item(0).value;
+				
+				$.ajax({
+					url: "facturador/facturar",
+					data: "idCliente=" + idCliente,
+					type: "GET",
+					typedata: "json",
+					async: false,
+					beforeSend : function () {	},
+					success: function(jsResp){
+							
+					},
+					complete : function () {	},
+					error: function(){
+						alert("Error al iniciar facturacion. La tranferencia salio MAL.");
+					}
+				}); // Fin de ajax
+			} else {
+				alert("Debe agregar un cliente.");
+			}
 		}
 };
+
+Remito = {
+		action : function(){}
+};
+
+ElementFactory = {
+		producto : function() {},
+		cliente : function() {},
+		proveedor : function() {},
+		usuario : function() {},
+};
+
 
 Product = {		
 		addProduct : function(){
@@ -32,7 +49,7 @@ Product = {
 				}
 								
 			$.ajax({
-				url: "documento/AddProduct",
+				url: "documento/addProduct",
 				data: "idProducto="+idProducto+"&cantidad="+cantidad,
 				type: "POST",
 				typedata: "json",
@@ -64,7 +81,7 @@ Product = {
 					$("#listaProductos").append(div);
 
 					var divTotal = '<ul class="formTotal">' +
-						'<li>Total: '+ jsResp.objDocumento.totalMasIva +'</li>' +
+						'<li><strong>Total: '+ jsResp.objDocumento.totalMasIva +'</strong></li>' +
 						'<li>Total bruto: '+ jsResp.objDocumento.totalBruto +'</li> </ul>';
 					
 					$("#totalFactura").empty();
@@ -115,7 +132,7 @@ Client = {
 				termino = "";
 
 			$.ajax({
-				url: "client/SearchClients",
+				url: "client/searchClients",
 				data: "termino=" + termino,
 				type: "GET",
 				typedata: "json",
@@ -174,7 +191,7 @@ Client = {
 			document.getElementsByName("cl-credito").item(0).value = cliente.credito;
 			
 			$.ajax({
-				url: "documento/AddClient",
+				url: "documento/addClient",
 				data: "idCliente=" + cliente.id,
 				type: "GET",
 				typedata: "json",

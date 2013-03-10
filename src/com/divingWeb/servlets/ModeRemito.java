@@ -32,6 +32,7 @@ public class ModeRemito extends HttpServlet {
 		RequestDispatcher disp;
 		
 		request.setAttribute("documento", "remito");
+		request.setAttribute("claseJS", "Remito");
 		request.setAttribute("titulo_html", "Vicenta - Remito");
 		request.setAttribute("titulo_mainContent", "Remito");
 		request.setAttribute("pane_left", true);
@@ -40,6 +41,8 @@ public class ModeRemito extends HttpServlet {
 		request.setAttribute("form_provider", true);
 		request.setAttribute("pane_left_client", true);
 		request.setAttribute("pane_left_provider", true);
+		request.setAttribute("actionBool", true);
+		request.setAttribute("actionName", "Ejecutar");
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("documento", new Remito());

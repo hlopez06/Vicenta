@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%
-	String documento = (String)request.getAttribute("documento");
+	String elemento = (String)request.getAttribute("elemento");
 	String titulo = (String)request.getAttribute("titulo_html");
 	String titulo_mainContent = (String)request.getAttribute("titulo_mainContent");
-    
+	String claseJS = (String)request.getAttribute("claseJS");
+	String actionName = (String)request.getAttribute("actionName");
     %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,7 +36,7 @@
 					<div id="titulo-pag"><%=titulo_mainContent%></div>
 
 					<!-- formulario de Remito -->
-
+<% if ( elemento.contains("producto") ){ %>
 					<div id="formFactoryElem">
 							<a>Formulario para ingreso de productos</a>
 						<form action="">
@@ -44,6 +45,43 @@
 								<li>
 									<ul class="formElem">
 										<li><span>Nombre de producto</span></li>
+										<li><input type="text" size="20" name="pr-nombre" class="inputProducto" value="" /></li>
+									</ul>	
+								</li>
+								<li>
+									<ul class="formElem">
+										<li><span>Detalles</span></li>
+										<li><input type="text" size="20" name="pr-detalles" class="inputProducto" value="" /></li>
+									</ul>	
+								</li>	
+								<li>
+									<ul class="formElem">
+										<li><span>Categoria</span></li>
+										<li><input type="text" size="20" name="pr-categoria" class="inputProducto" value="" /></li>
+									</ul>	
+								</li>
+								<li>
+									<ul class="formElem">
+										<li><span>Precio</span></li>
+										<li><input type="text" size="20" name="pr-precio" class="inputProducto" value="" /></li>
+									</ul>	
+								</li>
+
+							</ul>
+							<input type="hidden" size="20" name="pr-id"
+								value="" />
+		
+							<button id="btn-<%=actionName%>" onclick="ElementFactory.<%=claseJS%>()"><%=actionName%></button>
+						</form>
+					</div>
+<% } else if (elemento.contains("cliente")){ %>
+					<div id="formFactoryElem">
+							<a>Formulario para ingreso de clientes</a>
+						<form action="">
+							<ul id="formElem">
+								<li>
+									<ul class="formElem">
+										<li><span>Nombre de cliente</span></li>
 										<li><input type="text" size="20" name="pr-nombre" value="" /></li>
 									</ul>	
 								</li>
@@ -70,9 +108,16 @@
 							<input type="hidden" size="20" name="pr-id"
 								value="" />
 		
+							<button id="btn-<%=actionName%>" onclick="ElementFactory.<%=claseJS%>()"><%=actionName%></button>
 						</form>
 					</div>
-
+<% } else if (elemento.contains("proveedor")){ %>
+		<div > proveedor no cargado</div>
+<% } else if (elemento.contains("usuario")){ %>
+		<div > usuario no cargado</div>
+<% } else { %>
+		<div > No cargado</div>
+<% } %>
 			</div>
 				<jsp:include page="tools/temp-pie.jsp"></jsp:include>
 		</div>

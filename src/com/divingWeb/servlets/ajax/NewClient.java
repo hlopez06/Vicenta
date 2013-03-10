@@ -20,7 +20,6 @@ public class NewClient extends HttpServlet {
      */
     public NewClient() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

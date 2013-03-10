@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.divingWeb.conexionDAO.UserDAO;
+import com.divingWeb.documents.Factura;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,11 +27,14 @@ public class LoginServlet extends HttpServlet {
 		
 		if ("hernan".equals(user) && "hernan".equals(pass)) {
 			
-//			HttpSession session = request.getSession();
+			HttpSession session = request.getSession();
 			
 //			session.setAttribute("usuario", UserDAO.buscarCliente(idUsuario));
 			
-			request.setAttribute("documento", "facturador");
+			session.setAttribute("documento", new Factura());
+			
+			request.setAttribute("documento", "factura");
+			request.setAttribute("claseJS", "Factura");
 			request.setAttribute("titulo_html", "Vicenta - Facturador");
 			request.setAttribute("titulo_mainContent", "Facturador");
 			request.setAttribute("pane_left", true);
@@ -39,6 +43,8 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("form_provider", false);
 			request.setAttribute("pane_left_client", true);
 			request.setAttribute("pane_left_provider", false);
+			request.setAttribute("actionBool", true);
+			request.setAttribute("actionName", "Ejecutar");
 			
 			disp = getServletContext().getRequestDispatcher("/JSP/general.jsp");
 			
