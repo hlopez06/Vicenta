@@ -13,20 +13,22 @@ public class Usuario {
 	private String sucursal;
 	private Usuario objSupervisor;
 	private String supervisor;
+	private long idDepositoDefault;
+	private Deposito objDepositoDefault;
 	private boolean administrador;
 	List<Cliente> lClFavoritos;
 	List<Cliente> lClHistorico;
 	
-	private Usuario(){
-
-	}
+	private Usuario(){}
 	
-	public void newUsuario(String strNombre, String strApellido, String strCategoria, String strSucursal,String strSupervisor){
+	public void newUsuario(String nombre, String apellido, String categoria, String sucursal,String supervisor){
 		
-		newUsuario(strNombre, strApellido, strCategoria, strSucursal);
+		newUsuario(nombre, apellido, categoria, sucursal);
 		
-		supervisor = strSupervisor;
+		this.supervisor = supervisor;
 		objSupervisor = null;
+		administrador = false;
+		idDepositoDefault = 0;
 	}
 
 	public void newUsuario(String strNombre, String strApellido, String strCategoria, String strSucursal,Usuario oSupervisor){
@@ -37,17 +39,34 @@ public class Usuario {
 		objSupervisor = oSupervisor;
 	}
 		
-	private void newUsuario(String strNombre, String strApellido, String strCategoria, String strSucursal){
+	private void newUsuario(String nombre, String apellido, String categoria, String sucursal){
 		
-		nombre = strNombre;
-		apellido = strApellido;
-		categoria = strCategoria;
-		sucursal = strSucursal;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.categoria = categoria;
+		this.sucursal = sucursal;
 		
 		lClFavoritos = new LinkedList<Cliente>();
 		lClHistorico = new LinkedList<Cliente>();
 	}
 
+	public long caragarObjDeposito(){
+		// se debe usan el idDepositoDefault para traer el un deposito a "objDepositoDefault" y (return id de deposito).
+		return 1;
+	}
+	
+	public String getNombreDepositoDefault(){
+		String nombreDeposito = null;
+		
+		if (objDepositoDefault != null){
+			nombreDeposito = objDepositoDefault.getNombre();
+		}
+		// sacar esta linea para multiples depositos.
+		nombreDeposito = "Deposito principal";
+
+		return nombreDeposito;
+	}
+	
 	public String getUsuario() {
 		return usuario;
 	}
@@ -118,6 +137,22 @@ public class Usuario {
 
 	public void setSupervisor(String supervisor) {
 		this.supervisor = supervisor;
+	}
+
+	public long getIdDepositoDefault() {
+		return idDepositoDefault;
+	}
+
+	public void setIdDepositoDefault(long idDepositoDefault) {
+		this.idDepositoDefault = idDepositoDefault;
+	}
+
+	public Deposito getObjDepositoDefault() {
+		return objDepositoDefault;
+	}
+
+	public void setObjDepositoDefault(Deposito objDepositoDefault) {
+		this.objDepositoDefault = objDepositoDefault;
 	}
 
 	public boolean isAdministrador() {

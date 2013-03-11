@@ -29,57 +29,65 @@ public class ElementFactory extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String identity = request.getParameter("element").trim();
+		String elemento = request.getParameter("element").trim();
 		
 		RequestDispatcher disp;		
 
-		if (identity.contains("producto") || identity.contains("cliente") || identity.contains("proveedor"))
+		if (elemento.contains("producto") || elemento.contains("cliente") || elemento.contains("proveedor"))
 		{
 	
 			HttpSession session = request.getSession();
 			Usuario objUsuario = (Usuario) session.getAttribute("usuario");
-			
-			request.setAttribute("titulo_html", "Vicenta - error");
-			request.setAttribute("titulo_mainContent", "error 404");
 
-			if (identity.equals("producto")){
+			if (elemento.equals("producto")){
 				request.setAttribute("elemento", "producto");
 				request.setAttribute("titulo_html", "Vicenta - Crear producto");
 				request.setAttribute("titulo_mainContent", "Crear un producto nuevo");
 				request.setAttribute("claseJS", "producto");
 				request.setAttribute("actionName", "Alta producto");
 				
-			} if (identity.equals("cliente")){
+//				request.setAttribute("nombreDepositoDefault", "no hay deposito asignado");			
+//				long idDepositoDefault = objUsuario.getIdDepositoDefault();
+//				request.setAttribute("idDepositoDefault", String.valueOf(idDepositoDefault));
+//
+//				String nombreDepositoDefault = objUsuario.getNombreDepositoDefault();
+//				if (idDepositoDefault > 0 && nombreDepositoDefault != null)					
+//						request.setAttribute("nombreDepositoDefault", nombreDepositoDefault);
+		
+			} else if (elemento.equals("cliente")){
 				request.setAttribute("elemento", "cliente");
 				request.setAttribute("titulo_html", "Vicenta - Crear cliente");
 				request.setAttribute("titulo_mainContent", "Crear un cliente nuevo");
 				request.setAttribute("claseJS", "cliente");
 				request.setAttribute("actionName", "Alta cliente");
 				
-			} if (identity.equals("proveedor")){
+			} else if (elemento.equals("proveedor")){
 				request.setAttribute("elemento", "cliente");
 				request.setAttribute("titulo_html", "Vicenta - Crear proveedor");
 				request.setAttribute("titulo_mainContent", "Crear un proveedor nuevo");
 				request.setAttribute("claseJS", "proveedor");
 				request.setAttribute("actionName", "Alta proveedor");
 			
-			} if (identity.equals("usuario") && objUsuario.isAdministrador()){
+			} else if (elemento.equals("usuario") && objUsuario.isAdministrador()){
 				request.setAttribute("elemento", "usuario");
 				request.setAttribute("titulo_html", "Vicenta - Crear usuario");
 				request.setAttribute("titulo_mainContent", "Crear un usuario nuevo");
 				request.setAttribute("claseJS", "usuario");
 				request.setAttribute("actionName", "Alta usuario");
 					
+			} else {
+				request.setAttribute("titulo_html", "Vicenta - error");
+				request.setAttribute("titulo_mainContent", "error 404");
 			}
 	
-			session.setAttribute("identity", new ElementHistory(identity, objUsuario));
+			session.setAttribute("elemento", new ElementHistory(elemento, objUsuario));
 	
 			disp = getServletContext().getRequestDispatcher("/JSP/elementFactory.jsp");
 		} else {
 			request.setAttribute("titulo_html", "Vicenta - Error");
 			request.setAttribute("titulo_error", "Error acceder a la carga de elementos.");
 			request.setAttribute("detalle_error", "Error acceder a la carga de elementos.");
-			request.setAttribute("oculto_error", "Error acceder a la carga de elementos. No se reconoce el parametro:" + identity);
+			request.setAttribute("oculto_error", "Error acceder a la carga de elementos. No se reconoce el parametro:" + elemento);
 			
 			disp = getServletContext().getRequestDispatcher("/JSP/errorPage.jsp");
 		}
