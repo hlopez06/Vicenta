@@ -108,4 +108,24 @@
     <servlet-name>ElementFactory</servlet-name>
     <url-pattern>/mode/elementFactory</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Crear un elemento (producto, cliente, proveedor)</description>
+    <display-name>NewElement</display-name>
+    <servlet-name>NewElement</servlet-name>
+    <servlet-class>com.divingWeb.servlets.NewElement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewElement</servlet-name>
+    <url-pattern>/mode/elementFactory/newProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Ejecuta la accion de remito</description>
+    <display-name>ActionRemito</display-name>
+    <servlet-name>ActionRemito</servlet-name>
+    <servlet-class>com.divingWeb.servlets.action.ActionRemito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActionRemito</servlet-name>
+    <url-pattern>/mode/document/remito/action</url-pattern>
+  </servlet-mapping>
 </web-app>

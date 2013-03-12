@@ -36,12 +36,12 @@ public class AddClient extends HttpServlet {
 		
 		if ( idCliente > 0 ) {
 			
-			Documento ecoDocument = (Documento)request.getSession().getAttribute("documento");
+			Documento documento = (Documento)request.getSession().getAttribute("documento");
 			
-			ecoDocument.setCliente(ClientDAO.buscarCliente(idCliente));
+			documento.setCliente(ClientDAO.buscarCliente(idCliente));
 			
 			Gson gson = new Gson();
-			String jsonOutput = gson.toJson(ecoDocument);
+			String jsonOutput = gson.toJson(documento);
 			
 			System.out.println(jsonOutput);
 					

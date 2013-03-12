@@ -52,6 +52,11 @@
 							<% if (form_client){ %><jsp:include page="templates/form_client.jsp"></jsp:include><% }%>
 							<% if (form_provider){ %><jsp:include page="templates/form_provider.jsp"></jsp:include><% }%>
 							
+							<% if (documento.contains("remito")){ %>
+									<input type="radio" name="rm-tipo" value="ingreso">ingreso</input>
+									<input type="radio" name="rm-tipo" value="egreso">egreso</input>
+							<%} %>
+							
 							<div id="productos">
 								<a>Lista de productos</a>
 								<ul id=listaProductos></ul>
@@ -71,6 +76,8 @@
 							<% if (documento.contains("factura")){ %>
 								<div id="totalFactura"></div>
 							<%} %>
+							
+
 		<!-- 						</form> -->
 							<% if (actionBool){ %>
 								<button id="btn-<%=actionName%>" onclick="<%=claseJS%>.action()"><%=actionName%></button>

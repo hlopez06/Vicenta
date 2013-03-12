@@ -4,7 +4,7 @@ package com.divingWeb.conexionDAO;
 import org.hibernate.HibernateException;
 
 import com.divingWeb.elememts.Producto;
-
+import com.divingWeb.elememts.StockProducto;
 
 public class ProductDAO extends ConexionDAO{
 	
@@ -37,6 +37,31 @@ public class ProductDAO extends ConexionDAO{
             iniciaOperacion(); 
             
             pr = (Producto) sesion.get(Producto.class, (long)idProducto);
+//            Query query = sesion.createQuery("FROM com.divingWeb.elememts.Producto WHERE guid=" + idProducto);
+//            pr = (Producto)query.uniqueResult();
+            
+            tx.commit(); 
+        } catch (HibernateException he) 
+        { 
+            manejaExcepcion(he); 
+            throw he; 
+        } finally 
+        { 
+            sesion.close(); 
+        } 
+		
+		return pr;
+	}
+	
+	public static StockProducto buscarProductoStock(int idProducto){
+		
+		StockProducto pr = null;
+		
+		try 
+        { 
+            iniciaOperacion(); 
+            
+            pr = (StockProducto) sesion.get(StockProducto.class, (long)idProducto);
 //            Query query = sesion.createQuery("FROM com.divingWeb.elememts.Producto WHERE guid=" + idProducto);
 //            pr = (Producto)query.uniqueResult();
             

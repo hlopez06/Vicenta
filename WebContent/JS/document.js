@@ -26,14 +26,60 @@ Factura = {
 };
 
 Remito = {
-		action : function(){}
+		action : function(){
+			
+			var tipo = document.getElementsByName("rm-tipo").item(0).value;
+			
+			if (tipo != "" && ( tipo == "ingreso" || tipo == "egreso" )){
+				
+				$.ajax({
+					url: "document/remito/action",
+					data: "tipoMovimiento=" + tipo,
+					type: "POST",
+					typedata: "json",
+					async: false,
+					beforeSend : function () {	},
+					success: function(jsResp){
+							
+					},
+					complete : function () {	},
+					error: function(){
+						alert("Error al iniciar facturacion. La tranferencia salio MAL.");
+					}
+				}); // Fin de ajax
+			} else {
+				alert("Error en el tipo de movimiento.");
+			}
+		}
 };
 
 ElementFactory = {
-		producto : function() {},
-		cliente : function() {},
-		proveedor : function() {},
-		usuario : function() {},
+		productoAction : function() {},
+		clienteAction : function() {},
+		proveedorAction : function() {},
+		usuarioAction : function() {},
+		ajaxCheckElement : function (url, datos){
+			
+			$.ajax({
+				url: url,
+				data: datos,
+				type: "GET",
+				typedata: "json",
+				async: false,
+				beforeSend : function () {	},
+				success: function(resp){
+						if (resp.objRespuesta.estado == "free")
+						{
+							return true;
+						}
+						return false;
+				},
+				complete : function () {	},
+				error: function(){
+					alert("Error al iniciar chequeo de elemento. La tranferencia salio MAL.");
+				}
+			}); // Fin de ajax
+		}
 };
 
 

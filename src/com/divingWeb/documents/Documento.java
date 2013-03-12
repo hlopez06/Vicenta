@@ -6,6 +6,7 @@ import java.util.List;
 import com.divingWeb.conexionDAO.ProductDAO;
 import com.divingWeb.elememts.Cliente;
 import com.divingWeb.elememts.Producto;
+import com.divingWeb.elememts.StockProducto;
 import com.divingWeb.elememts.Usuario;
 
 public abstract class Documento {
@@ -20,7 +21,7 @@ public abstract class Documento {
 	protected Date dia;
 	protected String tipoDocumento;
 	protected Cliente cliente;
-	protected Usuario cajero;
+	protected Usuario cajero;	
 
 	public Producto addProducto(int getId, int cantidad)
 	{

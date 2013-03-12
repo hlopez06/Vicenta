@@ -5,8 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.divingWeb.conexionDAO.TransactionDAO;
-import com.divingWeb.elememts.Usuario;
 import com.divingWeb.elememts.Producto;
+import com.divingWeb.elememts.Usuario;
+import com.divingWeb.elememts.StockProducto;
 
 public class Factura extends Documento{
 	

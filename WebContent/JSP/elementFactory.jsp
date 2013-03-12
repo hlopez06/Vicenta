@@ -39,7 +39,7 @@
 <% if ( elemento.contains("producto") ){ %>
 					<div id="formFactoryElem">
 							<a>Formulario para ingreso de productos</a>
-						<form action="">
+						<form action="elementFactory/newProduct"  method="GET">
 					
 							<ul id="formElem">
 								<li>
@@ -51,7 +51,7 @@
 								<li>
 									<ul class="formElem">
 										<li><span>Detalles</span></li>
-										<li><input type="text" size="20" name="pr-detalles" class="inputProducto" value="" /></li>
+										<li><input type="text" size="20" name="pr-detalle" class="inputProducto" value="" /></li>
 									</ul>	
 								</li>	
 								<li>
@@ -68,47 +68,46 @@
 								</li>
 
 							</ul>
-							<input type="hidden" size="20" name="pr-id"
-								value="" />
+							<input type="hidden" name="pr-id" value="0" />
+							<input type="hidden" name="elemento" value="<%=elemento%>"/>
 		
-							<button id="btn-<%=actionName%>" onclick="ElementFactory.<%=claseJS%>()"><%=actionName%></button>
+							<input id="btn-<%=actionName%>" type="submit" value="<%=actionName%>" name="<%=actionName%>"/>
 						</form>
 					</div>
 <% } else if (elemento.contains("cliente")){ %>
 					<div id="formFactoryElem">
 							<a>Formulario para ingreso de clientes</a>
-						<form action="">
+						<form action="elementFactory/newClient" method="GET">
 							<ul id="formElem">
 								<li>
 									<ul class="formElem">
 										<li><span>Nombre de cliente</span></li>
-										<li><input type="text" size="20" name="pr-nombre" value="" /></li>
+										<li><input type="text" size="20" name="cl-nombre" value="" /></li>
 									</ul>	
 								</li>
 								<li>
 									<ul class="formElem">
 										<li><span>Detalles</span></li>
-										<li><input type="text" size="20" name="pr-detalles" value="" /></li>
+										<li><input type="text" size="20" name="cl-detalle" value="" /></li>
 									</ul>	
 								</li>	
 								<li>
 									<ul class="formElem">
 										<li><span>Categoria</span></li>
-										<li><input type="text" size="20" name="pr-categoria" value="" /></li>
+										<li><input type="text" size="20" name="cl-categoria" value="" /></li>
 									</ul>	
 								</li>
 								<li>
 									<ul class="formElem">
 										<li><span>Precio</span></li>
-										<li><input type="text" size="20" name="pr-precio" value="" /></li>
+										<li><input type="text" size="20" name="cl-precio" value="" /></li>
 									</ul>	
 								</li>
-
 							</ul>
-							<input type="hidden" size="20" name="pr-id"
-								value="" />
+							<input type="hidden" size="20" name="cl-id"	value="0" />
+							<input type="hidden" name="elemento" value="<%=elemento%>"/>
 		
-							<button id="btn-<%=actionName%>" onclick="ElementFactory.<%=claseJS%>()"><%=actionName%></button>
+							<input id="btn-<%=actionName%>" type="submit" value="<%=actionName%>" name="<%=actionName%>"/>
 						</form>
 					</div>
 <% } else if (elemento.contains("proveedor")){ %>

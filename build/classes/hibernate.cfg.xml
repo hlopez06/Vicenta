@@ -21,7 +21,7 @@
 
         <mapping resource="mappings/Producto.hbm.xml"/>
         <mapping resource="mappings/Cliente.hbm.xml"/>
-
+ 		<mapping resource="mappings/StockProducto.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>
