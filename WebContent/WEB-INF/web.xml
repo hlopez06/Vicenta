@@ -50,15 +50,6 @@
     <url-pattern>/mode/client/searchClients</url-pattern>
   </servlet-mapping>
   <servlet>
-    <display-name>NewClient</display-name>
-    <servlet-name>NewClient</servlet-name>
-    <servlet-class>com.divingWeb.servlets.ajax.NewClient</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>NewClient</servlet-name>
-    <url-pattern>/mode/elementFactory/newClient</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <description>Agrega un cliente a una factura, nota de credito o remito.</description>
     <display-name>AddClient</display-name>
     <servlet-name>AddClient</servlet-name>
@@ -67,16 +58,6 @@
   <servlet-mapping>
     <servlet-name>AddClient</servlet-name>
     <url-pattern>/mode/documento/addClient</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Crea un nuevo producto y lo almacena en la base de datos</description>
-    <display-name>NewProduct</display-name>
-    <servlet-name>NewProduct</servlet-name>
-    <servlet-class>com.divingWeb.servlets.ajax.NewProduct</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>NewProduct</servlet-name>
-    <url-pattern>/mode/elementFactory/newProduct</url-pattern>
   </servlet-mapping>
   <servlet>
     <description>Recibe un formulario con la factura lista.</description>
@@ -109,14 +90,24 @@
     <url-pattern>/mode/elementFactory</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description>Crear un elemento (producto, cliente, proveedor)</description>
-    <display-name>NewElement</display-name>
-    <servlet-name>NewElement</servlet-name>
+    <description>Crear un elemento producto</description>
+    <display-name>NewProduct</display-name>
+    <servlet-name>NewProduct</servlet-name>
     <servlet-class>com.divingWeb.servlets.NewElement</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>NewElement</servlet-name>
+    <servlet-name>NewProduct</servlet-name>
     <url-pattern>/mode/elementFactory/newProduct</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description>Crear un elemento cliente</description>
+    <display-name>NewClient</display-name>
+    <servlet-name>NewClient</servlet-name>
+    <servlet-class>com.divingWeb.servlets.NewElement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewClient</servlet-name>
+    <url-pattern>/mode/elementFactory/newClient</url-pattern>
   </servlet-mapping>
   <servlet>
     <description>Ejecuta la accion de remito</description>

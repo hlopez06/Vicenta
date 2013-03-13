@@ -1,6 +1,7 @@
 package com.divingWeb.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import com.divingWeb.conexionDAO.ClientDAO;
 import com.divingWeb.conexionDAO.ProductDAO;
 import com.divingWeb.elememts.Cliente;
 import com.divingWeb.elememts.Producto;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class NewElement
@@ -31,56 +33,52 @@ public class NewElement extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json");
 		
 		String elemento = request.getParameter("elemento").trim();
 		
-		String titulo_html = "Vicenta";
-		String titulo_mainContent = "Vicenta";
-		Boolean resEstado = false;
-		String resDetalles = "error";
-		
+		String resEstado = "error";
+		String resDetalles = "Parametro elemento invalido.";
 		
 		if (elemento.contains("producto")){
-			int id = Integer.parseInt( request.getParameter("pr-id").trim() );			
-			String nombre = request.getParameter("pr-nombre").trim();
-			String detalle = request.getParameter("pr-detalle").trim();
-			int categoria = Integer.parseInt( request.getParameter("pr-categoria").trim() );
-			int precio = Integer.parseInt( request.getParameter("pr-precio").trim() );
+			int id = Integer.parseInt( request.getParameter("id").trim() );			
+			String nombre = request.getParameter("nombre").trim();
+			String detalle = request.getParameter("detalle").trim();
+			int categoria = Integer.parseInt( request.getParameter("categoria").trim() );
+			int precio = Integer.parseInt( request.getParameter("precio").trim() );
 			
 			Producto producto = new Producto(nombre, detalle, categoria, precio);
 			
 			ProductDAO.nuevoProducto(producto);
 			
-			resEstado = true;
+			resEstado = "ok";
 			resDetalles = "Salio todo ok.";
 			
 		} else if (elemento.contains("cliente")){
 			
-			String nombre = request.getParameter("cl-nombre").trim();
-			String apellido = request.getParameter("cl-apellido").trim();
-			String razonSocial = request.getParameter("cl-razonSocial").trim();
-			String tipo = request.getParameter("cl-tipo").trim();
-			int credito = Integer.parseInt( request.getParameter("cl-credito").trim() );
+			String nombre = request.getParameter("nombre").trim();
+			String apellido = request.getParameter("apellido").trim();
+			String razonSocial = request.getParameter("razonSocial").trim();
+			String tipo = request.getParameter("tipo").trim();
+			int credito = Integer.parseInt( request.getParameter("credito").trim() );
 			
 			Cliente cliente = new Cliente(nombre, apellido, razonSocial, tipo, credito);
 			
 			ClientDAO.nuevoCliente(cliente);
+			
+			resEstado = "ok";
+			resDetalles = "Salio todo ok.";
 		} else {
 			
 		}
+				
+		PrintWriter pw = response.getWriter();
 		
+		pw.print("{\"objNewElement\":{\"estado\":\""+ resEstado + "\",\"msj\":\"" + resDetalles + "\"}}");
 		
+		pw.flush();
 		
-		request.setAttribute("titulo_html", titulo_html);
-		request.setAttribute("titulo_mainContent", titulo_mainContent);
-		request.setAttribute("estado", resEstado);
-		request.setAttribute("respueta_detalles", resDetalles);
-		
-		RequestDispatcher disp;
-		
-		disp = getServletContext().getRequestDispatcher("/JSP/elementFactoryResponse.jsp");
-		
-		disp.forward(request, response);
+		pw.close();
 
 	}
 

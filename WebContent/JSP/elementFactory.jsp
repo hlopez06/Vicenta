@@ -39,7 +39,7 @@
 <% if ( elemento.contains("producto") ){ %>
 					<div id="formFactoryElem">
 							<a>Formulario para ingreso de productos</a>
-						<form action="elementFactory/newProduct"  method="GET">
+<!-- 						<form action=""> -->
 					
 							<ul id="formElem">
 								<li>
@@ -71,13 +71,14 @@
 							<input type="hidden" name="pr-id" value="0" />
 							<input type="hidden" name="elemento" value="<%=elemento%>"/>
 		
-							<input id="btn-<%=actionName%>" type="submit" value="<%=actionName%>" name="<%=actionName%>"/>
-						</form>
+							<button id="btn-Alta<%=elemento%>" href="#" onclick="ElementFactory.<%=elemento%>Action()"
+							 title="<%=actionName%>"><%=actionName%></button>
+<!-- 						</form> -->
 					</div>
 <% } else if (elemento.contains("cliente")){ %>
 					<div id="formFactoryElem">
 							<a>Formulario para ingreso de clientes</a>
-						<form action="elementFactory/newClient" method="GET">
+<!-- 						<form action=""> -->
 							<ul id="formElem">
 								<li>
 									<ul class="formElem">
@@ -87,28 +88,35 @@
 								</li>
 								<li>
 									<ul class="formElem">
-										<li><span>Detalles</span></li>
-										<li><input type="text" size="20" name="cl-detalle" value="" /></li>
+										<li><span>Apellido</span></li>
+										<li><input type="text" size="20" name="cl-apellido" value="" /></li>
 									</ul>	
 								</li>	
 								<li>
 									<ul class="formElem">
-										<li><span>Categoria</span></li>
-										<li><input type="text" size="20" name="cl-categoria" value="" /></li>
+										<li><span>Razon Social</span></li>
+										<li><input type="text" size="20" name="cl-razonSocial" value="" /></li>
 									</ul>	
 								</li>
 								<li>
 									<ul class="formElem">
-										<li><span>Precio</span></li>
-										<li><input type="text" size="20" name="cl-precio" value="" /></li>
+										<li><span>Tipo</span></li>
+										<li><input type="text" size="20" name="cl-tipo" value="" /></li>
+									</ul>	
+								</li>
+								<li>
+									<ul class="formElem">
+										<li><span>Credito</span></li>
+										<li><input type="number" size="20" name="cl-credito" value="" /></li>
 									</ul>	
 								</li>
 							</ul>
 							<input type="hidden" size="20" name="cl-id"	value="0" />
 							<input type="hidden" name="elemento" value="<%=elemento%>"/>
 		
-							<input id="btn-<%=actionName%>" type="submit" value="<%=actionName%>" name="<%=actionName%>"/>
-						</form>
+							<button id="btn-Alta<%=elemento%>" href="#" onclick="ElementFactory.<%=elemento%>Action()"
+							 title="<%=actionName%>"><%=actionName%></button>
+<!-- 						</form> -->
 					</div>
 <% } else if (elemento.contains("proveedor")){ %>
 		<div > proveedor no cargado</div>

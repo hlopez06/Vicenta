@@ -53,8 +53,8 @@
 							<% if (form_provider){ %><jsp:include page="templates/form_provider.jsp"></jsp:include><% }%>
 							
 							<% if (documento.contains("remito")){ %>
-									<input type="radio" name="rm-tipo" value="ingreso">ingreso</input>
-									<input type="radio" name="rm-tipo" value="egreso">egreso</input>
+									<input type="radio" name="rm-tipoMovimiento" value="ingreso">ingreso</input>
+									<input type="radio" name="rm-tipoMovimiento" value="egreso">egreso</input>
 							<%} %>
 							
 							<div id="productos">

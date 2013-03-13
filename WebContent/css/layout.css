@@ -207,7 +207,8 @@ div#ui-layout-north ul.menuSup ul.menuDesplegable li a:hover {
     text-decoration: underline;
 }
 div#ui-layout-north ul.menuSup li a.abreDesplegableAbierto {
-    background: url("../images/bk.openedGris.png") no-repeat scroll right center #F2F2F2;
+    background: no-repeat scroll right center #F2F2F2; 
+/*     url("../images/bk.openedGris.png") */
     border-left: 2px solid #BABABA;
     border-right: 2px solid #BABABA;
     border-top: 2px solid #BABABA;
