@@ -1,12 +1,17 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="com.divingWeb.tools.InputWeb"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%
+<%
 	String elemento = (String)request.getAttribute("elemento");
 	String titulo = (String)request.getAttribute("titulo_html");
 	String titulo_mainContent = (String)request.getAttribute("titulo_mainContent");
 	String claseJS = (String)request.getAttribute("claseJS");
 	String actionName = (String)request.getAttribute("actionName");
-    %>
+	String formName = (String)request.getAttribute("formName");
+	List<InputWeb> lInputs = (List<InputWeb>)request.getAttribute("inputs");
+%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html style="height: 100%;">
@@ -36,95 +41,35 @@
 					<div id="titulo-pag"><%=titulo_mainContent%></div>
 
 					<!-- formulario de Remito -->
-<% if ( elemento.contains("producto") ){ %>
-					<div id="formFactoryElem">
-							<a>Formulario para ingreso de productos</a>
-<!-- 						<form action=""> -->
-					
-							<ul id="formElem">
-								<li>
-									<ul class="formElem">
-										<li><span>Nombre de producto</span></li>
-										<li><input type="text" size="20" name="pr-nombre" class="inputProducto" value="" /></li>
-									</ul>	
-								</li>
-								<li>
-									<ul class="formElem">
-										<li><span>Detalles</span></li>
-										<li><input type="text" size="20" name="pr-detalle" class="inputProducto" value="" /></li>
-									</ul>	
-								</li>	
-								<li>
-									<ul class="formElem">
-										<li><span>Categoria</span></li>
-										<li><input type="text" size="20" name="pr-categoria" class="inputProducto" value="" /></li>
-									</ul>	
-								</li>
-								<li>
-									<ul class="formElem">
-										<li><span>Precio</span></li>
-										<li><input type="text" size="20" name="pr-precio" class="inputProducto" value="" /></li>
-									</ul>	
-								</li>
 
-							</ul>
-							<input type="hidden" name="pr-id" value="0" />
-							<input type="hidden" name="elemento" value="<%=elemento%>"/>
-		
-							<button id="btn-Alta<%=elemento%>" href="#" onclick="ElementFactory.<%=elemento%>Action()"
-							 title="<%=actionName%>"><%=actionName%></button>
-<!-- 						</form> -->
-					</div>
-<% } else if (elemento.contains("cliente")){ %>
 					<div id="formFactoryElem">
-							<a>Formulario para ingreso de clientes</a>
-<!-- 						<form action=""> -->
-							<ul id="formElem">
-								<li>
-									<ul class="formElem">
-										<li><span>Nombre de cliente</span></li>
-										<li><input type="text" size="20" name="cl-nombre" value="" /></li>
-									</ul>	
-								</li>
-								<li>
-									<ul class="formElem">
-										<li><span>Apellido</span></li>
-										<li><input type="text" size="20" name="cl-apellido" value="" /></li>
-									</ul>	
-								</li>	
-								<li>
-									<ul class="formElem">
-										<li><span>Razon Social</span></li>
-										<li><input type="text" size="20" name="cl-razonSocial" value="" /></li>
-									</ul>	
-								</li>
-								<li>
-									<ul class="formElem">
-										<li><span>Tipo</span></li>
-										<li><input type="text" size="20" name="cl-tipo" value="" /></li>
-									</ul>	
-								</li>
-								<li>
-									<ul class="formElem">
-										<li><span>Credito</span></li>
-										<li><input type="number" size="20" name="cl-credito" value="" /></li>
-									</ul>	
-								</li>
-							</ul>
-							<input type="hidden" size="20" name="cl-id"	value="0" />
-							<input type="hidden" name="elemento" value="<%=elemento%>"/>
+						<a><%=formName %></a>
+<!-- 					<form action=""> -->
+
+						<ul id="formElem">
+<%
+	Iterator<InputWeb> iLInputs = lInputs.iterator(); 
+	while( iLInputs.hasNext() ) {
+		InputWeb input = (InputWeb) iLInputs.next();
+%>
+							<li>
+								<ul class="<%=input.getClassName()%>">
+									<li><span><%=input.getTitulo() %></span></li>
+									<li><input type="<%=input.getType() %>" size="<%=input.getSize()%>"
+									 name="<%=input.getName()%>" value="<%=input.getValue()%>" /></li>
+								</ul>	
+							</li>
+<% 	} %>
+
+						</ul>
+						<input type="hidden" size="20" name="cl-id"	value="0" />
+						<input type="hidden" name="elemento" value="<%=elemento%>"/>
 		
-							<button id="btn-Alta<%=elemento%>" href="#" onclick="ElementFactory.<%=elemento%>Action()"
-							 title="<%=actionName%>"><%=actionName%></button>
-<!-- 						</form> -->
+						<button id="btn-Alta<%=elemento%>" href="#" onclick="ElementFactory.<%=elemento%>Action()"
+						 title="<%=actionName%>"><%=actionName%></button>
+<!-- 					</form> -->
 					</div>
-<% } else if (elemento.contains("proveedor")){ %>
-		<div > proveedor no cargado</div>
-<% } else if (elemento.contains("usuario")){ %>
-		<div > usuario no cargado</div>
-<% } else { %>
-		<div > No cargado</div>
-<% } %>
+
 			</div>
 				<jsp:include page="tools/temp-pie.jsp"></jsp:include>
 		</div>

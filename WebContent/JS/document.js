@@ -442,7 +442,6 @@ menu = {
 			document.getElementById("menuDespAlta").style["display"] = "block";
 			document.getElementById("AltaDesplegable").className = "abreDesplegableAbierto menuDesplegable";
 			document.getElementById("AltaDesplegable").onclick = function () {menu.altaDespCierra();};
-			document.getElementById("AltaDesplegable").onblur = function() {menu.altaDespCierra();};
 
 				},
 		altaDespCierra : function (){
