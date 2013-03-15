@@ -12,12 +12,12 @@ public class Proveedor {
 		
 	}
 	
-	public Proveedor(String sNombre,String sDireccion,String sRazonSocial,String sTipo){
+	public Proveedor(String nombre,String direccion,String razonSocial,String tipo){
 		
-		nombre = sNombre;
-		direccion = sDireccion;
-		razonSocial = sRazonSocial;
-		tipo = sTipo;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.razonSocial = razonSocial;
+		this.tipo = tipo;
 		
 	}
 

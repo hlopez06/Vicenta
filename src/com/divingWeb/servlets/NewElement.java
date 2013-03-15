@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.divingWeb.conexionDAO.ClientDAO;
 import com.divingWeb.conexionDAO.ProductDAO;
+import com.divingWeb.conexionDAO.ProviderDAO;
 import com.divingWeb.elememts.Cliente;
 import com.divingWeb.elememts.Producto;
+import com.divingWeb.elememts.Proveedor;
 import com.google.gson.Gson;
 
 /**
@@ -26,7 +28,6 @@ public class NewElement extends HttpServlet {
      */
     public NewElement() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -41,7 +42,6 @@ public class NewElement extends HttpServlet {
 		String resDetalles = "Parametro elemento invalido.";
 		
 		if (elemento.contains("producto")){
-			int id = Integer.parseInt( request.getParameter("id").trim() );			
 			String nombre = request.getParameter("nombre").trim();
 			String detalle = request.getParameter("detalle").trim();
 			int categoria = Integer.parseInt( request.getParameter("categoria").trim() );
@@ -59,17 +59,32 @@ public class NewElement extends HttpServlet {
 			String nombre = request.getParameter("nombre").trim();
 			String apellido = request.getParameter("apellido").trim();
 			String razonSocial = request.getParameter("razonSocial").trim();
+			String direccion = request.getParameter("direccion").trim();
 			String tipo = request.getParameter("tipo").trim();
 			int credito = Integer.parseInt( request.getParameter("credito").trim() );
 			
-			Cliente cliente = new Cliente(nombre, apellido, razonSocial, tipo, credito);
+			Cliente cliente = new Cliente(nombre, apellido, razonSocial, direccion, tipo, credito);
 			
 			ClientDAO.nuevoCliente(cliente);
 			
 			resEstado = "ok";
 			resDetalles = "Salio todo ok.";
-		} else {
+		} else if (elemento.contains("proveedor")){
 			
+			String nombre = request.getParameter("nombre").trim();
+			String razonSocial = request.getParameter("razonSocial").trim();
+			String direccion = request.getParameter("direccion").trim();
+			String tipo = request.getParameter("tipo").trim();
+			
+			Proveedor proveedor = new Proveedor(nombre, direccion, razonSocial, tipo);
+			
+			ProviderDAO.nuevoProveedor(proveedor);
+			
+			resEstado = "ok";
+			resDetalles = "Salio todo ok.";
+		} else {
+			resEstado = "error";
+			resDetalles = "El nombre del \"elemento\" no es correcto.";
 		}
 				
 		PrintWriter pw = response.getWriter();

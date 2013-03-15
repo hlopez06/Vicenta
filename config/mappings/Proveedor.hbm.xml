@@ -5,18 +5,16 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.divingWeb.elememts.Cliente">
+    <class name="com.divingWeb.elememts.Proveedor">
 
         <id name="id">
             <generator class="native" />
         </id>
 
         <property name="nombre" />
-        <property name="apellido" />
         <property name="razonSocial" />
         <property name="direccion" />
         <property name="tipo" />
-        <property name="credito" />
 
     </class>
 </hibernate-mapping>

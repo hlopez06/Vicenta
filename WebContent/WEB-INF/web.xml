@@ -97,9 +97,9 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>NewProduct</servlet-name>
-    <url-pattern>/mode/elementFactory/newProduct</url-pattern>
+    <url-pattern>/mode/newElement/newProduct</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description>Crear un elemento cliente</description>
     <display-name>NewClient</display-name>
     <servlet-name>NewClient</servlet-name>
@@ -107,7 +107,17 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>NewClient</servlet-name>
-    <url-pattern>/mode/elementFactory/newClient</url-pattern>
+    <url-pattern>/mode/newElement/newClient</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Crear un elemento proveedor</description>
+    <display-name>NewProvider</display-name>
+    <servlet-name>NewProvider</servlet-name>
+    <servlet-class>com.divingWeb.servlets.NewElement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewProvider</servlet-name>
+    <url-pattern>/mode/newElement/newProvider</url-pattern>
   </servlet-mapping>
   <servlet>
     <description>Ejecuta la accion de remito</description>
@@ -118,5 +128,15 @@
   <servlet-mapping>
     <servlet-name>ActionRemito</servlet-name>
     <url-pattern>/mode/document/remito/action</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Busca proveedores</description>
+    <display-name>SearchProviders</display-name>
+    <servlet-name>SearchProviders</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ajax.SearchProviders</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchProviders</servlet-name>
+    <url-pattern>/mode/providers/searchProviders</url-pattern>
   </servlet-mapping>
 </web-app>

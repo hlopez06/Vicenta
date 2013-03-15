@@ -27,11 +27,9 @@ Factura = {
 
 Remito = {
 		action : function(){
-			
 			var tipo = document.getElementsByName("rm-tipoMovimiento").item(0).value;
 			
 			if ( tipo == "ingreso" || tipo == "egreso" ){
-				
 				$.ajax({
 					url: "document/remito/action",
 					data: "tipoMovimiento=" + tipo,
@@ -57,14 +55,13 @@ ElementFactory = {
 		productoAction : function() {
 			var elemento = document.getElementsByName("elemento").item(0).value;
 			if(elemento == "producto"){
-				var id = document.getElementsByName("pr-id").item(0).value;
 				var nombre = document.getElementsByName("pr-nombre").item(0).value;
 				var detalle = document.getElementsByName("pr-detalle").item(0).value;
 				var categoria = document.getElementsByName("pr-categoria").item(0).value;
 				var precio = document.getElementsByName("pr-precio").item(0).value;
 				
-				var url = "elementFactory/newProduct";
-				var datos = "elemento=" + elemento + "&id=" + id + "&nombre=" + nombre + "&detalle=" + detalle +
+				var url = "newElement/newProduct";
+				var datos = "elemento=" + elemento + "&nombre=" + nombre + "&detalle=" + detalle +
 																		"&categoria=" + categoria + "&precio=" + precio;
 				
 				var respuesta = ElementFactory.ajaxNewElement(url,datos);
@@ -78,26 +75,45 @@ ElementFactory = {
 		clienteAction : function() {
 			var elemento = document.getElementsByName("elemento").item(0).value;
 			if(elemento == "cliente"){
-				var id = document.getElementsByName("cl-id").item(0).value;
 				var nombre = document.getElementsByName("cl-nombre").item(0).value;
 				var apellido = document.getElementsByName("cl-apellido").item(0).value;
 				var razonSocial = document.getElementsByName("cl-razonSocial").item(0).value;
+				var direccion = document.getElementsByName("cl-direccion").item(0).value;
 				var tipo = document.getElementsByName("cl-tipo").item(0).value;
 				var credito = document.getElementsByName("cl-credito").item(0).value;
 				
-				var url = "elementFactory/newClient";
-				var datos = "elemento=" + elemento + "&id=" + id + "&nombre=" + nombre + "&apellido=" + apellido +
-																		"&razonSocial=" + razonSocial + "&tipo=" + tipo + "&credito=" + credito;
+				var url = "newElement/newClient";
+				var datos = "elemento=" + elemento + "&nombre=" + nombre + "&apellido=" + apellido +
+								"&razonSocial=" + razonSocial + "&tipo=" + tipo + "&credito=" + credito + "&direccion=" + direccion;
 				
 				var respuesta = ElementFactory.ajaxNewElement(url,datos);
 				if (respuesta == "ok"){
 					alert("Comunicacion exitosa. Los datos se actualizaron correctamente. " + datos);
 				}else {
 					alert("Comunicacion exitosa. Los datos se NO se actualizaron.  " + datos);
-				}
-			}
+				};
+			};
 		},
-		proveedorAction : function() {},
+		proveedorAction : function() {
+			var elemento = document.getElementsByName("elemento").item(0).value;
+			if(elemento == "proveedor"){
+				var nombre = document.getElementsByName("pv-nombre").item(0).value;
+				var razonSocial = document.getElementsByName("pv-razonSocial").item(0).value;
+				var direccion = document.getElementsByName("pv-direccion").item(0).value;
+				var tipo = document.getElementsByName("pv-tipo").item(0).value;
+				
+				var url = "newElement/newProvider";
+				var datos = "elemento=" + elemento + "&nombre=" + nombre + "&razonSocial=" + razonSocial +
+								"&tipo=" + tipo + "&direccion=" + direccion;
+				
+				var respuesta = ElementFactory.ajaxNewElement(url,datos);
+				if (respuesta == "ok"){
+					alert("Comunicacion exitosa. Los datos se actualizaron correctamente. " + datos);
+				}else {
+					alert("Comunicacion exitosa. Los datos se NO se actualizaron.  " + datos);
+				};
+			};
+		},
 		usuarioAction : function() {},
 		ajaxNewElement : function(url, datos) {
 			var respuesta = "error";
@@ -114,7 +130,6 @@ ElementFactory = {
 						}else{
 							respuesta = resp.objNewElement.msj;
 						}
-	
 				},
 				complete : function () {	},
 				error: function(){
@@ -208,11 +223,11 @@ Product = {
 					alert("Error al cargar productos. La tranferencia salio MAL.");
 					$("#inputIdProducto").val(idProducto);
 					$("#cantidad").val(cantidad);
-				}	
+				},
 			}); //Fin de ajax
 			
 			$("#inputIdProducto").focus();
-		}
+		},
 };
 
 Client = {
@@ -220,7 +235,7 @@ Client = {
 		listaDeClientes : null,
 		
 		abrirFormCrearCliente : function (){
-			
+
 		},
 		
 		crearCliente : function(){
@@ -239,7 +254,7 @@ Client = {
 		},
 			
 		searchClients : function(){
-			var termino = $("#searchClientes").val();
+			var termino = $("#searchClients").val();
 			if (termino == "Buscar cliente...")
 				termino = "";
 
@@ -349,7 +364,7 @@ Provider = {
 				termino = "";
 
 			$.ajax({
-				url: "provider/SearchProviders",
+				url: "providers/searchProviders",
 				data: "termino=" + termino,
 				type: "GET",
 				typedata: "json",
@@ -449,6 +464,6 @@ menu = {
 				document.getElementById("AltaDesplegable").className = "abreDesplegable";
 				document.getElementById("AltaDesplegable").onclick = function () {menu.altaDespAbre();};
 				
-				},
+				}
 
 };

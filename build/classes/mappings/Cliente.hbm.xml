@@ -14,6 +14,7 @@
         <property name="nombre" />
         <property name="apellido" />
         <property name="razonSocial" />
+        <property name="direccion" />
         <property name="tipo" />
         <property name="credito" />
 

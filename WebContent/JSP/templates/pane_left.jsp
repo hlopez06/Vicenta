@@ -14,8 +14,8 @@
 			</h3>
 
 			<div id="formBuscaCliente">
-				<input id="searchClientes" type="text" value="Buscar cliente..."
-					name="searchClientes" size="25" maxlength="20"
+				<input id="searchClients" type="text" value="Buscar cliente..."
+					name="searchClients" size="25" maxlength="20"
 					onblur="if(this.value=='') this.value='Buscar cliente...';"
 					onfocus="if(this.value=='Buscar cliente...') this.value='';"
 					onkeypress="Client.searchClientsKeyEnter(event, this)" /> <a
@@ -41,8 +41,8 @@
 			</h3>
 
 			<div id="formBuscaProveedor">
-				<input id="searchProveedors" type="text" value="Buscar proveedor..."
-					name="searchProveedors" size="25" maxlength="20"
+				<input id="searchProviders" type="text" value="Buscar proveedor..."
+					name="searchProviders" size="25" maxlength="20"
 					onblur="if(this.value=='') this.value='Buscar proveedor...';"
 					onfocus="if(this.value=='Buscar proveedor...') this.value='';"
 					onkeypress="Provider.searchProvidersKeyEnter(event, this)" /> <a
@@ -53,7 +53,7 @@
 					src="../images/progress.gif" title="buscando...">
 				</a>
 			</div>
-			<div id="listProviderSearched" style="display: none;"></div>
+			<div id="listProvidersSearched" style="display: none;"></div>
 		</div>
 		
 		<div id="crearProveedor" class="subpanel">

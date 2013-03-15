@@ -30,19 +30,20 @@ public class NewClient extends HttpServlet {
 		String nombre = request.getParameter("nombre").trim();
 		String apellido = request.getParameter("apellido").trim();
 		String razonSocial = request.getParameter("razonSocial").trim();
+		String direccion = request.getParameter("direccion").trim();
 		String tipo = request.getParameter("tipo").trim();
 		int credito = Integer.parseInt( request.getParameter("credito").trim() );
 
-		Cliente cliente = new Cliente(nombre, apellido, razonSocial, tipo, credito);
+		Cliente cliente = new Cliente(nombre, apellido, razonSocial, direccion, tipo, credito);
 		
 		ClientDAO.nuevoCliente(cliente);
 
 		if (request.getParameter("completa").trim() == "true" )
 		{
-			Cliente cliente1 = new Cliente("matias", "di Natale", "Matias corporation", "capo", 1000);
-			Cliente cliente2 = new Cliente("Martin", "garga", "garga nation", "gilun", 200);
-			Cliente cliente3 = new Cliente("Sebastian", "Checho", "Checho android", "gilun", 300);
-			Cliente cliente4 = new Cliente("Mago", "Coperfi", "Pedro gil", "gilun", 200);
+			Cliente cliente1 = new Cliente("matias", "di Natale", "Matias corporation","", "capo", 1000);
+			Cliente cliente2 = new Cliente("Martin", "garga", "garga nation", "gilun","", 200);
+			Cliente cliente3 = new Cliente("Sebastian", "Checho", "Checho android","", "gilun", 300);
+			Cliente cliente4 = new Cliente("Mago", "Coperfi", "Pedro gil", "gilun","", 200);
 			
 			ClientDAO.nuevoCliente(cliente1);
 			ClientDAO.nuevoCliente(cliente2);

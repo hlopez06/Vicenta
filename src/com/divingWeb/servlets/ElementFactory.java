@@ -70,6 +70,7 @@ public class ElementFactory extends HttpServlet {
 				lInputs.add(new InputWeb("Razon Social","razonSocial","cl"));
 				lInputs.add(new InputWeb("Direccion","direccion","cl"));
 				lInputs.add(new InputWeb("Tipo","tipo","cl"));
+				lInputs.add(new InputWeb("Credito","credito","cl"));
 				
 			} else if (elemento.equals("proveedor")){
 				request.setAttribute("elemento", "proveedor");
