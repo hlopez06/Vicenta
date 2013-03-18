@@ -139,4 +139,14 @@
     <servlet-name>SearchProviders</servlet-name>
     <url-pattern>/mode/providers/searchProviders</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Agregar un proveedor al documento.</description>
+    <display-name>AddProvider</display-name>
+    <servlet-name>AddProvider</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ajax.AddProvider</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddProvider</servlet-name>
+    <url-pattern>/mode/documento/addProvider</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -47,6 +47,8 @@ public class ActionRemito extends HttpServlet {
 		
 		TransactionDAO.remitoAction(remito);
 		
+		remito.clearProductos();
+		
 		PrintWriter pw = response.getWriter();
 		
 		pw.print("{\"objDocumento\":{\"estado\":\"ok\",\"msj\":\"ninguno\"}}");

@@ -54,8 +54,20 @@ public abstract class Documento {
 		return nuevoProducto;
 	}
 	
+	protected void clearProductos(){
+		lProductos.clear();
+	}
+	
 	protected float getIva() {
 		return IVA;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	protected List<Producto> getlProductos() {
@@ -88,11 +100,27 @@ public abstract class Documento {
 	protected void setDia(Date dia) {
 		this.dia = dia;
 	}	
+	public String getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(String tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 	public Cliente getCliente() {
 		return cliente;
+	}
+
+	public Usuario getCajero() {
+		return cajero;
+	}
+
+	public void setCajero(Usuario cajero) {
+		this.cajero = cajero;
 	}
 
 }

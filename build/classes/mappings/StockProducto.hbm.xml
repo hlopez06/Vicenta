@@ -5,14 +5,21 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.divingWeb.elememts.StockProducto">
+    <class name="com.divingWeb.elememts.StockProducto" table="stock">
 
         <id name="id">
             <generator class="native" />
         </id>
 
-        <property name="precio" />
+        <property name="idProducto" />
         <property name="cantidad" />
+        <property name="precio" />
 
     </class>
+    
+    <sql-query name="call_sp_cargaStock">
+		<return alias="stock" class="com.divingWeb.elememts.StockProducto"/>
+		<![CDATA[CALL sp_cargaStock(:idProducto,:cantidad,:precio,@resp)]]>
+    </sql-query>
+
 </hibernate-mapping>

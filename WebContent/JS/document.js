@@ -27,7 +27,11 @@ Factura = {
 
 Remito = {
 		action : function(){
-			var tipo = document.getElementsByName("rm-tipoMovimiento").item(0).value;
+			var inTipo = menu.radioSelect("rm-tipoMovimiento");
+			var tipo = "ingreso";
+			
+			if (inTipo != null)
+				tipo = inTipo.value;
 			
 			if ( tipo == "ingreso" || tipo == "egreso" ){
 				$.ajax({
@@ -40,7 +44,9 @@ Remito = {
 					success: function(jsResp){
 							
 					},
-					complete : function () {	},
+					complete : function () {
+						Product.clearProductos();
+					},
 					error: function(){
 						alert("Error al iniciar facturacion. La tranferencia salio MAL.");
 					}
@@ -228,6 +234,10 @@ Product = {
 			
 			$("#inputIdProducto").focus();
 		},
+		clearProductos : function (){
+			$("#listaProductos").empty();
+			$("#totalFactura").empty();
+		}
 };
 
 Client = {
@@ -422,7 +432,7 @@ Provider = {
 			document.getElementsByName("pr-razonSocial").item(0).value = proveedor.razonSocial;
 			
 			$.ajax({
-				url: "documento/AddProvider",
+				url: "documento/addProvider",
 				data: "idProveedor=" + proveedor.id,
 				type: "GET",
 				typedata: "json",
@@ -440,6 +450,17 @@ Provider = {
 };
 
 menu = {
+		radioSelect : function (name){
+			var tm = document.getElementsByName(name);
+			
+			for (var i=0; i < tm.length; i++)
+			{ 
+				if (tm.item(i).checked){
+					return tm.item(i);
+				};
+			}
+			return null;
+		},
 		historialDespAbre : function (){
 			document.getElementById("menuDespHisto").style["display"] = "block";
 			document.getElementById("HistorialDesplegable").className = "abreDesplegableAbierto menuDesplegable";

@@ -1,6 +1,7 @@
 package com.divingWeb.conexionDAO;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 
@@ -18,34 +19,39 @@ public class TransactionDAO extends ConexionDAO {
 public static int remitoAction(Remito remito){
 		
 		int updateEntities = 0;
-		String qryUpdate = "";
 		
-		String accion = remito.signoMovimiento();
-		Iterator<Producto> listIterator = remito.getlProductos().iterator();
+		List<Producto> lProductos = remito.getlProductos();
 		
-		while( listIterator.hasNext() ) {
-			Producto pr = (Producto) listIterator.next();
-	     
-	          qryUpdate += " UPDATE stock stk SET stk.id=" + pr.getId() + " AND stk.cantidad=cantidad " + accion + " " + pr.getCantidad() + " AND stk.precio=" + pr.getPrecio() +
-	        		  " WHERE stk.id=" + pr.getId() + ";";
+		if (!lProductos.isEmpty() && !(remito.getProveedor() == null && remito.getCliente() == null ) ){
+			String accion = remito.signoMovimiento();
+			Iterator<Producto> listIterator = lProductos.iterator();
+			
+			try 
+	        { 
+				iniciaOperacion();
+	            
+	            while( listIterator.hasNext() ) {
+	            	Producto pr = (Producto) listIterator.next();
+	            	
+//	            	sesion.getNamedQuery("call_sp_cargaStock").setParameter("stock", new StockProducto(pr, idUsuario) ).executeUpdate();
+	            	
+	            	sesion.getNamedQuery("call_sp_cargaStock")
+		            	.setParameter("idProducto",pr.getId())
+		            	.setParameter("cantidad", accion + pr.getCantidad())
+		            	.setParameter("precio", pr.getPrecio())
+		            	.executeUpdate();
+		            		            	
+	            	++updateEntities;
+	            }
+	            tx.commit();
+		
+	        } catch (HibernateException he) { 
+	            manejaExcepcion(he); 
+	            throw he; 
+	        } finally { 
+	            sesion.close(); 
+	        }
 		}
-		
-		try 
-        { 
-            iniciaOperacion();
-
-	         updateEntities = sesion.createQuery( qryUpdate ).executeUpdate();
-            
-            tx.commit(); 
-        } catch (HibernateException he) 
-        { 
-            manejaExcepcion(he); 
-            throw he; 
-        } finally 
-        { 
-            sesion.close(); 
-        }
-		
 		return updateEntities;
 	}
 	

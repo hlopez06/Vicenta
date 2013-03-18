@@ -42,6 +42,10 @@ public class Remito extends Documento {
 		
 		return signo;
 	}
+	
+	public void clearProductos(){
+		super.clearProductos();
+	}
 
 	public Proveedor getProveedor() {
 		return proveedor;

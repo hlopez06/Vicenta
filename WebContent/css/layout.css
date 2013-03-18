@@ -458,3 +458,9 @@ ul.formTotal li {
 ul#listaProductos{
 	margin: 0 0 0.5em 2em;
 }
+
+#tipoMovimiento {
+	float: right;
+	padding: 5px;
+	font-size: 20px;
+}
