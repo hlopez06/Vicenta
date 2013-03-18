@@ -29,7 +29,7 @@ public class ClientDAO extends ConexionDAO {
 		
 		return id;
 	}
-	public static Cliente buscarCliente(int idCliente){
+	public static Cliente buscarCliente(long idCliente){
 		
 		Cliente cl = null;
 		

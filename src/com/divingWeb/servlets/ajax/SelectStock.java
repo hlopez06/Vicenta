@@ -9,19 +9,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.divingWeb.conexionDAO.ClientDAO;
+import com.divingWeb.conexionDAO.DepositoDAO;
 import com.divingWeb.documents.Documento;
+import com.divingWeb.elememts.Deposito;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class AddClient
+ * Servlet implementation class SelectStock
  */
-public class AddClient extends HttpServlet {
+public class SelectStock extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddClient() {
+    public SelectStock() {
         super();
     }
 
@@ -29,16 +31,19 @@ public class AddClient extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		response.setContentType("application/json");
 		
-		long idCliente = Integer.parseInt( request.getParameter("idCliente").trim() );
+		int lineMax = Integer.parseInt( request.getParameter("lineMax") );
 		
-		if ( idCliente > 0 ) {
+		if ( request.getParameter("other").isEmpty() ){
+			int other = Integer.parseInt( request.getParameter("other") );
+		}
+		
+		if ( true ) {
 			
 			Documento documento = (Documento)request.getSession().getAttribute("documento");
 			
-			documento.setCliente(ClientDAO.buscarCliente(idCliente));
+			DepositoDAO.SelectStock(lineMax);
 			
 			Gson gson = new Gson();
 			String jsonOutput = gson.toJson(documento);
@@ -56,7 +61,6 @@ public class AddClient extends HttpServlet {
 		} else {
 			response.getWriter().print("invalid");
 		}
-		
 	}
 
 }

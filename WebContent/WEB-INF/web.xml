@@ -149,4 +149,14 @@
     <servlet-name>AddProvider</servlet-name>
     <url-pattern>/mode/documento/addProvider</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Devuelve una tabla con el stock</description>
+    <display-name>SelectStock</display-name>
+    <servlet-name>SelectStock</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ajax.SelectStock</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectStock</servlet-name>
+    <url-pattern>/SelectStock</url-pattern>
+  </servlet-mapping>
 </web-app>

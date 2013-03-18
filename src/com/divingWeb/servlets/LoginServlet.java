@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.divingWeb.conexionDAO.UserDAO;
 import com.divingWeb.documents.Factura;
+import com.divingWeb.elememts.Deposito;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,6 +33,9 @@ public class LoginServlet extends HttpServlet {
 //			session.setAttribute("usuario", UserDAO.buscarCliente(idUsuario));
 			
 			session.setAttribute("documento", new Factura());
+			Deposito deposito = new Deposito();
+			deposito.setId(1);
+			session.setAttribute("deposito", new Deposito());
 			
 			request.setAttribute("documento", "factura");
 			request.setAttribute("claseJS", "Factura");

@@ -8,10 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.divingWeb.conexionDAO.TransactionDAO;
-import com.divingWeb.documents.Documento;
+import com.divingWeb.conexionDAO.DepositoDAO;
 import com.divingWeb.documents.Remito;
-import com.google.gson.Gson;
 
 /**
  * Servlet implementation class ActionRemito
@@ -45,7 +43,7 @@ public class ActionRemito extends HttpServlet {
 		
 		remito.setTipoMovimiento(tipoMovimiento);
 		
-		TransactionDAO.remitoAction(remito);
+		DepositoDAO.remitoAction(remito);
 		
 		remito.clearProductos();
 		
