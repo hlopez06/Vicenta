@@ -2,6 +2,7 @@ package com.divingWeb.servlets.ajax;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import com.divingWeb.conexionDAO.ClientDAO;
 import com.divingWeb.conexionDAO.DepositoDAO;
 import com.divingWeb.documents.Documento;
 import com.divingWeb.elememts.Deposito;
+import com.divingWeb.elememts.StockProducto;
 import com.google.gson.Gson;
 
 /**
@@ -33,26 +35,27 @@ public class SelectStock extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		
-		int lineMax = Integer.parseInt( request.getParameter("lineMax") );
+		int lineMax = 20;
 		
-		if ( request.getParameter("other").isEmpty() ){
+		if( request.getParameter("lineMax") != null )
+			lineMax = Integer.parseInt( request.getParameter("lineMax") );
+		
+		if ( request.getParameter("other") != null ){
 			int other = Integer.parseInt( request.getParameter("other") );
 		}
 		
 		if ( true ) {
-			
-			Documento documento = (Documento)request.getSession().getAttribute("documento");
-			
-			DepositoDAO.SelectStock(lineMax);
+						
+			List<StockProducto> stock = DepositoDAO.SelectStock(lineMax);
 			
 			Gson gson = new Gson();
-			String jsonOutput = gson.toJson(documento);
+			String jsonOutput = gson.toJson(stock);
 			
 			System.out.println(jsonOutput);
 					
 			PrintWriter pw = response.getWriter();
 			
-			pw.print("{\"objFactura\":".concat(jsonOutput).concat("}"));
+			pw.print("{\"objStock\":".concat(jsonOutput).concat("}"));
 			
 			pw.flush();
 			

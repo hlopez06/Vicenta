@@ -1,16 +1,23 @@
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.List"%>
-<%@page import="com.divingWeb.tools."%>
+<%@ page import="java.util.Iterator"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.divingWeb.elememts.StockProducto"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
-	String elemento = (String)request.getAttribute("elemento");
+	String documento = (String)request.getAttribute("documento");
+	String claseJS = (String)request.getAttribute("claseJS");
 	String titulo = (String)request.getAttribute("titulo_html");
 	String titulo_mainContent = (String)request.getAttribute("titulo_mainContent");
-	String claseJS = (String)request.getAttribute("claseJS");
-	String actionName = (String)request.getAttribute("actionName");
-	String formName = (String)request.getAttribute("formName");
-	List<InputWeb> lColum = (List<InputWeb>)request.getAttribute("colum");
+	Boolean pane_rigth = (Boolean) request.getAttribute("pane_rigth");
+	Boolean pane_left = (Boolean) request.getAttribute("pane_left");
+	int lineMax = (Integer) request.getAttribute("lineMax");
+	
+ 	List<StockProducto> stock = (List<StockProducto>) request.getAttribute("stock");
+ 	int cantidadProductos = stock.size();
+ 	float hojas = cantidadProductos / lineMax;
+ 	if (cantidadProductos % lineMax > 0)
+ 		++hojas;
 %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -43,31 +50,34 @@
 					<!-- formulario de Remito -->
 
 					<div id="bodyList">
-						<a><%=formName %></a>
-<!-- 					<form action=""> -->
 
-						<ul id="formElem">
+						<table>
+							<tr>
+								<th>Codigo </th>
+								<th>Precio</th>
+								<th>Cantidad</th>
+							</tr>
 <%
-	Iterator<InputWeb> iLColum = lColum.iterator(); 
-	while( iLColum.hasNext() ) {
-		InputWeb colum = (InputWeb) iLColum.next();
+	Iterator<StockProducto> iStock = stock.iterator(); 
+	while( iStock.hasNext() ) {
+		StockProducto pr = (StockProducto) iStock.next();
 %>
-							<li>
-								<ul class="<%=colum.getClassName()%>">
-									<li><span><%=colum.getTitulo() %></span></li>
-									<li><input type="<%=colum.getType() %>" size="<%=colum.getSize()%>"
-									 name="<%=colum.getName()%>" value="<%=colum.getValue()%>" /></li>
-								</ul>	
-							</li>
+							<tr>
+								<td class="prStock">
+									<input value="<%=pr.getIdProducto()%>" />
+								</td>
+								<td class="prStock">
+									<input value="<%=pr.getPrecio() %>" />
+								</td>
+								<td class="prStock">
+									<input value="<%=pr.getCantidad()%>" />
+								</td>
+							</tr>
 <% 	} %>
-
-						</ul>
-						<input type="hidden" size="20" name="cl-id"	value="0" />
-						<input type="hidden" name="elemento" value="<%=elemento%>"/>
-		
-						<button id="btn-List<%=elemento%>" href="#" onclick=""
-						 title="<%=actionName%>"><%=actionName%></button>
-<!-- 					</form> -->
+						</table>
+<%if (hojas > 1){ %>						
+						<dir id="hojas">Hojas <a>1</a>/<a><%=hojas %></a></dir>
+<%} %>						
 					</div>
 
 			</div>

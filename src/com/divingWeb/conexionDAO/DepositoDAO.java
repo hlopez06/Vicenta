@@ -7,20 +7,21 @@ import org.hibernate.HibernateException;
 
 import com.divingWeb.documents.Remito;
 import com.divingWeb.elememts.Producto;
+import com.divingWeb.elememts.StockProducto;
 
 public class DepositoDAO extends ConexionDAO {
 	
 	private static String nombreDeposito = "stock";
 	
-	public static String SelectStock(int lineMax ){
+	public static List<StockProducto> SelectStock(int lineMax ){
 		
-		String table = "";
+		List<StockProducto> stock = null;
 		
 		try 
         { 
 			iniciaOperacion();
             
-            sesion.
+            stock = sesion.createCriteria(StockProducto.class).list();
         
             tx.commit();
 	
@@ -31,7 +32,7 @@ public class DepositoDAO extends ConexionDAO {
             sesion.close(); 
         }
 		
-		return table;
+		return stock;
 	}
 
 	public static int remitoAction(Remito remito){

@@ -78,7 +78,6 @@ table {
 }
 
 td {
-    border-bottom: 1px solid #CFCFCF;
     padding: 0.5em;
     vertical-align: top;
 }
@@ -271,12 +270,10 @@ div#pie {
 }
 div#pie ul {
     margin: 0.5em 0 0;
-    width: 62%;
-}
-div#pie ul {
-    width: 66%;
+/*     width: 62%; */
     float: right;
 }
+
 div#pie ul li {
     border-right: 1px solid #CFCFCF;
     display: inline;
@@ -463,4 +460,22 @@ ul#listaProductos{
 	float: right;
 	padding: 5px;
 	font-size: 20px;
+}
+
+#bodyList {
+/* 	border-color: powderblue; */
+/*     border-image: none !important; */
+/*     border-style: solid !important; */
+/*     border-width: 1px !important; */
+    border: 1px solid #CCCCCC;
+    padding: 20px;
+}
+
+#bodyList input {
+	border: medium none;
+	 width: 40px;
+} 
+
+.formProducto td {
+	border-bottom: 1px solid #CFCFCF;
 }

@@ -157,6 +157,16 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SelectStock</servlet-name>
-    <url-pattern>/SelectStock</url-pattern>
+    <url-pattern>/mode/product/selectStock</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Template de stock</description>
+    <display-name>ModeStock</display-name>
+    <servlet-name>ModeStock</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ModeStock</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModeStock</servlet-name>
+    <url-pattern>/mode/stock</url-pattern>
   </servlet-mapping>
 </web-app>

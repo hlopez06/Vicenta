@@ -18,6 +18,8 @@
 			alt="Hacer nota de credito">Nota de credito</a></li>
 		<li><a href="remito" title="Ver/recuperar últimas sesiones"
 			alt="Hacer remitos">Remito</a></li>
+		<li><a href="stock" title="Ver stock"
+			alt="Ver stock">Stock</a></li>	
 			
 		<li><a id="AltaDesplegable" onclick="menu.altaDespAbre()" class="abreDesplegable"
 			title="Alta de movimientos" href="#">Alta</a>
