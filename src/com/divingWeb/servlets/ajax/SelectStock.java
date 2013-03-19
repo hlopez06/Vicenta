@@ -55,7 +55,8 @@ public class SelectStock extends HttpServlet {
 					
 			PrintWriter pw = response.getWriter();
 			
-			pw.print("{\"objStock\":".concat(jsonOutput).concat("}"));
+			String msj = "Todo ok.";
+			pw.print("{\"estado\":\"ok\",\"list\":" + jsonOutput + ",\"msj\":\""+ msj +"\"}" );
 			
 			pw.flush();
 			

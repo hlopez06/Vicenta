@@ -64,21 +64,29 @@
 %>
 							<tr>
 								<td class="prStock">
-									<input value="<%=pr.getIdProducto()%>" />
+									<input value="<%=pr.getIdProducto() %>" />
 								</td>
 								<td class="prStock">
 									<input value="<%=pr.getPrecio() %>" />
 								</td>
 								<td class="prStock">
-									<input value="<%=pr.getCantidad()%>" />
+									<input value="<%=pr.getCantidad() %>" />
 								</td>
 							</tr>
 <% 	} %>
 						</table>
 <%if (hojas > 1){ %>						
-						<dir id="hojas">Hojas <a>1</a>/<a><%=hojas %></a></dir>
+						<div id="hojas">
+							<div id="hojasDisplay">
+								Hojas <a>1</a>/<a><%=hojas %></a>
+								<button onclick="List.nextPage()" src="">>></button>
+							</div>
+							<div id="actualPage" value="1" style="display:none;"/>
+							<div id="lastPage" value="<%=hojas %>" style="display:none;"/>
+						</div>
 <%} %>						
 					</div>
+					<div id="lineMax" value="<%=lineMax %>"/>
 
 			</div>
 				<jsp:include page="tools/temp-pie.jsp"></jsp:include>

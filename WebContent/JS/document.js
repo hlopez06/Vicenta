@@ -1,3 +1,93 @@
+List = {
+		meta : {
+			cantProd : null,
+			actualPage : null,
+			lastPage : null,
+			backPage : null,
+			nextPage : null
+		},
+		
+		lista : null,
+		
+		insertStock : function(lista){
+
+			var cantPagina = document.getElementById("lineMax").item(0).value;
+			List.meta.cantProd = List.lista.length;
+			
+			List.meta.lastPage = maxProd/List.meta.cantProd;
+			if (maxProd % List.meta.cantProd)
+				++List.meta.cantProd;
+				
+			var divList = '<table>'+
+							'<tr>'+
+								'<th>Codigo </th>'+'<th>Precio</th>'+'<th>Cantidad</th>'+
+							'</tr>';
+			
+			var i=1;
+			var element = null;
+			
+			var max = cantPagina * List.meta.actualPage;
+			
+			if (List.meta.actualPage == List.meta.lastPage){
+				i = 0;
+				max = 2;
+			}
+			
+			while(i < max){
+				element = lista[i-1];
+			
+				divList += 	'<tr>' + 
+					'<td class="prStock">' + '<input value="' + element.idProducto + '" /></td>' +
+					'<td class="prStock">' + '<input value="' + element.precio + '" /></td>' +
+					'<td class="prStock">' + '<input value="' + element.cantidad + '" /></td>' +
+				'</tr>';
+			};
+			
+			divList += 	'</table>' + '<dir id="hojas"></div>';
+			
+			document.getElementById("bodyList").innerHTML = divList;
+			
+			if (actualPage != 1)
+				botonBack = '<button onclick="List.backPage()" src=""><<</button>';
+			if (actualPage != lastPage)
+				botonNext = '<button onclick="List.nextPage()" src="">>></button>';
+			
+			name = 'Hojas ';
+			desdeHasta = '<a>' + actualPage + '</a>/<a>'+ lastPage +'</a>';
+			
+			document.getElementById("hojasDisplay").innerHTML = name + botonBack + desdeHasta + botonNext ;
+			document.getElementById("actualPage").setAttribute("value",actualPage);
+		},
+
+		callStock : function(){
+
+				$.ajax({
+					url: "stock",
+					data: "pagina=" + numeroPagina,
+					type: "GET",
+					typedata: "json",
+					async: false,
+					beforeSend : function () {	},
+					success: function(jsResp){
+						if (jsResp.estado == "ok"){
+							
+							List.lista = jsResp.lista;
+			
+							List.insertStock(List.lista);
+							
+						}else{
+							alert(jsResp.msj);
+						}
+					},
+					complete : function () {	},
+					error: function(){
+						alert("Error al iniciar facturacion. La tranferencia salio MAL.");
+					}
+				}); // Fin de ajax
+			
+		}
+};
+
 Factura = {
 		action : function(){
 			
