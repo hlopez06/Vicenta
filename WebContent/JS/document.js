@@ -1,6 +1,6 @@
 List = {
 		meta : {
-			cantProd : null,
+			totalProdStock : null,
 			actualPage : null,
 			lastPage : null,
 			backPage : null,
@@ -9,71 +9,74 @@ List = {
 		
 		lista : null,
 		
-		insertStock : function(lista){
+		loadPage : function(actualPage){
+			var lineMax = document.getElementById("lineMax").getAttribute("value");
 
-			var cantPagina = document.getElementById("lineMax").item(0).value;
-			List.meta.cantProd = List.lista.length;
+			var totalProdStock = List.meta.totalProdStock;
+			List.meta.actualPage = actualPage;
 			
-			List.meta.lastPage = maxProd/List.meta.cantProd;
-			if (maxProd % List.meta.cantProd)
-				++List.meta.cantProd;
-				
+			List.meta.lastPage = parseInt(totalProdStock / lineMax);
+			if ((totalProdStock % lineMax) > 0 )
+				++List.meta.lastPage;
+			var lastPage = List.meta.lastPage;
+			
 			var divList = '<table>'+
 							'<tr>'+
 								'<th>Codigo </th>'+'<th>Precio</th>'+'<th>Cantidad</th>'+
 							'</tr>';
-			
-			var i=1;
+					
+			var max = lineMax * actualPage;
+			var i = max - lineMax;
 			var element = null;
 			
-			var max = cantPagina * List.meta.actualPage;
-			
-			if (List.meta.actualPage == List.meta.lastPage){
-				i = 0;
-				max = 2;
-			}
+			if (actualPage == lastPage)
+				max = totalProdStock;
 			
 			while(i < max){
-				element = lista[i-1];
+				element = List.lista[i];
 			
 				divList += 	'<tr>' + 
 					'<td class="prStock">' + '<input value="' + element.idProducto + '" /></td>' +
 					'<td class="prStock">' + '<input value="' + element.precio + '" /></td>' +
 					'<td class="prStock">' + '<input value="' + element.cantidad + '" /></td>' +
 				'</tr>';
+				
+				++i;
 			};
 			
-			divList += 	'</table>' + '<dir id="hojas"></div>';
+			divList += 	'</table>' + '<dir id="hoja"></div>';
 			
 			document.getElementById("bodyList").innerHTML = divList;
 			
+			var botonBack = "", botonNext = "";
 			if (actualPage != 1)
-				botonBack = '<button onclick="List.backPage()" src=""><<</button>';
+				botonBack = '<button onclick="List.loadPage(' + (actualPage - 1) + ')" src=""><<</button>';
 			if (actualPage != lastPage)
-				botonNext = '<button onclick="List.nextPage()" src="">>></button>';
+				botonNext = '<button onclick="List.loadPage(' + (actualPage + 1)  + ')" src="">>></button>';
 			
-			name = 'Hojas ';
+			name = 'Hoja ';
 			desdeHasta = '<a>' + actualPage + '</a>/<a>'+ lastPage +'</a>';
 			
-			document.getElementById("hojasDisplay").innerHTML = name + botonBack + desdeHasta + botonNext ;
-			document.getElementById("actualPage").setAttribute("value",actualPage);
+			document.getElementById("hoja").innerHTML = name + botonBack + desdeHasta + botonNext ;
+
 		},
 
 		callStock : function(){
 
 				$.ajax({
-					url: "stock",
-					data: "pagina=" + numeroPagina,
+					url: "product/selectStock",
+					data: "pagina=0",
 					type: "GET",
 					typedata: "json",
 					async: false,
 					beforeSend : function () {	},
 					success: function(jsResp){
 						if (jsResp.estado == "ok"){
-							
-							List.lista = jsResp.lista;
+
+							List.lista = jsResp.list;
+							List.meta.totalProdStock = List.lista.length;
 			
-							List.insertStock(List.lista);
+							List.loadPage(1);
 							
 						}else{
 							alert(jsResp.msj);

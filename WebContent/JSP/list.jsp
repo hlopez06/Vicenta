@@ -34,7 +34,7 @@
 
 </head>
 
-<body>
+<body onload="List.callStock()">
 
 	<jsp:include page="tools/temp-head.jsp"></jsp:include>
 
@@ -50,43 +50,9 @@
 					<!-- formulario de Remito -->
 
 					<div id="bodyList">
-
-						<table>
-							<tr>
-								<th>Codigo </th>
-								<th>Precio</th>
-								<th>Cantidad</th>
-							</tr>
-<%
-	Iterator<StockProducto> iStock = stock.iterator(); 
-	while( iStock.hasNext() ) {
-		StockProducto pr = (StockProducto) iStock.next();
-%>
-							<tr>
-								<td class="prStock">
-									<input value="<%=pr.getIdProducto() %>" />
-								</td>
-								<td class="prStock">
-									<input value="<%=pr.getPrecio() %>" />
-								</td>
-								<td class="prStock">
-									<input value="<%=pr.getCantidad() %>" />
-								</td>
-							</tr>
-<% 	} %>
-						</table>
-<%if (hojas > 1){ %>						
-						<div id="hojas">
-							<div id="hojasDisplay">
-								Hojas <a>1</a>/<a><%=hojas %></a>
-								<button onclick="List.nextPage()" src="">>></button>
-							</div>
-							<div id="actualPage" value="1" style="display:none;"/>
-							<div id="lastPage" value="<%=hojas %>" style="display:none;"/>
-						</div>
-<%} %>						
+						<h3>cargando los datos...</h3>
 					</div>
-					<div id="lineMax" value="<%=lineMax %>"/>
+					<div id="lineMax" value="<%=lineMax %>"></div>
 
 			</div>
 				<jsp:include page="tools/temp-pie.jsp"></jsp:include>
