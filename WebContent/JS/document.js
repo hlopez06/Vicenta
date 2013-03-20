@@ -50,10 +50,11 @@ List = {
 			
 			var botonBack = "", botonNext = "";
 			if (actualPage != 1)
-				botonBack = '<button onclick="List.loadPage(' + (actualPage - 1) + ')" src=""><<</button>';
+				botonBack = '<a onclick="List.loadPage(' + (actualPage - 1) + ')">'+
+					'<img src="../images/go-lt-off.gif" alt="Pagina anterior"/></a>';
 			if (actualPage != lastPage)
-				botonNext = '<button onclick="List.loadPage(' + (actualPage + 1)  + ')" src="">>></button>';
-			
+				botonNext = '<a onclick="List.loadPage(' + (actualPage + 1) + ')">'+
+				'<img src="../images/go-rt-off.gif" alt="Pagina anterior"/></a>';
 			name = 'Hoja ';
 			desdeHasta = '<a>' + actualPage + '</a>/<a>'+ lastPage +'</a>';
 			
