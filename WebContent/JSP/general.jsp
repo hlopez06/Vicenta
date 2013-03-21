@@ -48,21 +48,32 @@
 					<!-- formulario de Remito -->
 					<div id="formDocument">
 <!-- 						<form action="" method="POST" name="formPrincipal"> -->
-							
-							<% if (form_client){ %><jsp:include page="templates/form_client.jsp"></jsp:include><% }%>
-							<% if (form_provider){ %><jsp:include page="templates/form_provider.jsp"></jsp:include><% }%>
-							
+							<div id="frPersons" class="formDocument">
+								<% if (form_client){ %><jsp:include page="templates/form_client.jsp"></jsp:include><% }%>
+								<% if (form_provider){ %><jsp:include page="templates/form_provider.jsp"></jsp:include><% }%>
+							</div>
 							<% if (documento.contains("remito")){ %>
-							<div id="tipoMovimiento">
-									<input type="radio" name="rm-tipoMovimiento" value="ingreso"> Ingreso </input>
-									<input type="radio" name="rm-tipoMovimiento" value="egreso"> Egreso </input>
+							<div id="frTools" class="formDocument">
+								<div id="tipoMovimiento">
+										<input type="radio" name="rm-tipoMovimiento" value="ingreso"> Ingreso </input>
+										<input type="radio" name="rm-tipoMovimiento" value="egreso"> Egreso </input>
+								</div>
 							</div>
 							<%} %>
 							
-							<div id="productos">
+							<div id="frListaProductos" class="formDocument">
 								<a>Lista de productos</a>
-								<ul id=listaProductos></ul>
-
+								<div id="listaProductos"></div>
+							
+								<% if (documento.contains("factura")){ %>
+									<div id="totalFactura" class="formTotal"></div>
+								<%} else if (documento.contains("remito")){ %>
+									<div id="totalRemito" class="formTotal"></div>
+								<%} %>
+							</div>
+								
+							
+							<div id="frNewProduct" class="formDocument">
 								<ul class="formFactura ">
 									<li><a>Id de Producto</a> <input id="inputIdProducto"
 										type="text" step="1" maxlength="10" size="15"
@@ -74,16 +85,14 @@
 										value="cargar" href="javascript:Product.addProduct();">CARGAR</a>
 									</li>
 								</ul>
-							</div>
-							<% if (documento.contains("factura")){ %>
-								<div id="totalFactura"></div>
+							<% if (actionBool){ %>
+							<div id="frBtnAction" style="display: none;">
+								<button id="btn-<%=actionName%>" onclick="<%=claseJS%>.action()"><%=actionName%></button>
+							</div>	
 							<%} %>
-							
+							</div>
 
 		<!-- 						</form> -->
-							<% if (actionBool){ %>
-								<button id="btn-<%=actionName%>" onclick="<%=claseJS%>.action()"><%=actionName%></button>
-							<%} %>
 					</div>
 				</div>
 

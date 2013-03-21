@@ -44,7 +44,7 @@ List = {
 				++i;
 			};
 			
-			divList += 	'</table>' + '<dir id="hoja"></div>';
+			divList += 	'</table>' + '<dir id="hoja"><div id="hojaDisplay"></div></div>';
 			
 			document.getElementById("bodyList").innerHTML = divList;
 			
@@ -58,7 +58,7 @@ List = {
 			name = 'Hoja ';
 			desdeHasta = '<a>' + actualPage + '</a>/<a>'+ lastPage +'</a>';
 			
-			document.getElementById("hoja").innerHTML = name + botonBack + desdeHasta + botonNext ;
+			document.getElementById("hojaDisplay").innerHTML = name + botonBack + desdeHasta + botonNext ;
 
 		},
 
@@ -291,6 +291,7 @@ Product = {
 					'<td>Precio </td>' 		+
 					'<td>Cantidad </li>' 	+
 					'</tr>';
+					var cantProductos = 0;
 					
 					jsResp.objDocumento.lProductos.forEach(function (element, index, array) {						
 						div += 	'<tr class="formProducto">' +
@@ -300,6 +301,8 @@ Product = {
 						'<td>'+ element.precio 		+ '</td>' +
 						'<td>'+ element.cantidad	+ '</td>' + 
 						'</tr>';
+						
+						cantProductos++;
 					});
 					
 					div += '</table>';
@@ -310,9 +313,17 @@ Product = {
 					var divTotal = '<ul class="formTotal">' +
 						'<li><strong>Total: '+ jsResp.objDocumento.totalMasIva +'</strong></li>' +
 						'<li>Total bruto: '+ jsResp.objDocumento.totalBruto +'</li> </ul>';
-					
+										
 					$("#totalFactura").empty();
 					$("#totalFactura").append(divTotal);
+					
+					var divCantidad = '<ul class="formTotal">' +
+						'<li><strong>Total: '+ cantProductos +'</strong></li></ul>';
+					
+					$("#totalRemito").empty();
+					$("#totalRemito").append(divCantidad);
+					
+					$("#frBtnAction").show();
 					
 				}else{
 					alert(jsResp.msjError);
@@ -331,6 +342,7 @@ Product = {
 		clearProductos : function (){
 			$("#listaProductos").empty();
 			$("#totalFactura").empty();
+			$("#frBtnAction").hide();
 		}
 };
 

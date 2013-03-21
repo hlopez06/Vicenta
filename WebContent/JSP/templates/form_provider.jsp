@@ -3,7 +3,7 @@
 
     
 <div id="provider">
-	<ul class="formProvider">
+	<ul>
 		<li><span>Nombre de proveedor</span><input type="text"
 			disabled="disabled" size="20" name="pr-nombre" value="" /></li>
 		<li><span>RS &nbsp;</span> <input type="text"

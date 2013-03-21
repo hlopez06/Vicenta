@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <div id="clientes">
-	<ul class="formFactura">
+	<ul>
 		<li><span>Nombre de cliente</span><input type="text"
 			disabled="disabled" size="20" name="cl-nombre" value="" /></li>
 		<li><span>Apellido</span> <input type="text"

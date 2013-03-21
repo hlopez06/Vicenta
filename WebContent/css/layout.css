@@ -16,7 +16,7 @@ p {
     margin-bottom: 1em;
 }
 ul {
-    margin: 0 0 1.5em 2em;
+/*     margin: 0 0 1.5em 2em; */
 }
 li, dt, dd {
     margin-bottom: 0.5em;
@@ -368,7 +368,6 @@ div#panel-derecho {
 	background: none repeat scroll 0 0 orange;
     float: right;
     font-size: x-large;
-    margin: 10px;
 }
 
 #btn-Facturar {
@@ -399,34 +398,8 @@ ul.formElem li {
 /*     width: auto; */
 }
 
-ul.formFactura ul.formProvider{
-	margin: 0 0 0.5em 2em;
-	border-bottom: 1px solid #CFCFCF;
-	padding: 6px;
-	overflow: auto;
-}
-
-ul.formProvider li {
-	position: relative;
-	float: left;
-	width: 140px;
-}
-
-ul.formProvider {
-	margin: 0 0 0em 0em;
-	border-bottom: 1px solid #CFCFCF;
-	padding: 6px;
-	overflow: auto;
-}
-
-ul.formFactura li {
-	position: relative;
-	float: left;
-	width: 140px;
-}
-
-ul.formProducto {
-	margin: 0 0 0em 0em;
+.formDocument {
+	margin: 0 0 0.5em 1em;
 	border-bottom: 1px solid #CFCFCF;
 	padding: 6px;
 	overflow: auto;
@@ -439,9 +412,8 @@ ul.formProducto li {
 	width: 100px;
 }
 
-ul.formTotal {
-	margin: 0 0 0em 0em;
-	border-bottom: 1px solid #CFCFCF;
+.formTotal ul {
+	margin-top: 10px;
 	overflow: auto;
 }
 
@@ -449,19 +421,43 @@ ul.formTotal li {
 	position: relative;
     float: right;
 	padding-right: 50px;
-	width: 100px;
 }
 
-ul#listaProductos{
-	margin: 0 0 0.5em 2em;
+#frPersons li {
+	position: relative;
+	float: left;
+	width: 140px;
 }
 
-#tipoMovimiento {
-	float: right;
+#frNewProduct li {
+	position: relative;
+	float: left;
+	width: 140px;
+}
+
+#frTools {
+	border: 0;
+	overflow: auto;
+	padding: 3px;
+}
+
+#frTools #tipoMovimiento {
+	border-bottom: 3px solid #CFCFCF;
+    float: right;
+    font-size: 20px;
+    padding-bottom: 3px;
+}
+
+#frListaProductos {
 	padding: 5px;
-	font-size: 20px;
+	border-bottom: 1px solid #CFCFCF;
+/* 	margin: 0 0 0.5em 2em; */
 }
 
+#frNewProduct {
+	
+}
+/* template lista (Stock) */
 #bodyList {
 /* 	border-color: powderblue; */
 /*     border-image: none !important; */
