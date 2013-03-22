@@ -31,19 +31,37 @@ public class ModeRemito extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher disp;
 		
-		request.setAttribute("documento", "remito");
-		request.setAttribute("claseJS", "Remito");
-		request.setAttribute("titulo_html", "Vicenta - Remito");
-		request.setAttribute("titulo_mainContent", "Remito");
-		request.setAttribute("pane_left", true);
-		request.setAttribute("pane_rigth", false);
-		request.setAttribute("form_client", false);
-		request.setAttribute("form_provider", true);
-		request.setAttribute("pane_left_client", true);
-		request.setAttribute("pane_left_provider", true);
-		request.setAttribute("actionBool", true);
-		request.setAttribute("actionName", "Ejecutar");
+		String tipoMovimiento = request.getParameter("tm" ).trim();
 		
+		if ( tipoMovimiento.contains("egreso") ){
+			request.setAttribute("documento", "remito");
+			request.setAttribute("tipoRemito", "egreso");
+			request.setAttribute("claseJS", "Remito");
+			request.setAttribute("titulo_html", "Vicenta - Remito");
+			request.setAttribute("titulo_mainContent", "Remito de egreso");
+			request.setAttribute("pane_left", true);
+			request.setAttribute("pane_rigth", false);
+			request.setAttribute("form_client", true);
+			request.setAttribute("form_provider", false);
+			request.setAttribute("pane_left_client", true);
+			request.setAttribute("pane_left_provider", false);
+			request.setAttribute("actionBool", true);
+			request.setAttribute("actionName", "Ejecutar");
+		} else {
+			request.setAttribute("documento", "remito");
+			request.setAttribute("claseJS", "Remito");
+			request.setAttribute("tipoRemito", "ingreso");
+			request.setAttribute("titulo_html", "Vicenta - Remito");
+			request.setAttribute("titulo_mainContent", "Remito de ingreso");
+			request.setAttribute("pane_left", true);
+			request.setAttribute("pane_rigth", false);
+			request.setAttribute("form_client", false);
+			request.setAttribute("form_provider", true);
+			request.setAttribute("pane_left_client", false);
+			request.setAttribute("pane_left_provider", true);
+			request.setAttribute("actionBool", true);
+			request.setAttribute("actionName", "Ejecutar");
+		}
 		HttpSession session = request.getSession();
 		session.setAttribute("documento", new Remito());
 		

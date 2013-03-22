@@ -52,6 +52,7 @@ public class ElementFactory extends HttpServlet {
 				request.setAttribute("actionName", "Alta producto");
 				request.setAttribute("formName", "Formulario para ingreso de productos");
 				
+				lInputs.add(new InputWeb("Codigo unico","codigo","pr"));
 				lInputs.add(new InputWeb("Nombre del producto","nombre","pr"));
 				lInputs.add(new InputWeb("Detalle","detalle","pr"));
 				lInputs.add(new InputWeb("Categoria","categoria","pr"));

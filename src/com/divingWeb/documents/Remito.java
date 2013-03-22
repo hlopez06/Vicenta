@@ -14,9 +14,10 @@ public class Remito extends Documento {
 	
 	public Remito(){
 		lProductos = new LinkedList<Producto>();
-		cantidadProductos = 0;
 		cliente = null;
 		proveedor = null;
+		cantTotalProductos = 0;
+		cantElemProductos = 0;
 		tipoDocumento = "remito";
 		tipoMovimiento = "ingreso";
 	}
@@ -26,6 +27,11 @@ public class Remito extends Documento {
 		TransactionDAO.remitoAction(this);
 		
 		return true;
+	}
+	
+	public Producto addProducto (int codigo, int cantidad){ 
+		return super.addProducto (codigo, cantidad);
+		
 	}
 	
 	public String signoMovimiento(){

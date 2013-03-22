@@ -31,10 +31,11 @@ public class AddProduct extends HttpServlet {
 		
 		response.setContentType("application/json");
 		
-		int idProducto = Integer.parseInt (request.getParameter("idProducto").trim() );
+//		int idProducto = Integer.parseInt (request.getParameter("idProducto").trim() );
+		int codProducto = Integer.parseInt (request.getParameter("codProducto").trim() );
 		int cantidad = Integer.parseInt( request.getParameter("cantidad").trim() );
 		
-		if ( idProducto > 0 && cantidad > 0 ) {
+		if ( codProducto > 0 && cantidad > 0 ) {
 			
 			Gson gson = new Gson();
 			String jsonOutput;
@@ -43,7 +44,7 @@ public class AddProduct extends HttpServlet {
 			
 			PrintWriter pw = response.getWriter();
 
-			if(documento.addProducto(idProducto, cantidad) != null){				
+			if(documento.addProducto(codProducto, cantidad) != null){				
 				jsonOutput = gson.toJson(documento);
 				System.out.println(jsonOutput);
 				pw.print("{\"estado\":\"ok\",\"objDocumento\":" + jsonOutput + "}");

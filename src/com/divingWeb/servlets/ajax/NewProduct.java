@@ -32,14 +32,6 @@ public class NewProduct extends HttpServlet {
 		String detalle = request.getParameter("detalle").trim();
 		int categoria = Integer.parseInt( request.getParameter("categoria").trim() );
 		int precio = Integer.parseInt( request.getParameter("precio").trim() );
-		
-		int cantidad;
-		
-		if(request.getAttribute("cantidad") == null){
-			cantidad = 1;
-		}else{
-			cantidad = Integer.parseInt( request.getParameter("cantidad").trim() );
-		}
 
 		Producto producto = new Producto(nombre, detalle, categoria, precio);
 		

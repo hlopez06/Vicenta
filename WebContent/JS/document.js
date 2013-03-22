@@ -36,7 +36,7 @@ List = {
 				element = List.lista[i];
 			
 				divList += 	'<tr>' + 
-					'<td class="prStock">' + '<input value="' + element.idProducto + '" /></td>' +
+					'<td class="prStock">' + '<input value="' + element.codProducto + '" /></td>' +
 					'<td class="prStock">' + '<input value="' + element.precio + '" /></td>' +
 					'<td class="prStock">' + '<input value="' + element.cantidad + '" /></td>' +
 				'</tr>';
@@ -121,7 +121,7 @@ Factura = {
 
 Remito = {
 		action : function(){
-			var inTipo = menu.radioSelect("rm-tipoMovimiento");
+			var inTipo = Menu.radioSelect("rm-tipoMovimiento");
 			var tipo = "ingreso";
 			
 			if (inTipo != null)
@@ -214,7 +214,9 @@ ElementFactory = {
 				};
 			};
 		},
+		
 		usuarioAction : function() {},
+		
 		ajaxNewElement : function(url, datos) {
 			var respuesta = "error";
 			$.ajax({
@@ -239,6 +241,7 @@ ElementFactory = {
 			
 			return respuesta;
 		},
+		
 		ajaxCheckElement : function (url, datos){
 			
 			$.ajax({
@@ -263,21 +266,20 @@ ElementFactory = {
 		}
 };
 
-
 Product = {		
 		addProduct : function(){
-			var idProducto = $("#inputIdProducto").val();
+			var codProducto = $("#inputIdProducto").val();
 								$("#inputIdProducto").val("");
 			var cantidad = $("#cantidad").val();
 							$("#cantidad").val("1");
 			
-			if(idProducto == "" || cantidad == "" || idProducto <= 0 || cantidad <= 0){
+			if(codProducto == "" || cantidad == "" || codProducto <= 0 || cantidad <= 0){
 				return;
 				}
 								
 			$.ajax({
 				url: "documento/addProduct",
-				data: "idProducto="+idProducto+"&cantidad="+cantidad,
+				data: "codProducto="+codProducto+"&cantidad="+cantidad,
 				type: "POST",
 				typedata: "json",
 				async: false,
@@ -285,7 +287,7 @@ Product = {
 				
 				if(jsResp.estado == "ok"){	
 					var div = '<table><tr class="formProducto">' + 
-					'<td>Id Producto</td>' 	+ 
+					'<td>Codigo</td>' 	+ 
 					'<td>Nombre </td>' 		+
 					'<td>Detalles </td>' 	+
 					'<td>Precio </td>' 		+
@@ -295,7 +297,7 @@ Product = {
 					
 					jsResp.objDocumento.lProductos.forEach(function (element, index, array) {						
 						div += 	'<tr class="formProducto">' +
-						'<td>'+ element.id 		+ '</td>' +
+						'<td>'+ element.codigo 		+ '</td>' +
 						'<td>'+ element.nombre 		+ '</td>' +
 						'<td>'+ element.detalle		+ '</td>' +
 						'<td>'+ element.precio 		+ '</td>' +
@@ -318,8 +320,9 @@ Product = {
 					$("#totalFactura").append(divTotal);
 					
 					var divCantidad = '<ul class="formTotal">' +
-						'<li><strong>Total: '+ cantProductos +'</strong></li></ul>';
-					
+						'<li><strong>Total: '+ jsResp.objDocumento.cantTotalProductos +'</strong></li>' +
+						'<li>Total de elementos: '+ jsResp.objDocumento.cantElemProductos +'</li> </ul>';
+										
 					$("#totalRemito").empty();
 					$("#totalRemito").append(divCantidad);
 					
@@ -332,7 +335,7 @@ Product = {
 				},	
 				error: function(){
 					alert("Error al cargar productos. La tranferencia salio MAL.");
-					$("#inputIdProducto").val(idProducto);
+					$("#inputIdProducto").val(codProducto);
 					$("#cantidad").val(cantidad);
 				},
 			}); //Fin de ajax
@@ -347,6 +350,7 @@ Product = {
 };
 
 Client = {
+		terminoBuscar : "Buscar cliente...",
 		
 		listaDeClientes : null,
 		
@@ -371,7 +375,7 @@ Client = {
 			
 		searchClients : function(){
 			var termino = $("#searchClients").val();
-			if (termino == "Buscar cliente...")
+			if (termino == Client.terminoBuscar)
 				termino = "";
 
 			$.ajax({
@@ -448,10 +452,16 @@ Client = {
 					alert("Error al iniciar cargar cliente. La tranferencia salio MAL.");
 				}
 			});
+			
+			$("#listClientsSearched").hide();
+			$("#listClientsSearched").empty();
+			$("#searchClients").val(Client.terminoBuscar);
+			
 		}
 };
 
 Provider = {
+		terminoBuscar : "Buscar proveedor...",
 		
 		listaDeProviders : null,
 		
@@ -476,7 +486,7 @@ Provider = {
 			
 		searchProviders : function(){
 			var termino = $("#searchProviders").val();
-			if (termino == "Buscar proveedor...")
+			if (termino == Provider.terminoBuscar)
 				termino = "";
 
 			$.ajax({
@@ -552,10 +562,35 @@ Provider = {
 					alert("Error al iniciar cargar proveedor. La tranferencia salio MAL.");
 				}
 			});
+			
+			$("#listProvidersSearched").hide();
+			$("#listProvidersSearched").empty();
+			$("#searchProviders").val(Provider.terminoBuscar);
 		}
 };
 
-menu = {
+Menu = {
+		init : function (){
+			window.onresize = Menu.resize;
+			Menu.resize();
+		},
+		
+		resize : function (){			
+			Menu.adapatarLargo();
+			Menu.adapatarAncho();
+		},
+		
+		adapatarLargo : function (){
+			var windowLargo = window.innerHeight;
+			var menuLargo = document.getElementById("ui-layout-north").offsetHeight;
+			document.getElementById("panel-izquierdo").style.height =  (windowLargo - menuLargo - 1) + "px";
+		},
+		adapatarAncho : function (){
+			var windowAncho = window.innerWidth;
+			var menuAncho = document.getElementById("ui-layout-north").offsetHeight;
+			document.getElementById("outer-center").style.width =  (windowAncho - menuAncho - 1) + "px";
+		},
+		
 		radioSelect : function (name){
 			var tm = document.getElementsByName(name);
 			
@@ -567,30 +602,16 @@ menu = {
 			}
 			return null;
 		},
-		historialDespAbre : function (){
-			document.getElementById("menuDespHisto").style["display"] = "block";
-			document.getElementById("HistorialDesplegable").className = "abreDesplegableAbierto menuDesplegable";
-			document.getElementById("HistorialDesplegable").onclick = function () {menu.historialDespCierra();};
-			document.getElementById("HistorialDesplegable").onblur = function() {menu.historialDespCierra();};
-
-				},
-		historialDespCierra : function (){
-				document.getElementById("menuDespHisto").style["display"] = "none";
-				document.getElementById("HistorialDesplegable").className = "abreDesplegable";
-				document.getElementById("HistorialDesplegable").onclick = function () {menu.historialDespAbre();};
-				
-				},
-		altaDespAbre : function (){
-			document.getElementById("menuDespAlta").style["display"] = "block";
-			document.getElementById("AltaDesplegable").className = "abreDesplegableAbierto menuDesplegable";
-			document.getElementById("AltaDesplegable").onclick = function () {menu.altaDespCierra();};
-
-				},
-		altaDespCierra : function (){
-				document.getElementById("menuDespAlta").style["display"] = "none";
-				document.getElementById("AltaDesplegable").className = "abreDesplegable";
-				document.getElementById("AltaDesplegable").onclick = function () {menu.altaDespAbre();};
-				
-				}
-
+		desplegableAbre : function(e,ob){
+			ob.getElementsByTagName("ul").item(0).style["display"] = "block";
+			ob.getElementsByTagName("a").item(0).className = "abreDesplegableAbierto menuDesplegable";
+			ob.onclick = function (event) { Menu.desplegableCierra(event,this); };
+			ob.onblur = function(event) { Menu.desplegableCierra(event,this);
+			alert("chau");};	
+		},
+		desplegableCierra : function (e,ob){
+			ob.getElementsByTagName("ul").item(0).style["display"] = "none";
+			ob.getElementsByTagName("a").item(0).className = "abreDesplegable";
+			ob.onclick = function (event) {Menu.desplegableAbre(event,this);};
+		}
 };

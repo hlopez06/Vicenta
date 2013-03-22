@@ -3,6 +3,7 @@ package com.divingWeb.elememts;
 public class StockProducto {
 	private long id;
 	private long idProducto;
+	private long codProducto;
 	private long idUsuario;
 	private int cantidad;
 	private int precio;
@@ -11,6 +12,7 @@ public class StockProducto {
 	
 	public StockProducto(Producto producto,long idUsuario){
 		this.idProducto = producto.getId();
+		this.codProducto = producto.getCodigo();
 		this.cantidad = producto.getCantidad();
 		this.precio = producto.getPrecio();
 		this.idUsuario = idUsuario;
@@ -31,6 +33,14 @@ public class StockProducto {
 
 	public void setIdProducto(long idProducto) {
 		this.idProducto = idProducto;
+	}
+
+	public long getCodProducto() {
+		return codProducto;
+	}
+
+	public void setCodProducto(long idProducto) {
+		this.codProducto = idProducto;
 	}
 
 	public long getIdUsuario() {

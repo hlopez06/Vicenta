@@ -12,6 +12,7 @@
         </id>
 
         <property name="idProducto" />
+        <property name="codProducto" />
         <property name="cantidad" />
         <property name="precio" />
 
@@ -19,7 +20,7 @@
     
     <sql-query name="call_sp_cargaStock">
 		<return alias="stock" class="com.divingWeb.elememts.StockProducto"/>
-		<![CDATA[CALL sp_cargaStock(:idProducto,:cantidad,:precio,@resp)]]>
+		<![CDATA[CALL sp_cargaStock(:idProducto,:codProducto,:cantidad,:precio,@resp)]]>
     </sql-query>
 
 </hibernate-mapping>

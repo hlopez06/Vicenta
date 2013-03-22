@@ -18,41 +18,42 @@ public abstract class Documento {
 	protected List<Producto> lProductos;
 	protected Usuario usuario;
 	protected int nroDocumento;
-	protected int cantidadProductos;
+	protected int cantTotalProductos;
+	protected int cantElemProductos;
 	protected Date dia;
 	protected String tipoDocumento;
 	protected Cliente cliente;
 	protected Usuario cajero;
 	protected Deposito deposito;
 
-	public Producto addProducto(int getId, int cantidad)
+	private Producto existeProducto(int codigo , int cantidad)
 	{
-		boolean encontrado = false;
-		Producto nuevoProducto = null;
-
 		for (Producto unProducto : lProductos) {
-			if(unProducto.getId() == getId)
+			if(unProducto.getCodigo() ==  codigo)
 			{
 				unProducto.setCantidad(unProducto.getCantidad() + cantidad);
-				nuevoProducto = unProducto;
-				encontrado = true;
 				
-				break;
+				return unProducto;
 			}
 		}
+		return null;
+	}	
+	public Producto addProducto (int codigo, int cantidad){ 	
 		
-		if( !encontrado ){
-			nuevoProducto = ProductDAO.buscarProducto(getId);
+		Producto nuevoProducto = existeProducto(codigo ,cantidad);
+		
+		if( nuevoProducto == null ){
+			nuevoProducto = ProductDAO.buscarProducto(codigo);
 			
 			if (nuevoProducto == null)
 					return null;
 			
+			++cantElemProductos;
 			nuevoProducto.setCantidad(cantidad);
 			lProductos.add(nuevoProducto);
 		}
+		cantTotalProductos += cantidad;
 		
-		cantidadProductos += cantidad;
-			
 		return nuevoProducto;
 	}
 	
@@ -90,11 +91,17 @@ public abstract class Documento {
 	protected void setNroDocumento(int nroDocumento) {
 		this.nroDocumento = nroDocumento;
 	}
-	protected int getCantidadProductos() {
-		return cantidadProductos;
+	public int getCantTotalProductos() {
+		return cantTotalProductos;
 	}
-	protected void setCantidadProductos(int cantidadProductos) {
-		this.cantidadProductos = cantidadProductos;
+	public void setCantTotalProductos(int cantTotalProductos) {
+		this.cantTotalProductos = cantTotalProductos;
+	}
+	public int getCantElemProductos() {
+		return cantElemProductos;
+	}
+	public void setCantElemProductos(int cantElemProductos) {
+		this.cantElemProductos = cantElemProductos;
 	}
 	protected Date getDia() {
 		return dia;

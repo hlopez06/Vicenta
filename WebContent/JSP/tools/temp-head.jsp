@@ -15,33 +15,43 @@
 			title="Ver carpetas y documentos guardados" alt="Hacer facturas">Factura</a>
 		</li>
 		<li><a href="notaCredito" title="Ver/recuperar últimas sesiones"
-			alt="Hacer nota de credito">Nota de credito</a></li>
-		<li><a href="remito" title="Ver/recuperar últimas sesiones"
-			alt="Hacer remitos">Remito</a></li>
+			alt="Hacer nota de credito">Nota de credito</a>
+		</li>
+		<li>
+			<div id="remitoDesplegable" onclick="Menu.desplegableAbre(event,this)">
+				<a class="abreDesplegable" title="Remito de movimientos" href="#">Remito</a>
+				<ul class="menuDesplegable oculto">
+					<li><a href="remito?tm=ingreso">Ingreso</a></li>
+					<li><a href="remito?tm=egreso">Egreso</a></li>
+				</ul>
+			</div>
+		</li>
 		<li><a href="stock" title="Ver stock"
 			alt="Ver stock">Stock</a></li>	
 			
-		<li><a id="AltaDesplegable" onclick="menu.altaDespAbre()" class="abreDesplegable"
-			title="Alta de movimientos" href="#">Alta</a>
-			<ul id="menuDespAlta" class="menuDesplegable oculto">
-
-				<li><a href="elementFactory?element=producto">de producto</a></li>
-				<li><a href="elementFactory?element=cliente">de cliente</a></li>
-				<li><a href="elementFactory?element=proveedor">de proveedor</a></li>
-				<li><a href="elementFactory?element=usuario">de usuario</a></li>
-			</ul>
+		<li>
+			<div id="altaDesplegable" onclick="Menu.desplegableAbre(event,this)">
+				<a title="Alta de movimientos" class="abreDesplegable" href="#">Alta</a>
+				<ul class="menuDesplegable oculto">
+					<li><a href="elementFactory?element=producto">de producto</a></li>
+					<li><a href="elementFactory?element=cliente">de cliente</a></li>
+					<li><a href="elementFactory?element=proveedor">de proveedor</a></li>
+					<li><a href="elementFactory?element=usuario">de usuario</a></li>
+				</ul>
+			</div>	
 		</li>	
 
-		<li><a id="HistorialDesplegable" onclick="menu.historialDespAbre()" class="abreDesplegable"
-			title="Historico de movimientos" href="#">Historial</a>
-			<ul id="menuDespHisto" class="menuDesplegable oculto">
-
-				<li><a href="historico-ventas">de Ventas</a></li>
-				<li><a href="historico-notaCredito">de Nota de credito</a></li>
-				<li><a href="historico-remitos">de Remitos</a></li>
-				<li><a href="otros">otros</a>
-				</li>
-			</ul>
+		<li>
+			<div id="historialDesplegable" onclick="Menu.desplegableAbre(event,this)" >
+				<a class="abreDesplegable" title="Historico de movimientos" href="#">Historial</a>
+				<ul class="menuDesplegable oculto">
+					<li><a href="historico-ventas">de Ventas</a></li>
+					<li><a href="historico-notaCredito">de Nota de credito</a></li>
+					<li><a href="historico-remitos">de Remitos</a></li>
+					<li><a href="otros">otros</a>
+					</li>
+				</ul>
+			</div>	
 		</li>
 
 		<li><a href="#" title="Seleccionar idioma, configuración..."

@@ -22,7 +22,8 @@ public class Factura extends Documento{
 		cliente = null;
 		totalBruto = 0;
 		totalMasIva = 0;
-		cantidadProductos = 0;
+		cantTotalProductos = 0;
+		cantElemProductos = 0;
 		tipoDocumento = "factura";
 	}
 	

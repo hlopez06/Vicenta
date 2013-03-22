@@ -28,7 +28,7 @@
 
 </head>
 
-<body>
+<body onload="Menu.init()">
 
 	<jsp:include page="tools/temp-head.jsp"></jsp:include>
 
@@ -52,11 +52,13 @@
 								<% if (form_client){ %><jsp:include page="templates/form_client.jsp"></jsp:include><% }%>
 								<% if (form_provider){ %><jsp:include page="templates/form_provider.jsp"></jsp:include><% }%>
 							</div>
-							<% if (documento.contains("remito")){ %>
+							<% if (documento.contains("ar")){ %>
 							<div id="frTools" class="formDocument">
 								<div id="tipoMovimiento">
-										<input type="radio" name="rm-tipoMovimiento" value="ingreso"> Ingreso </input>
-										<input type="radio" name="rm-tipoMovimiento" value="egreso"> Egreso </input>
+										<input type="radio" name="rm-tipoMovimiento" value="ingreso"
+										onclick="Remito.selectMovimiento(event, this)"> Ingreso </input>
+										<input type="radio" name="rm-tipoMovimiento" value="egreso" 
+										onclick="Remito.selectMovimiento(event, this)"> Egreso </input>
 								</div>
 							</div>
 							<%} %>
