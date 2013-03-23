@@ -177,6 +177,7 @@ div#ui-layout-north ul.menuSup ul.menuDesplegable {
     border-right: 2px solid #BABABA;
     left: 0;
     margin: 0;
+    margin-top: 1px;
     padding: 0.25em 0;
     position: absolute;
     top: 1.8em;
@@ -208,9 +209,7 @@ div#ui-layout-north ul.menuSup ul.menuDesplegable li a:hover {
 div#ui-layout-north ul.menuSup li a.abreDesplegableAbierto {
     background: no-repeat scroll right center #F2F2F2; 
 /*     url("../images/bk.openedGris.png") */
-    border-left: 2px solid #BABABA;
-    border-right: 2px solid #BABABA;
-    border-top: 2px solid #BABABA;
+    border: 2px solid #BABABA;
     color: #515151;
     padding: 1px 15px 3px 3px;
 }
@@ -261,13 +260,23 @@ div#mainContent div#docContent {
 div.outer-center div.ui-layout-north {
     height: auto !important;
 }
+
 div#pie {
-/*     background: url("../images/tr_peq2.gif") no-repeat scroll right top transparent; */
     border-top: 3px double #CCCCCC;
     clear: both;
+    float: right;
     margin: 1em 0 0;
-    padding: 0.5em 1em 1.75em;
+    padding: 0.5em 1em 0;
+    bottom: 0;
+    position: absolute;
+    width: -moz-available;
 }
+/* div#pie { */
+/*     border-top: 3px double #CCCCCC; */
+/*     clear: both; */
+/*     margin: 1em 0 0; */
+/*     padding: 0.5em 1em 1.75em; */
+/* } */
 div#pie ul {
     margin: 0.5em 0 0;
 /*     width: 62%; */
@@ -405,11 +414,12 @@ ul.formElem li {
 	overflow: auto;
 }
 
-ul.formProducto li {
-	position: relative;
-	float: left;
-	padding-right: 50px;
-	width: 100px;
+tr.formProducto img {
+	width: 15px;
+}
+
+.formProducto td {
+	border-bottom: 1px solid #CFCFCF;
 }
 
 .formTotal ul {
@@ -471,7 +481,3 @@ ul.formTotal li {
 	border: medium none;
 	 width: 40px;
 } 
-
-.formProducto td {
-	border-bottom: 1px solid #CFCFCF;
-}

@@ -18,7 +18,7 @@
 					name="searchClients" size="25" maxlength="20"
 					onblur="if(this.value=='') this.value='Buscar cliente...';"
 					onfocus="if(this.value=='Buscar cliente...') this.value='';"
-					onkeypress="Client.searchClientsKeyEnter(event, this)" /> <a
+					onkeypress="Menu.keyEnter(event, this, Client.searchClients)" /> <a
 					id="lupaSearchCliente"
 					href="javascript:Client.searchClients();"> <img
 					src="../images/magnifier.png" title="Buscar">
@@ -45,7 +45,7 @@
 					name="searchProviders" size="25" maxlength="20"
 					onblur="if(this.value=='') this.value='Buscar proveedor...';"
 					onfocus="if(this.value=='Buscar proveedor...') this.value='';"
-					onkeypress="Provider.searchProvidersKeyEnter(event, this)" /> <a
+					onkeypress="Menu.keyEnter(event, this, Provider.searchProviders)" /> <a
 					id="lupaSearchProviders"
 					href="javascript:Provider.searchProviders();"> <img
 					src="../images/magnifier.png" title="Buscar">

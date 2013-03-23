@@ -27,14 +27,14 @@ public class Factura extends Documento{
 		tipoDocumento = "factura";
 	}
 	
-	public boolean ejecutate(long idCliente){
+	public boolean action(long idCliente){
 		
 		if (cliente.getId() == idCliente){
 			setDia(new Date(0));
 			
 			checkCreditoCliente();
 			
-			TransactionDAO.guardarFactura(this);			
+			TransactionDAO.actionFactura(this);			
 		}
 		
 		return true;
@@ -59,6 +59,18 @@ public class Factura extends Documento{
 		totalMasIva = (totalBruto * IVA) + totalBruto;
 			
 		return nuevoProducto;
+	}
+	
+	public long getIdCliente(){
+		if (cliente != null){
+			return cliente.getId();
+		}
+		
+		return 0;
+	}
+	
+	public void clearProductos(){
+		super.clearProductos();
 	}
 	
 	public List<Producto> listProductos()

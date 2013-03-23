@@ -61,13 +61,13 @@
   </servlet-mapping>
   <servlet>
     <description>Recibe un formulario con la factura lista.</description>
-    <display-name>Facturar</display-name>
-    <servlet-name>Facturar</servlet-name>
-    <servlet-class>com.divingWeb.servlets.Facturar</servlet-class>
+    <display-name>ActionFactura</display-name>
+    <servlet-name>ActionFactura</servlet-name>
+    <servlet-class>com.divingWeb.servlets.action.ServletActionFactura</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Facturar</servlet-name>
-    <url-pattern>/mode/facturador/facturar</url-pattern>
+    <servlet-name>ActionFactura</servlet-name>
+    <url-pattern>/mode/facturador/action</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -123,7 +123,7 @@
     <description>Ejecuta la accion de remito</description>
     <display-name>ActionRemito</display-name>
     <servlet-name>ActionRemito</servlet-name>
-    <servlet-class>com.divingWeb.servlets.action.ActionRemito</servlet-class>
+    <servlet-class>com.divingWeb.servlets.action.ServletActionRemito</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ActionRemito</servlet-name>

@@ -30,36 +30,51 @@ public class AddProduct extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setContentType("application/json");
+		PrintWriter pw = response.getWriter();
 		
 //		int idProducto = Integer.parseInt (request.getParameter("idProducto").trim() );
 		int codProducto = Integer.parseInt (request.getParameter("codProducto").trim() );
 		int cantidad = Integer.parseInt( request.getParameter("cantidad").trim() );
 		
-		if ( codProducto > 0 && cantidad > 0 ) {
-			
-			Gson gson = new Gson();
-			String jsonOutput;
-			
-			Documento documento = (Documento)request.getSession().getAttribute("documento");
-			
-			PrintWriter pw = response.getWriter();
+		Gson gson = new Gson();
+		String jsonOutput;
+		
+		Documento documento = (Documento)request.getSession().getAttribute("documento");
+
+		if ( codProducto > 0 && cantidad > 0 ) {	
 
 			if(documento.addProducto(codProducto, cantidad) != null){				
 				jsonOutput = gson.toJson(documento);
 				System.out.println(jsonOutput);
 				pw.print("{\"estado\":\"ok\",\"objDocumento\":" + jsonOutput + "}");
 			}else{
-				pw.print("{\"estado\":\"error\",\"msjError\":\"Error al ingresar el producto\"}");
+				pw.print("{\"estado\":\"error\",\"msj\":\"Error al ingresar el producto\"}");
 			}
-						
-			pw.flush();
 			
-			pw.close();
-
+		} else if (codProducto > 0 && cantidad < 0){
 			
-		} else {
-			response.getWriter().print("invalid");
+			if(documento.extractProducto(codProducto, cantidad) != null){				
+				jsonOutput = gson.toJson(documento);
+				System.out.println(jsonOutput);
+				pw.print("{\"estado\":\"ok\",\"objDocumento\":" + jsonOutput + "}");
+			}else{
+				pw.print("{\"estado\":\"error\",\"msj\":\"Error al restar producto\"}");
+			}
+		} else if (codProducto > 0 && cantidad == 0){
+			
+			if(documento.removeProducto(codProducto) == true){				
+				jsonOutput = gson.toJson(documento);
+				System.out.println(jsonOutput);
+				pw.print("{\"estado\":\"ok\",\"objDocumento\":" + jsonOutput + "}");
+			}else{
+				pw.print("{\"estado\":\"error\",\"msj\":\"Error al eliminar el producto\"}");
+			}
+		}else{
+			pw.print("{\"estado\":\"error\",\"msj\":\"El codigo de producto o cantidad inavalido.\"}");
 		}
+		pw.flush();
+		
+		pw.close();
 		
 	}
 

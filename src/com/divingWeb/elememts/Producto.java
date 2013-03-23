@@ -20,6 +20,20 @@ public class Producto {
 		
 	}
 	
+	public int sumarCantidad(int cantidad){
+		if(cantidad < 0)
+			cantidad = (cantidad * -1);
+		
+		return this.cantidad += cantidad;
+	}
+	
+	public int restarCantidad(int cantidad){
+		if(cantidad < 0)
+			cantidad = (cantidad * -1);
+		
+		return this.cantidad -= cantidad;
+	}
+	
 	public long getId() {
 		return id;
 	}

@@ -77,11 +77,11 @@
 							
 							<div id="frNewProduct" class="formDocument">
 								<ul class="formFactura ">
-									<li><a>Id de Producto</a> <input id="inputIdProducto"
+									<li><a>Id de Producto</a> <input id="inputCodProducto"
 										type="text" step="1" maxlength="10" size="15"
-										name="idProducto" value="1" />
+										name="idProducto" value="1" onkeypress="Menu.keyEnter(event, this, Product.addProduct)"/>
 									<li><a>Cantidad </a> <input id="cantidad" type="text"
-										step="2" maxlength="7" size="15" name="cantidad" value="2" />
+										step="2" maxlength="7" size="15" name="cantidad" value="1" />
 									</li>
 									<li><a type="button" size="4" name="cargar" step="3"
 										value="cargar" href="javascript:Product.addProduct();">CARGAR</a>

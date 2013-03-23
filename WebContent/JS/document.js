@@ -10,56 +10,59 @@ List = {
 		lista : null,
 		
 		loadPage : function(actualPage){
-			var lineMax = document.getElementById("lineMax").getAttribute("value");
-
-			var totalProdStock = List.meta.totalProdStock;
-			List.meta.actualPage = actualPage;
-			
-			List.meta.lastPage = parseInt(totalProdStock / lineMax);
-			if ((totalProdStock % lineMax) > 0 )
-				++List.meta.lastPage;
-			var lastPage = List.meta.lastPage;
-			
-			var divList = '<table>'+
-							'<tr>'+
-								'<th>Codigo </th>'+'<th>Precio</th>'+'<th>Cantidad</th>'+
-							'</tr>';
-					
-			var max = lineMax * actualPage;
-			var i = max - lineMax;
-			var element = null;
-			
-			if (actualPage == lastPage)
-				max = totalProdStock;
-			
-			while(i < max){
-				element = List.lista[i];
-			
-				divList += 	'<tr>' + 
-					'<td class="prStock">' + '<input value="' + element.codProducto + '" /></td>' +
-					'<td class="prStock">' + '<input value="' + element.precio + '" /></td>' +
-					'<td class="prStock">' + '<input value="' + element.cantidad + '" /></td>' +
-				'</tr>';
+			if (List.lista.length > 0){
+				var lineMax = document.getElementById("lineMax").getAttribute("value");
+	
+				var totalProdStock = List.meta.totalProdStock;
+				List.meta.actualPage = actualPage;
 				
-				++i;
-			};
-			
-			divList += 	'</table>' + '<dir id="hoja"><div id="hojaDisplay"></div></div>';
-			
-			document.getElementById("bodyList").innerHTML = divList;
-			
-			var botonBack = "", botonNext = "";
-			if (actualPage != 1)
-				botonBack = '<a onclick="List.loadPage(' + (actualPage - 1) + ')">'+
-					'<img src="../images/go-lt-off.gif" alt="Pagina anterior"/></a>';
-			if (actualPage != lastPage)
-				botonNext = '<a onclick="List.loadPage(' + (actualPage + 1) + ')">'+
-				'<img src="../images/go-rt-off.gif" alt="Pagina anterior"/></a>';
-			name = 'Hoja ';
-			desdeHasta = '<a>' + actualPage + '</a>/<a>'+ lastPage +'</a>';
-			
-			document.getElementById("hojaDisplay").innerHTML = name + botonBack + desdeHasta + botonNext ;
-
+				List.meta.lastPage = parseInt(totalProdStock / lineMax);
+				if ((totalProdStock % lineMax) > 0 )
+					++List.meta.lastPage;
+				var lastPage = List.meta.lastPage;
+				
+				var divList = '<table>'+
+								'<tr>'+
+									'<th>Codigo </th>'+'<th>Precio</th>'+'<th>Cantidad</th>'+
+								'</tr>';
+						
+				var max = lineMax * actualPage;
+				var i = max - lineMax;
+				var element = null;
+				
+				if (actualPage == lastPage)
+					max = totalProdStock;
+				
+				while(i < max){
+					element = List.lista[i];
+				
+					divList += 	'<tr>' + 
+						'<td class="prStock">' + '<input value="' + element.codProducto + '" /></td>' +
+						'<td class="prStock">' + '<input value="' + element.precio + '" /></td>' +
+						'<td class="prStock">' + '<input value="' + element.cantidad + '" /></td>' +
+					'</tr>';
+					
+					++i;
+				};
+				
+				divList += 	'</table>' + '<dir id="hoja"><div id="hojaDisplay"></div></div>';
+				
+				document.getElementById("bodyList").innerHTML = divList;
+				
+				var botonBack = "", botonNext = "";
+				if (actualPage != 1)
+					botonBack = '<a onclick="List.loadPage(' + (actualPage - 1) + ')">'+
+						'<img src="../images/go-lt-off.gif" alt="Pagina anterior"/></a>';
+				if (actualPage != lastPage)
+					botonNext = '<a onclick="List.loadPage(' + (actualPage + 1) + ')">'+
+					'<img src="../images/go-rt-off.gif" alt="Pagina anterior"/></a>';
+				name = 'Hoja ';
+				desdeHasta = '<a>' + actualPage + '</a>/<a>'+ lastPage +'</a>';
+				
+				document.getElementById("hojaDisplay").innerHTML = name + botonBack + desdeHasta + botonNext ;
+			}else{
+				document.getElementById("bodyList").innerHTML = '<div id="sinStock">No hay productos en stock.</div>';
+			}
 		},
 
 		callStock : function(){
@@ -99,9 +102,9 @@ Factura = {
 				var idCliente = document.getElementsByName("cl-id").item(0).value;
 				
 				$.ajax({
-					url: "facturador/facturar",
+					url: "facturador/action",
 					data: "idCliente=" + idCliente,
-					type: "GET",
+					type: "POST",
 					typedata: "json",
 					async: false,
 					beforeSend : function () {	},
@@ -268,25 +271,48 @@ ElementFactory = {
 
 Product = {		
 		addProduct : function(){
-			var codProducto = $("#inputIdProducto").val();
-								$("#inputIdProducto").val("");
+			var codProducto = $("#inputCodProducto").val();
+								$("#inputCodProducto").val("");
 			var cantidad = $("#cantidad").val();
 							$("#cantidad").val("1");
 			
 			if(codProducto == "" || cantidad == "" || codProducto <= 0 || cantidad <= 0){
 				return;
-				}
-								
+			}else {
+				Product.ajaxProducto("codProducto="+codProducto+"&cantidad="+cantidad);
+			}
+		},
+		extractProduct : function(codProducto, cantidad){
+			if (cantidad != "" || cantidad > 0)
+				cantidad = (cantidad * -1);
+				
+			if(codProducto == "" || codProducto <= 0){
+				return;
+			}else {
+				Product.ajaxProducto("codProducto="+codProducto+"&cantidad="+cantidad);
+			}
+		},
+		eliminar : function (codProducto){
+			if(codProducto == "" || codProducto <= 0 ){
+				return;
+			}else {
+				Product.ajaxProducto("codProducto="+codProducto+"&cantidad=0");
+			}
+		},
+		ajaxProducto : function(data){
+			
 			$.ajax({
 				url: "documento/addProduct",
-				data: "codProducto="+codProducto+"&cantidad="+cantidad,
+				data: data,
 				type: "POST",
 				typedata: "json",
 				async: false,
 				success: function(jsResp){
-				
-				if(jsResp.estado == "ok"){	
-					var div = '<table><tr class="formProducto">' + 
+				if(jsResp.estado == "ok"){  
+
+					var div;
+					if (jsResp.objDocumento.lProductos.length > 0){
+					div = '<table><tr class="formProducto">' + 
 					'<td>Codigo</td>' 	+ 
 					'<td>Nombre </td>' 		+
 					'<td>Detalles </td>' 	+
@@ -301,7 +327,13 @@ Product = {
 						'<td>'+ element.nombre 		+ '</td>' +
 						'<td>'+ element.detalle		+ '</td>' +
 						'<td>'+ element.precio 		+ '</td>' +
-						'<td>'+ element.cantidad	+ '</td>' + 
+						'<td>'+ element.cantidad	+ '</td>' +
+						'<td>'+ 
+							'<a href="javascript:Product.extractProduct('+ element.codigo +',1);">' + 
+							' <img title="Restar uno" src="../images/bt-extractProduct.png"></a>' +
+							'<a href="javascript:Product.eliminar('+ element.codigo +');">' + 
+							' <img title="Eliminar" src="../images/bt-deleteProduct.png"></a>' +
+						'</td>' +
 						'</tr>';
 						
 						cantProductos++;
@@ -309,9 +341,6 @@ Product = {
 					
 					div += '</table>';
 					
-					$("#listaProductos").empty();
-					$("#listaProductos").append(div);
-
 					var divTotal = '<ul class="formTotal">' +
 						'<li><strong>Total: '+ jsResp.objDocumento.totalMasIva +'</strong></li>' +
 						'<li>Total bruto: '+ jsResp.objDocumento.totalBruto +'</li> </ul>';
@@ -327,24 +356,32 @@ Product = {
 					$("#totalRemito").append(divCantidad);
 					
 					$("#frBtnAction").show();
+					} else {
+						div = '<div id="sinProductos">Ingrese algun producto...</div>';
+					}
+
+					$("#listaProductos").empty();
+					$("#listaProductos").append(div);
 					
 				}else{
-					alert(jsResp.msjError);
+					alert(jsResp.msj);
 				}
 	
 				},	
 				error: function(){
 					alert("Error al cargar productos. La tranferencia salio MAL.");
-					$("#inputIdProducto").val(codProducto);
+					$("#inputCodProducto").val(codProducto);
 					$("#cantidad").val(cantidad);
-				},
+				}
 			}); //Fin de ajax
 			
-			$("#inputIdProducto").focus();
+			$("#inputCodProducto").focus();
+			Menu.resize();
 		},
 		clearProductos : function (){
 			$("#listaProductos").empty();
 			$("#totalFactura").empty();
+			$("#totalRemito").empty();
 			$("#frBtnAction").hide();
 		}
 };
@@ -366,11 +403,6 @@ Client = {
 			var cliente = Client.listaDeClientes.objListaClientes[numeroDeIndex];
 			if(cliente != undefined)
 				return Client.listaDeClientes.objListaClientes[numeroDeIndex];
-		},
-		
-		searchClientsKeyEnter : function(e, elemento) {
-				tecla=(document.all) ? e.keyCode : e.which; 
-				if(tecla == 13) Client.searchClients();
 		},
 			
 		searchClients : function(){
@@ -478,11 +510,6 @@ Provider = {
 			if(proveedor != undefined)
 				return Provider.listaDeProviders.objListaProviders[numeroDeIndex];
 		},
-		
-		searchProvidersKeyEnter : function(e, elemento) {
-				tecla=(document.all) ? e.keyCode : e.which; 
-				if(tecla == 13) Provider.searchProviders();
-		},
 			
 		searchProviders : function(){
 			var termino = $("#searchProviders").val();
@@ -583,12 +610,28 @@ Menu = {
 		adapatarLargo : function (){
 			var windowLargo = window.innerHeight;
 			var menuLargo = document.getElementById("ui-layout-north").offsetHeight;
-			document.getElementById("panel-izquierdo").style.height =  (windowLargo - menuLargo - 1) + "px";
+			var docContent = document.getElementById("docContent").offsetHeight;
+			var menuPie = document.getElementById("pie").offsetHeight;
+			var outerCenter = windowLargo;
+			if (docContent > (windowLargo - menuLargo)){
+				outerCenter = docContent + menuPie + 20; //20px por margenes
+			}else {
+				outerCenter = windowLargo - menuLargo - 1;
+			}
+				
+			document.getElementById("panel-izquierdo").style.height =  (outerCenter) + "px";
+			document.getElementById("mainContent").style.height =  (outerCenter) + "px";
 		},
 		adapatarAncho : function (){
 			var windowAncho = window.innerWidth;
 			var menuAncho = document.getElementById("ui-layout-north").offsetHeight;
 			document.getElementById("outer-center").style.width =  (windowAncho - menuAncho - 1) + "px";
+			
+		},
+		
+		keyEnter : function(e, elemento, funcion) {
+			tecla=(document.all) ? e.keyCode : e.which; 
+			if(tecla == 13)	funcion();
 		},
 		
 		radioSelect : function (name){

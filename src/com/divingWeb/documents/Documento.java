@@ -26,13 +26,11 @@ public abstract class Documento {
 	protected Usuario cajero;
 	protected Deposito deposito;
 
-	private Producto existeProducto(int codigo , int cantidad)
+	private Producto searchProducto(int codigo)
 	{
 		for (Producto unProducto : lProductos) {
 			if(unProducto.getCodigo() ==  codigo)
 			{
-				unProducto.setCantidad(unProducto.getCantidad() + cantidad);
-				
 				return unProducto;
 			}
 		}
@@ -40,22 +38,63 @@ public abstract class Documento {
 	}	
 	public Producto addProducto (int codigo, int cantidad){ 	
 		
-		Producto nuevoProducto = existeProducto(codigo ,cantidad);
+		Producto producto = searchProducto(codigo);
 		
-		if( nuevoProducto == null ){
-			nuevoProducto = ProductDAO.buscarProducto(codigo);
+		if( producto == null ){
+			producto = ProductDAO.buscarProducto(codigo);
 			
-			if (nuevoProducto == null)
+			if (producto == null)
 					return null;
 			
 			++cantElemProductos;
-			nuevoProducto.setCantidad(cantidad);
-			lProductos.add(nuevoProducto);
+			producto.setCantidad(cantidad);
+			lProductos.add(producto);
+		} else {
+			producto.sumarCantidad(cantidad);
 		}
 		cantTotalProductos += cantidad;
 		
-		return nuevoProducto;
+		return producto;
 	}
+	
+	public Producto extractProducto (int codigo, int cantidad){ 	
+		
+		if(cantidad > 0)
+			cantidad = (cantidad * -1);
+		
+		Producto producto = searchProducto(codigo);
+		
+		if( producto != null ){
+			producto.restarCantidad(cantidad);
+			
+			if(producto.getCantidad() == 0){
+				lProductos.remove(producto);
+				--cantElemProductos;				
+			}
+
+		} else {
+			return null;
+		}
+		cantTotalProductos -= cantidad;
+		
+		return producto;
+	}
+
+	public boolean removeProducto (int codigo){ 	
+	
+		Producto producto = searchProducto(codigo);
+		
+		if( producto != null ){
+			cantTotalProductos -= producto.getCantidad();
+			lProductos.remove(producto);
+			--cantElemProductos;
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
 	
 	protected void clearProductos(){
 		lProductos.clear();

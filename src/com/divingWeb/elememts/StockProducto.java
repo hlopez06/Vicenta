@@ -26,6 +26,10 @@ public class StockProducto {
 	public long getId() {
 		return id;
 	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public long getIdProducto() {
 		return idProducto;
@@ -34,13 +38,13 @@ public class StockProducto {
 	public void setIdProducto(long idProducto) {
 		this.idProducto = idProducto;
 	}
-
+	
 	public long getCodProducto() {
 		return codProducto;
 	}
 
-	public void setCodProducto(long idProducto) {
-		this.codProducto = idProducto;
+	public void setCodProducto(long codProducto) {
+		this.codProducto = codProducto;
 	}
 
 	public long getIdUsuario() {
@@ -49,10 +53,6 @@ public class StockProducto {
 
 	public void setIdUsuario(long idUsuario) {
 		this.idUsuario = idUsuario;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public int getCantidad() {
@@ -70,5 +70,4 @@ public class StockProducto {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
-
 }

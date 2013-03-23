@@ -56,6 +56,7 @@ public class DepositoDAO extends ConexionDAO {
 	            	
 	            	sesion.getNamedQuery("call_sp_cargaStock")
 		            	.setParameter("idProducto",pr.getId())
+		            	.setParameter("codProducto",pr.getCodigo())
 		            	.setParameter("cantidad", accion + pr.getCantidad())
 		            	.setParameter("precio", pr.getPrecio())
 		            	.executeUpdate();

@@ -55,6 +55,39 @@ public static int remitoAction(Remito remito){
 		}
 		return updateEntities;
 	}
+
+	public static void actionFactura(Factura factura){
+	
+		List<Producto> lProductos = factura.getlProductos();
+		String qry = "";
+		
+		if (!lProductos.isEmpty() && factura.getCliente() != null ){
+			Iterator<Producto> listIterator = lProductos.iterator();
+			
+			try 
+	        { 
+				iniciaOperacion();
+	            
+	            while( listIterator.hasNext() ) {
+	            	Producto pr = (Producto) listIterator.next();
+	            		            	
+	            	qry = " UPDATE com.divingWeb.elememts.StockProducto AS sk SET sk.cantidad=sk.cantidad-:cantidad WHERE sk.idProducto=:idProducto";
+	            	sesion.createQuery(qry)
+	            		.setParameter("idProducto", pr.getId())
+	            		.setParameter("cantidad", pr.getCantidad())
+	            		.executeUpdate();
+		            		            	
+	            }
+	            tx.commit();
+		
+	        } catch (HibernateException he) { 
+	            manejaExcepcion(he); 
+	            throw he;
+	        } finally { 
+	            sesion.close(); 
+	        }
+		}
+	}
 	
 	public static int facturarProductos(Factura factura){
 		
@@ -88,25 +121,5 @@ public static int remitoAction(Remito remito){
 		return updateEntities;
 	}
 	
-	public static boolean guardarFactura(Factura unaFactura){
-		
-		try 
-        { 
-            iniciaOperacion(); 
-            
-            sesion.save(unaFactura);
-            
-            tx.commit(); 
-        } catch (HibernateException he) 
-        { 
-            manejaExcepcion(he); 
-            throw he; 
-        } finally 
-        { 
-            sesion.close(); 
-        }
-		
-		return true;
-	}
 
 }
