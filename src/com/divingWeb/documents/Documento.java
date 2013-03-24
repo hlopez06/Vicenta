@@ -1,13 +1,12 @@
 package com.divingWeb.documents;
 
-import java.sql.Date;
-import java.util.List;
+import java.util.Date;
+import java.util.Set;
 
 import com.divingWeb.conexionDAO.ProductDAO;
 import com.divingWeb.elememts.Cliente;
 import com.divingWeb.elememts.Deposito;
 import com.divingWeb.elememts.Producto;
-import com.divingWeb.elememts.StockProducto;
 import com.divingWeb.elememts.Usuario;
 
 public abstract class Documento {
@@ -15,13 +14,14 @@ public abstract class Documento {
 	static float IVA = 0.21F;
 	
 	protected long id;
-	protected List<Producto> lProductos;
+	protected Set<Producto> lProductos;
 	protected Usuario usuario;
 	protected int nroDocumento;
 	protected int cantTotalProductos;
 	protected int cantElemProductos;
 	protected Date dia;
 	protected String tipoDocumento;
+	protected String claseDocumento;
 	protected Cliente cliente;
 	protected Usuario cajero;
 	protected Deposito deposito;
@@ -96,11 +96,11 @@ public abstract class Documento {
 	}
 	
 	
-	protected void clearProductos(){
+	public void clearProductos(){
 		lProductos.clear();
 	}
 	
-	protected float getIva() {
+	public float getIva() {
 		return IVA;
 	}
 
@@ -112,22 +112,22 @@ public abstract class Documento {
 		this.id = id;
 	}
 
-	protected List<Producto> getlProductos() {
+	public Set<Producto> getlProductos() {
 		return lProductos;
 	}
-	protected void setlProductos(List<Producto> lProductos) {
+	public void setlProductos(Set<Producto> lProductos) {
 		this.lProductos = lProductos;
 	}
-	protected Usuario getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
-	protected void setUsuario(Usuario usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	protected int getNroDocumento() {
+	public int getNroDocumento() {
 		return nroDocumento;
 	}
-	protected void setNroDocumento(int nroDocumento) {
+	public void setNroDocumento(int nroDocumento) {
 		this.nroDocumento = nroDocumento;
 	}
 	public int getCantTotalProductos() {
@@ -142,10 +142,10 @@ public abstract class Documento {
 	public void setCantElemProductos(int cantElemProductos) {
 		this.cantElemProductos = cantElemProductos;
 	}
-	protected Date getDia() {
+	public Date getDia() {
 		return dia;
 	}
-	protected void setDia(Date dia) {
+	public void setDia(Date dia) {
 		this.dia = dia;
 	}	
 	public String getTipoDocumento() {
@@ -156,6 +156,12 @@ public abstract class Documento {
 		this.tipoDocumento = tipoDocumento;
 	}
 
+	public String getClaseDocumento() {
+		return claseDocumento;
+	}
+	public void setClaseDocumento(String claseDocumento) {
+		this.claseDocumento = claseDocumento;
+	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}

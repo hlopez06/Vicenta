@@ -34,28 +34,26 @@
 
 </head>
 
-<body onload="List.callStock()">
+<body onload="List.callStock();Menu.init();">
 
 	<jsp:include page="tools/temp-head.jsp"></jsp:include>
 
 	<div id="outer-center"  class="pane">
 
 		<div id="mainContent">
-			<div class="content" id="docContent">
-				<!-- panel contenido principal(central) -->
-					<!--cuerpo -->
-					
-					<div id="titulo-pag"><%=titulo_mainContent%></div>
-
-					<!-- formulario de Remito -->
-
-					<div id="bodyList">
-						<h3>cargando los datos...</h3>
-					</div>
-					<div id="lineMax" value="<%=lineMax %>"></div>
-
+			<div id="docContent" class="contentOnly">
+						<!--cuerpo -->
+						
+						<div id="titulo-pag"><%=titulo_mainContent%></div>
+	
+						<!-- formulario de Remito -->
+	
+						<div id="bodyList">
+							<h3>cargando los datos...</h3>
+						</div>
+						<div id="lineMax" value="<%=lineMax %>"></div>
 			</div>
-				<jsp:include page="tools/temp-pie.jsp"></jsp:include>
+<%-- 				<jsp:include page="tools/temp-pie.jsp"></jsp:include> --%>
 		</div>
 
 </div>

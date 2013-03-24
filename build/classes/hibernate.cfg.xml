@@ -23,6 +23,8 @@
         <mapping resource="mappings/Cliente.hbm.xml"/>
         <mapping resource="mappings/Proveedor.hbm.xml"/>
  		<mapping resource="mappings/StockProducto.hbm.xml"/>
+ 		<mapping resource="mappings/Factura.hbm.xml"/>
+ 		
     </session-factory>
 
 </hibernate-configuration>

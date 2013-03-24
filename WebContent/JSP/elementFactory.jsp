@@ -27,49 +27,47 @@
 
 </head>
 
-<body>
+<body onload="Menu.init();">
 
 	<jsp:include page="tools/temp-head.jsp"></jsp:include>
 
 	<div id="outer-center"  class="pane">
 
 		<div id="mainContent">
-			<div class="content" id="docContent">
-				<!-- panel contenido principal(central) -->
-					<!--cuerpo -->
-					
-					<div id="titulo-pag"><%=titulo_mainContent%></div>
-
-					<!-- formulario de Remito -->
-
-					<div id="formFactoryElem">
-						<a><%=formName %></a>
-<!-- 					<form action=""> -->
-
-						<ul id="formElem">
-<%
-	Iterator<InputWeb> iLInputs = lInputs.iterator(); 
-	while( iLInputs.hasNext() ) {
-		InputWeb input = (InputWeb) iLInputs.next();
-%>
-							<li>
-								<ul class="<%=input.getClassName()%>">
-									<li><span><%=input.getTitulo() %></span></li>
-									<li><input type="<%=input.getType() %>" size="<%=input.getSize()%>"
-									 name="<%=input.getName()%>" value="<%=input.getValue()%>" /></li>
-								</ul>	
-							</li>
-<% 	} %>
-
-						</ul>
-						<input type="hidden" size="20" name="cl-id"	value="0" />
-						<input type="hidden" name="elemento" value="<%=elemento%>"/>
-		
-						<button id="btn-Alta<%=elemento%>" href="#" onclick="ElementFactory.<%=elemento%>Action()"
-						 title="<%=actionName%>"><%=actionName%></button>
-<!-- 					</form> -->
-					</div>
-
+			<div id="docContent" class="contentOnly" >
+						<!--cuerpo -->
+						
+						<div id="titulo-pag"><%=titulo_mainContent%></div>
+	
+						<!-- formulario de Remito -->
+	
+						<div id="formFactoryElem">
+							<a><%=formName %></a>
+	<!-- 					<form action=""> -->
+	
+							<ul id="formElemFactory">
+	<%
+		Iterator<InputWeb> iLInputs = lInputs.iterator(); 
+		while( iLInputs.hasNext() ) {
+			InputWeb input = (InputWeb) iLInputs.next();
+	%>
+								<li class="formElemFactory">
+									<ul class="<%=input.getClassName()%>">
+										<li><span><%=input.getTitulo() %></span></li>
+										<li><input type="<%=input.getType() %>" size="<%=input.getSize()%>"
+										 name="<%=input.getName()%>" value="<%=input.getValue()%>" /></li>
+									</ul>	
+								</li>
+	<% 	} %>
+	
+							</ul>
+							<input type="hidden" size="20" name="cl-id"	value="0" />
+							<input type="hidden" name="elemento" value="<%=elemento%>"/>
+			
+							<h3><a id="btn-Alta<%=elemento%>" class="boton" onclick="ElementFactory.<%=elemento%>Action()"
+							 title="<%=actionName%>"><%=actionName%></a></h3>
+	<!-- 					</form> -->
+						</div>
 			</div>
 				<jsp:include page="tools/temp-pie.jsp"></jsp:include>
 		</div>

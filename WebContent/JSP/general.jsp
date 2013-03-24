@@ -38,7 +38,7 @@
 	<div id="outer-center"  class="pane">
 
 		<div id="mainContent">
-			<div class="content" id="docContent">
+			<div id="docContent">
 				<!-- panel contenido principal(central) -->
 				<div id="ui-layout-content">
 					<!--cuerpo -->
@@ -89,7 +89,7 @@
 								</ul>
 							<% if (actionBool){ %>
 							<div id="frBtnAction" style="display: none;">
-								<button id="btn-<%=actionName%>" onclick="<%=claseJS%>.action()"><%=actionName%></button>
+								<a id="btn-<%=actionName%>" class="boton" onclick="<%=claseJS%>.action()"><%=actionName%></a>
 							</div>	
 							<%} %>
 							</div>

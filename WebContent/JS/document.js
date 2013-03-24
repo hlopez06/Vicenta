@@ -11,7 +11,7 @@ List = {
 		
 		loadPage : function(actualPage){
 			if (List.lista.length > 0){
-				var lineMax = document.getElementById("lineMax").getAttribute("value");
+				var lineMax = getID("lineMax").getAttribute("value");
 	
 				var totalProdStock = List.meta.totalProdStock;
 				List.meta.actualPage = actualPage;
@@ -47,7 +47,7 @@ List = {
 				
 				divList += 	'</table>' + '<dir id="hoja"><div id="hojaDisplay"></div></div>';
 				
-				document.getElementById("bodyList").innerHTML = divList;
+				getID("bodyList").innerHTML = divList;
 				
 				var botonBack = "", botonNext = "";
 				if (actualPage != 1)
@@ -59,9 +59,9 @@ List = {
 				name = 'Hoja ';
 				desdeHasta = '<a>' + actualPage + '</a>/<a>'+ lastPage +'</a>';
 				
-				document.getElementById("hojaDisplay").innerHTML = name + botonBack + desdeHasta + botonNext ;
+				getID("hojaDisplay").innerHTML = name + botonBack + desdeHasta + botonNext ;
 			}else{
-				document.getElementById("bodyList").innerHTML = '<div id="sinStock">No hay productos en stock.</div>';
+				getID("bodyList").innerHTML = '<div id="sinStock">No hay productos en stock.</div>';
 			}
 		},
 
@@ -362,6 +362,7 @@ Product = {
 
 					$("#listaProductos").empty();
 					$("#listaProductos").append(div);
+					getID("pie").style["display"] = "none";
 					
 				}else{
 					alert(jsResp.msj);
@@ -379,6 +380,7 @@ Product = {
 			Menu.resize();
 		},
 		clearProductos : function (){
+			getID("pie").style["display"] = "block";
 			$("#listaProductos").empty();
 			$("#totalFactura").empty();
 			$("#totalRemito").empty();
@@ -609,24 +611,35 @@ Menu = {
 		
 		adapatarLargo : function (){
 			var windowLargo = window.innerHeight;
-			var menuLargo = document.getElementById("ui-layout-north").offsetHeight;
-			var docContent = document.getElementById("docContent").offsetHeight;
-			var menuPie = document.getElementById("pie").offsetHeight;
+			var menuLargo = getID("ui-layout-north").offsetHeight;
+			var docContent = getID("docContent").offsetHeight;
+			var menuPie = 0;
+			if(getID("pie"))
+				menuPie = getID("pie").offsetHeight;
+			
 			var outerCenter = windowLargo;
 			if (docContent > (windowLargo - menuLargo)){
 				outerCenter = docContent + menuPie + 20; //20px por margenes
 			}else {
 				outerCenter = windowLargo - menuLargo - 1;
 			}
-				
-			document.getElementById("panel-izquierdo").style.height =  (outerCenter) + "px";
-			document.getElementById("mainContent").style.height =  (outerCenter) + "px";
+			if(getID("panel-izquierdo"))	
+				getID("panel-izquierdo").style.height =  (outerCenter) + "px";
+			
+			getID("mainContent").style.height =  (outerCenter) + "px";
 		},
 		adapatarAncho : function (){
 			var windowAncho = window.innerWidth;
-			var menuAncho = document.getElementById("ui-layout-north").offsetHeight;
-			document.getElementById("outer-center").style.width =  (windowAncho - menuAncho - 1) + "px";
+			var menuAncho = 0;
+			if(getID("panel-izquierdo")){
+				menuAncho = getID("panel-izquierdo").offsetWidth;
+				getID("mainContent").style.left = menuAncho + "px";
+			}	
 			
+			getID("outer-center").style.width =  (windowAncho - menuAncho - 1) + "px";
+			
+			if (getID("pie"))
+				getID("pie").style.width =  (windowAncho - menuAncho - 5 - 1) + "px";
 		},
 		
 		keyEnter : function(e, elemento, funcion) {
@@ -657,4 +670,10 @@ Menu = {
 			ob.getElementsByTagName("a").item(0).className = "abreDesplegable";
 			ob.onclick = function (event) {Menu.desplegableAbre(event,this);};
 		}
+};
+function getID(idName) {
+	if (document.getElementById(idName))
+		return document.getElementById(idName);
+	
+	return null;
 };

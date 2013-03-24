@@ -6,13 +6,13 @@ public class Producto {
 	private int codigo;
 	private String nombre;
 	private String detalle;
-	private int categoria;
+	private String categoria;
 	private int precio;
 	private int cantidad;
 
 	public Producto() {}
 
-	public Producto(String strNombre, String strDetalle, int intCategoria, int intPrecio) {
+	public Producto(String strNombre, String strDetalle, String intCategoria, int intPrecio) {
 		nombre = strNombre;
 		detalle = strDetalle;
 		categoria = intCategoria;
@@ -66,11 +66,11 @@ public class Producto {
 		this.detalle = detalle;
 	}
 
-	public int getCategoria() {
+	public String getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(int categoria) {
+	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 

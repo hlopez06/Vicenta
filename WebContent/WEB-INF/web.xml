@@ -93,7 +93,7 @@
     <description>Crear un elemento producto</description>
     <display-name>NewProduct</display-name>
     <servlet-name>NewProduct</servlet-name>
-    <servlet-class>com.divingWeb.servlets.NewElement</servlet-class>
+    <servlet-class>com.divingWeb.servlets.ajax.NewElement</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>NewProduct</servlet-name>

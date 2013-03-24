@@ -2,6 +2,7 @@ package com.divingWeb.conexionDAO;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 
@@ -39,7 +40,7 @@ public class DepositoDAO extends ConexionDAO {
 		
 		int updateEntities = 0;
 		
-		List<Producto> lProductos = remito.getlProductos();
+		Set<Producto> lProductos = remito.getlProductos();
 		
 		if (!lProductos.isEmpty() && !(remito.getProveedor() == null && remito.getCliente() == null ) ){
 			String accion = remito.signoMovimiento();

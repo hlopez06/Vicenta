@@ -1,14 +1,13 @@
 package com.divingWeb.conexionDAO;
 
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 
 import com.divingWeb.documents.Factura;
 import com.divingWeb.documents.Remito;
 import com.divingWeb.elememts.Producto;
-import com.divingWeb.elememts.StockProducto;
 
 public class TransactionDAO extends ConexionDAO {
 
@@ -20,7 +19,7 @@ public static int remitoAction(Remito remito){
 		
 		int updateEntities = 0;
 		
-		List<Producto> lProductos = remito.getlProductos();
+		Set<Producto> lProductos = remito.getlProductos();
 		
 		if (!lProductos.isEmpty() && !(remito.getProveedor() == null && remito.getCliente() == null ) ){
 			String accion = remito.signoMovimiento();
@@ -58,7 +57,7 @@ public static int remitoAction(Remito remito){
 
 	public static void actionFactura(Factura factura){
 	
-		List<Producto> lProductos = factura.getlProductos();
+		Set<Producto> lProductos = factura.getlProductos();
 		String qry = "";
 		
 		if (!lProductos.isEmpty() && factura.getCliente() != null ){
@@ -78,6 +77,8 @@ public static int remitoAction(Remito remito){
 	            		.executeUpdate();
 		            		            	
 	            }
+	            sesion.save(factura);
+	            
 	            tx.commit();
 		
 	        } catch (HibernateException he) { 
@@ -120,6 +121,5 @@ public static int remitoAction(Remito remito){
 		
 		return updateEntities;
 	}
-	
 
 }

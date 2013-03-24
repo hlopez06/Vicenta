@@ -5,16 +5,23 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.divingWeb.facturador.Factura"  >
+    <class name="com.divingWeb.documents.Factura"  >
 
-        <id name="nroFactura">
-           <column name="nroFactura"/>  
+        <id name="id" column="id_Factura">  
             <generator class="native" />
         </id>
         
-        <property name="tipo" />
+        <property name="claseDocumento" /> 
+        <property name="tipoDocumento" />
+        <property name="nroDocumento" />  
         <property name="totalBruto" />
-        <property name="totalMasIva" />     
-
+        <property name="totalMasIva" />
+        <property name="cantTotalProductos" /> 
+        <property name="cantElemProductos" />
+        <property name="dia" />
+        <set name="lProductos" table="productosFacturados">
+			<key column="id_Factura"/>
+			<many-to-many column="idProducto" class="com.divingWeb.elememts.Producto"/>
+		</set>
     </class>
 </hibernate-mapping>

@@ -99,15 +99,17 @@ td {
     font-weight: bold;
 }
 
-a.boton:link, a.boton:visited {
+a.boton:link, a.boton:visited, a.boton {
     background: url("../images/v3.bkOrangeStandard.gif") repeat-x scroll 0 0 #FF9100;
     border: 1px solid #FF9100;
+    padding: 4px;
 }
 
 a.boton:hover, a.boton:active, a.boton:focus {
     background: url("../images/v3.bkOrangeActiveHover.gif") repeat-x scroll left bottom #FF8000;
     border: 1px solid #FF5900;
     text-decoration: none;
+    padding: 2px;
 }
 
 div.botonera input, div.botonera a {
@@ -257,6 +259,11 @@ div.pane-east {
 div#mainContent div#docContent {
     padding: 6px;
 }
+
+.contentOnly {
+	margin: 10px 25px;
+}
+
 div.outer-center div.ui-layout-north {
     height: auto !important;
 }
@@ -266,10 +273,10 @@ div#pie {
     clear: both;
     float: right;
     margin: 1em 0 0;
-    padding: 0.5em 1em 0;
+    padding: 0.5em 0 0;
     bottom: 0;
     position: absolute;
-    width: -moz-available;
+    width: 300px;
 }
 /* div#pie { */
 /*     border-top: 3px double #CCCCCC; */
@@ -341,7 +348,7 @@ div#titulo-pag {
 div#mainContent {
 	overflow: visible;
 	position: absolute;
-	left: 240px;
+/* 	left: 240px; */
 	display: block;
 	width: auto;
 	visibility: visible;
@@ -374,7 +381,6 @@ div#panel-derecho {
 /* hernan */
 
 #btn-Ejecutar {
-	background: none repeat scroll 0 0 orange;
     float: right;
     font-size: x-large;
 }
@@ -391,9 +397,21 @@ div#panel-derecho {
 }
 
 #formFactoryElem{
-	width: 550px;
+/* 	width: 550px; */
 	border-top: medium groove whitesmoke;
 	padding: 1em;
+}
+
+ul#formElemFactory{
+	margin: 1em;
+	position: relative;
+	overflow: auto;
+}
+
+li.formElemFactory{
+	float: left;
+	margin-bottom: 20px;
+	margin-left: 20px;
 }
 
 #formElem{
@@ -402,9 +420,7 @@ div#panel-derecho {
 }
 
 ul.formElem li {
-/* 	float: left; */
     position: relative;
-/*     width: auto; */
 }
 
 .formDocument {
@@ -420,6 +436,7 @@ tr.formProducto img {
 
 .formProducto td {
 	border-bottom: 1px solid #CFCFCF;
+	padding: 2px;
 }
 
 .formTotal ul {
@@ -464,9 +481,6 @@ ul.formTotal li {
 /* 	margin: 0 0 0.5em 2em; */
 }
 
-#frNewProduct {
-	
-}
 /* template lista (Stock) */
 #bodyList {
 /* 	border-color: powderblue; */
@@ -474,10 +488,17 @@ ul.formTotal li {
 /*     border-style: solid !important; */
 /*     border-width: 1px !important; */
     border: 1px solid #CCCCCC;
-    padding: 20px;
+    padding: 10px;
+	overflow: auto;
 }
 
 #bodyList input {
 	border: medium none;
 	 width: 40px;
-} 
+}
+
+#hoja {
+	margin-top: 5px;
+	float: right;
+}
+
