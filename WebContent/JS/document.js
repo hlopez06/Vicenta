@@ -1,30 +1,49 @@
-List = {
-		meta : {
+function listPage(pts){
+		var meta = {
 			totalProdStock : null,
 			actualPage : null,
 			lastPage : null,
 			backPage : null,
 			nextPage : null
-		},
+		};
 		
-		lista : null,
+		this.pts = {
+			name : "List",
+ 			lineMax : "lineMax",
+			divTitulo : '<table>'+'<tr>'+'<th>Codigo </th>'+'<th>Precio</th>'+'<th>Cantidad</th>'+'</tr>',
+			divContent : function (element, index ) {
+				return '<tr>' + 
+				'<td class="prStock">' + '<input value="' + element.codProducto + '" /></td>' +
+				'<td class="prStock">' + '<input value="' + element.precio + '" /></td>' +
+				'<td class="prStock">' + '<input value="' + element.cantidad + '" /></td>' +
+			'</tr>';
+			},
+			bodyList : "bodyList",
+		};
 		
-		loadPage : function(actualPage){
-			if (List.lista.length > 0){
-				var lineMax = getID("lineMax").getAttribute("value");
+		if (pts)
+			this.pts = pts;
+		
+		this.lista = null;
+		
+		this.newList = function (unaLista) {
+			meta.totalProdStock = unaLista.length;
+			this.lista = unaLista;
+		};
+		
+		this.loadPage = function (actualPage){
+			if (meta.totalProdStock > 0){
+				var lineMax = getID(this.pts.lineMax).getAttribute("value");
 	
-				var totalProdStock = List.meta.totalProdStock;
-				List.meta.actualPage = actualPage;
+				var totalProdStock = meta.totalProdStock;
+				meta.actualPage = actualPage;
 				
-				List.meta.lastPage = parseInt(totalProdStock / lineMax);
+				meta.lastPage = parseInt(totalProdStock / lineMax);
 				if ((totalProdStock % lineMax) > 0 )
-					++List.meta.lastPage;
-				var lastPage = List.meta.lastPage;
+					++meta.lastPage;
+				var lastPage = meta.lastPage;
 				
-				var divList = '<table>'+
-								'<tr>'+
-									'<th>Codigo </th>'+'<th>Precio</th>'+'<th>Cantidad</th>'+
-								'</tr>';
+				var divList = this.pts.divTitulo;
 						
 				var max = lineMax * actualPage;
 				var i = max - lineMax;
@@ -34,35 +53,57 @@ List = {
 					max = totalProdStock;
 				
 				while(i < max){
-					element = List.lista[i];
+					element = this.lista[i];
 				
-					divList += 	'<tr>' + 
-						'<td class="prStock">' + '<input value="' + element.codProducto + '" /></td>' +
-						'<td class="prStock">' + '<input value="' + element.precio + '" /></td>' +
-						'<td class="prStock">' + '<input value="' + element.cantidad + '" /></td>' +
-					'</tr>';
+					divList += 	this.pts.divContent(element,i);
 					
 					++i;
 				};
 				
 				divList += 	'</table>' + '<dir id="hoja"><div id="hojaDisplay"></div></div>';
 				
-				getID("bodyList").innerHTML = divList;
+				getID(this.pts.bodyList).innerHTML = divList;
 				
-				var botonBack = "", botonNext = "";
-				if (actualPage != 1)
-					botonBack = '<a onclick="List.loadPage(' + (actualPage - 1) + ')">'+
-						'<img src="../images/go-lt-off.gif" alt="Pagina anterior"/></a>';
-				if (actualPage != lastPage)
-					botonNext = '<a onclick="List.loadPage(' + (actualPage + 1) + ')">'+
-					'<img src="../images/go-rt-off.gif" alt="Pagina anterior"/></a>';
-				name = 'Hoja ';
-				desdeHasta = '<a>' + actualPage + '</a>/<a>'+ lastPage +'</a>';
-				
-				getID("hojaDisplay").innerHTML = name + botonBack + desdeHasta + botonNext ;
+				if (actualPage < lastPage){
+					var botonBack = "", botonNext = "";
+					if (actualPage != 1)
+						botonBack = '<a onclick="'+this.pts.name+'.loadPage(' + (actualPage - 1) + ')">'+
+							'<img src="../images/go-lt-off.gif" alt="Pagina anterior"/></a>';
+					if (actualPage != lastPage)
+						botonNext = '<a onclick="'+this.pts.name+'.loadPage(' + (actualPage + 1) + ')">'+
+						'<img src="../images/go-rt-off.gif" alt="Pagina anterior"/></a>';
+					
+					name = 'Hoja ';
+					desdeHasta = '<a>' + actualPage + '</a>/<a>'+ lastPage +'</a>';
+					
+					getID("hojaDisplay").innerHTML = name + botonBack + desdeHasta + botonNext ;
+				};
 			}else{
-				getID("bodyList").innerHTML = '<div id="sinStock">No hay productos en stock.</div>';
-			}
+				getID(this.pts.bodyList).innerHTML = '<div id="sinStock">No hay productos en stock.</div>';
+			};
+		};
+};
+
+List = {
+		init : function(){
+			Menu.init();
+			List.callStock();
+			
+			var pts = {
+					name : "List",
+		 			lineMax : "lineMax",
+					divTitulo : '<table>'+'<tr>'+'<th>Codigo </th>'+'<th>Precio</th>'+'<th>Cantidad</th>'+'</tr>',
+					divContent : function (element, index ) {
+						return '<tr>' + 
+						'<td class="prStock">' + '<input value="' + element.codProducto + '" /></td>' +
+						'<td class="prStock">' + '<input value="' + element.precio + '" /></td>' +
+						'<td class="prStock">' + '<input value="' + element.cantidad + '" /></td>' +
+					'</tr>';
+					},
+					bodyList : "bodyList"
+				};
+				LL = new listPage(pts);
+				
 		},
 
 		callStock : function(){
@@ -77,10 +118,8 @@ List = {
 					success: function(jsResp){
 						if (jsResp.estado == "ok"){
 
-							List.lista = jsResp.list;
-							List.meta.totalProdStock = List.lista.length;
-			
-							List.loadPage(1);
+							LL.newList(jsResp.list);
+							LL.loadPage(1);
 							
 						}else{
 							alert(jsResp.msj);
@@ -96,6 +135,7 @@ List = {
 };
 
 Factura = {
+			
 		action : function(){
 			
 			if (document.getElementsByName("cl-id").item(0).value != ""){
@@ -269,19 +309,156 @@ ElementFactory = {
 		}
 };
 
-Product = {		
-		addProduct : function(){
-			var codProducto = $("#inputCodProducto").val();
-								$("#inputCodProducto").val("");
-			var cantidad = $("#cantidad").val();
-							$("#cantidad").val("1");
+Product = {
+		init : function(){
+			Menu.init();
 			
-			if(codProducto == "" || cantidad == "" || codProducto <= 0 || cantidad <= 0){
-				return;
-			}else {
-				Product.ajaxProducto("codProducto="+codProducto+"&cantidad="+cantidad);
-			}
+			var pts = {
+				name : "LP",
+				lineMax : "lineMax",
+				divTitulo : "<table>",
+				bodyList : "listProductsSearched",
+				divContent : function (element, index){
+					return 	'<tr class="listProductsSearched">' + 
+								'<td><a name=' + element.codigo + ' onclick="Product.addProduct('+ index +')" href="#">'
+								+ element.codigo + '. ' + element.nombre + 
+								'</a></td>' +
+							'</tr>';
+				}
+			};
+			LP = new listPage(pts);
 		},
+		
+		terminoBuscar : "Buscar productos...",
+		
+		listaDeProductos : null,
+		
+		obtenerProducto : function(numeroDeIndex){
+			var producto = Product.listaDeProductos[numeroDeIndex];
+			if(producto != undefined)
+				return Product.listaDeProductos[numeroDeIndex];
+		},
+			
+		searchProducts : function(){
+			var termino = $("#searchProdTermino").val();
+			if (termino == Product.terminoBuscar)
+				termino = "";
+			
+			var nombre = $("#searchProdNombre").val();
+			var detalle = $("#searchProdDetalle").val();
+			var categoria = $("#searchProdCategoria").val();
+
+			var data = "termino=" + termino + "&nombre=" + nombre + "&detalle=" + detalle +
+						"&categoria=" + categoria  + "&codigo=&deposito=";
+			
+			$.ajax({
+				url: "products/searchProducts",
+				data: data,
+				type: "GET",
+				typedata: "json",
+				async: false,
+				beforeSend : function () {
+					$("#lupaSearchProduct").hide();	
+					$("#searchingProducts").show();
+					},
+				success: function(jsResp){
+					if (jsResp.estado == "ok"){
+						
+						
+						
+						Product.listaDeProductos = jsResp.objList;
+						var div;
+						
+						if (jsResp.objList.length > 0)
+						{
+							if(termino == "")
+								termino = "<strong>TODO</strong>";
+								
+							div = '<ul class="lista" style="margin: 3px 10px;">' +
+									'<li>Resultado de la busqueda </li> <table>';
+							
+							LP.newList(jsResp.objList);
+							LP.pts.divTitulo = div;
+							LP.loadPage(1);
+							
+							
+						}else{
+							div = '<a style="margin: 2px 22px;" >No hay resultados para <i>"' + termino + '"</i><a>';
+							$("#listProductsSearched").empty;
+							$("#listProductsSearched").add(div);
+						}
+						$("#listProductsSearched").show();
+	
+					} else {
+						alert("Error en la respuesta. " + jsResp.msj);
+					}					
+				},
+				complete : function () {
+					$("#lupaSearchProduct").show();
+					$("#searchingProducts").hide();
+					},
+				error: function(){
+					$("#lupaSearchProduct").show();
+					$("#searchingProducts").hide();
+					alert("Error al iniciar buscar productos. La tranferencia salio MAL.");
+				}	
+			}); //Fin de ajax
+		},
+		
+		NO_SE_USA_agregarProduct : function(numeroDeIndex){
+			var cliente = Client.obtenerCliente(numeroDeIndex);
+			
+			document.getElementsByName("cl-id").item(0).value = cliente.id;
+			document.getElementsByName("cl-nombre").item(0).value = cliente.nombre;
+			document.getElementsByName("cl-apellido").item(0).value = cliente.apellido;
+			document.getElementsByName("cl-tipo").item(0).value = cliente.tipo;
+			document.getElementsByName("cl-razonSocial").item(0).value = cliente.razonSocial;
+			document.getElementsByName("cl-credito").item(0).value = cliente.credito;
+			
+			$.ajax({
+				url: "documento/addClient",
+				data: "idCliente=" + cliente.id,
+				type: "GET",
+				typedata: "json",
+				async: false,
+				beforeSend : function () {	},
+				success: function(jsResp){
+		
+				},
+				complete : function () {	},
+				error: function(){
+					alert("Error al iniciar cargar cliente. La tranferencia salio MAL.");
+				}
+			});
+			
+			$("#listClientsSearched").hide();
+			$("#listClientsSearched").empty();
+			$("#searchClients").val(Client.terminoBuscar);
+			
+		},
+		
+		addProduct : function(numeroDeIndex){
+			var codProducto;
+			var cantidad;
+			
+			if (numeroDeIndex){
+				var producto = Product.obtenerProducto(numeroDeIndex);
+				codProducto = producto.codigo;
+				cantidad = 1;
+			}else{
+				codProducto = $("#inputCodProducto").val();
+									$("#inputCodProducto").val("");
+				cantidad = $("#cantidad").val();
+								$("#cantidad").val("1");
+				
+			}
+				if(codProducto == "" || cantidad == "" || codProducto <= 0 || cantidad <= 0){
+					return;
+				}else {
+					Product.ajaxProducto("codProducto="+codProducto+"&cantidad="+cantidad);
+				}
+		},
+		
 		extractProduct : function(codProducto, cantidad){
 			if (cantidad != "" || cantidad > 0)
 				cantidad = (cantidad * -1);
@@ -392,14 +569,6 @@ Client = {
 		terminoBuscar : "Buscar cliente...",
 		
 		listaDeClientes : null,
-		
-		abrirFormCrearCliente : function (){
-
-		},
-		
-		crearCliente : function(){
-			
-		},
 		
 		obtenerCliente : function(numeroDeIndex){
 			var cliente = Client.listaDeClientes.objListaClientes[numeroDeIndex];
@@ -628,6 +797,18 @@ Menu = {
 			
 			getID("mainContent").style.height =  (outerCenter) + "px";
 		},
+		
+		display : function (nameElem){
+			var element = getID(nameElem);
+			if(element){
+				if (element.style["display"] == "none"){
+					element.style["display"] = "block";
+				} else {
+					element.style["display"] = "none";
+				}	
+			}
+		},
+		
 		adapatarAncho : function (){
 			var windowAncho = window.innerWidth;
 			var menuAncho = 0;

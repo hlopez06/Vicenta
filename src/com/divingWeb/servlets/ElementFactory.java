@@ -2,7 +2,6 @@ package com.divingWeb.servlets;
 
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,6 +50,11 @@ public class ElementFactory extends HttpServlet {
 				request.setAttribute("claseJS", "producto");
 				request.setAttribute("actionName", "Alta producto");
 				request.setAttribute("formName", "Formulario para ingreso de productos");
+				request.setAttribute("pane_left", true);
+				request.setAttribute("pane_rigth", false);
+				request.setAttribute("pane_left_client", false);
+				request.setAttribute("pane_left_provider", false);
+				request.setAttribute("pane_left_product", true);
 				
 				lInputs.add(new InputWeb("Codigo unico","codigo","pr"));
 				lInputs.add(new InputWeb("Nombre del producto","nombre","pr"));
@@ -65,6 +69,11 @@ public class ElementFactory extends HttpServlet {
 				request.setAttribute("claseJS", "cliente");
 				request.setAttribute("actionName", "Alta cliente");
 				request.setAttribute("formName", "Formulario para ingreso de clientes");
+				request.setAttribute("pane_left", true);
+				request.setAttribute("pane_rigth", false);
+				request.setAttribute("pane_left_client", true);
+				request.setAttribute("pane_left_provider", false);
+				request.setAttribute("pane_left_product", false);
 				
 				lInputs.add(new InputWeb("Nombre del cliente","nombre","cl"));
 				lInputs.add(new InputWeb("Apellido","apellido","cl"));
@@ -80,6 +89,11 @@ public class ElementFactory extends HttpServlet {
 				request.setAttribute("claseJS", "proveedor");
 				request.setAttribute("actionName", "Alta proveedor");
 				request.setAttribute("formName", "Formulario para ingreso de proveedores");
+				request.setAttribute("pane_left", true);
+				request.setAttribute("pane_rigth", false);
+				request.setAttribute("pane_left_client", false);
+				request.setAttribute("pane_left_provider", true);
+				request.setAttribute("pane_left_product", false);
 				
 				lInputs.add(new InputWeb("Nombre del proveedor","nombre","pv"));
 				lInputs.add(new InputWeb("Razon Social","razonSocial","pv"));
@@ -94,6 +108,11 @@ public class ElementFactory extends HttpServlet {
 				request.setAttribute("claseJS", "usuario");
 				request.setAttribute("actionName", "Alta usuario");
 				request.setAttribute("formName", "Formulario para ingreso de usuarios");
+				request.setAttribute("pane_left", false);
+				request.setAttribute("pane_rigth", false);
+				request.setAttribute("pane_left_client", false);
+				request.setAttribute("pane_left_provider", false);
+				request.setAttribute("pane_left_product", false);
 				
 				lInputs.add(new InputWeb("Nombre del usuario","nombre","us"));
 				lInputs.add(new InputWeb("Razon Social","razonSocial","us"));

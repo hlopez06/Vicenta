@@ -45,6 +45,7 @@ public class ModeRemito extends HttpServlet {
 			request.setAttribute("form_provider", false);
 			request.setAttribute("pane_left_client", true);
 			request.setAttribute("pane_left_provider", false);
+			request.setAttribute("pane_left_product", true);
 			request.setAttribute("actionBool", true);
 			request.setAttribute("actionName", "Ejecutar");
 		} else {
@@ -59,6 +60,7 @@ public class ModeRemito extends HttpServlet {
 			request.setAttribute("form_provider", true);
 			request.setAttribute("pane_left_client", false);
 			request.setAttribute("pane_left_provider", true);
+			request.setAttribute("pane_left_product", true);
 			request.setAttribute("actionBool", true);
 			request.setAttribute("actionName", "Ejecutar");
 		}

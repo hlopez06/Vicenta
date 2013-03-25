@@ -10,6 +10,10 @@
 	String claseJS = (String)request.getAttribute("claseJS");
 	String actionName = (String)request.getAttribute("actionName");
 	String formName = (String)request.getAttribute("formName");
+	Boolean pane_rigth = (Boolean) request.getAttribute("pane_rigth");
+	Boolean pane_left = (Boolean) request.getAttribute("pane_left");
+	Boolean form_client = (Boolean) request.getAttribute("form_client");
+	Boolean form_provider = (Boolean) request.getAttribute("form_provider");
 	List<InputWeb> lInputs = (List<InputWeb>)request.getAttribute("inputs");
 %>
     
@@ -71,6 +75,11 @@
 			</div>
 				<jsp:include page="tools/temp-pie.jsp"></jsp:include>
 		</div>
+		<!-- panel contenido principal(izquierdo) -->
+		
+		<% if (pane_left){ %><jsp:include page="templates/pane_left.jsp"></jsp:include><% }%>
+
+		<% if (pane_rigth){ %><jsp:include page="templates/pane_rigth.jsp"></jsp:include><% }%>
 
 </div>
 

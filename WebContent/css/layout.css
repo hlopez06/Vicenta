@@ -502,3 +502,7 @@ ul.formTotal li {
 	float: right;
 }
 
+tr.listProductsSearched td {
+	padding: 2px;
+}
+

@@ -37,7 +37,7 @@ public class ModeStock extends HttpServlet {
 		request.setAttribute("titulo_html", "Vicenta - Stock");
 		request.setAttribute("titulo_mainContent", "Stock de productos");
 		request.setAttribute("lineMax", lineMax);
-		request.setAttribute("pane_left", true);
+		request.setAttribute("pane_left", false);
 		request.setAttribute("pane_rigth", false);
 		
 		List<StockProducto> stock = DepositoDAO.SelectStock(lineMax);

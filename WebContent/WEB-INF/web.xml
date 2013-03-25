@@ -169,4 +169,14 @@
     <servlet-name>ModeStock</servlet-name>
     <url-pattern>/mode/stock</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Busca productos</description>
+    <display-name>SearchProducts</display-name>
+    <servlet-name>SearchProducts</servlet-name>
+    <servlet-class>com.divingWeb.servlets.ajax.SearchProducts</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchProducts</servlet-name>
+    <url-pattern>/mode/products/searchProducts</url-pattern>
+  </servlet-mapping>
 </web-app>

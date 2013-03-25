@@ -28,7 +28,7 @@
 
 </head>
 
-<body onload="Menu.init()">
+<body onload="Product.init();">
 
 	<jsp:include page="tools/temp-head.jsp"></jsp:include>
 

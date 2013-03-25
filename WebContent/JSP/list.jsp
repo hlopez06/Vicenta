@@ -34,7 +34,7 @@
 
 </head>
 
-<body onload="List.callStock();Menu.init();">
+<body onload="List.init();">
 
 	<jsp:include page="tools/temp-head.jsp"></jsp:include>
 
