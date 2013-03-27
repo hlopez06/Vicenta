@@ -9,6 +9,6 @@
 </head>
 <body>
 	<h1>No se pudo loguear</h1>
-	<jsp:include page="login.jsp"></jsp:include>
+	<jsp:include page="formLogin.jsp"></jsp:include>
 </body>
 </html>

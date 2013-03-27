@@ -47,18 +47,35 @@ public class SearchProducts extends HttpServlet {
 		String categoria = request.getParameter("categoria");
 		
 		String deposito = request.getParameter("deposito").trim();
-//		String fuente = request.getParameter("fuente").trim();
+		
+		String fuente = request.getParameter("fuente").trim();
 		
 		Gson gson = new Gson();
 		String jsonOutput = "";
+		
 		if (codigo == 0 ){
-			List<Producto> lProductos = ProductDAO.buscarProductos(termino, nombre, detalle, categoria);
 			
-			jsonOutput = gson.toJson(lProductos);
+			List<Producto> lProductos;
+			
+			if (fuente.equals("all")){
+				lProductos = ProductDAO.buscarProductos(termino, nombre, detalle, categoria);
+			} else {
+				lProductos = ProductDAO.buscarProductos(termino, nombre, detalle, categoria);
+			}
+			
+			if (lProductos == null){
+				jsonOutput = "[]";
+			} else {
+				jsonOutput = gson.toJson(lProductos);
+			}
 		} else {
 			Producto producto = ProductDAO.buscarProducto(codigo);
 			
-			jsonOutput = gson.toJson(producto);
+			if (producto == null){
+				jsonOutput = "[]";
+			} else {
+				jsonOutput = gson.toJson(producto);
+			}
 		}
 				
 		System.out.println(jsonOutput);

@@ -56,7 +56,10 @@
 <%-- 				<jsp:include page="tools/temp-pie.jsp"></jsp:include> --%>
 		</div>
 
-</div>
+	</div>
+	<div id="properties" style="display:none;">
+		<input id="SearchProductFuente" value="all"/>
+	</div>
 
 </body>
 </html>

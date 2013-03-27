@@ -46,12 +46,13 @@ public class NewElement extends HttpServlet {
 		
 			if (elemento.equals("producto")){
 	
+				long codigo = Long.parseLong( request.getParameter("codigo").trim() );
 				String nombre = request.getParameter("nombre").trim();
 				String detalle = request.getParameter("detalle").trim();
 				String categoria = request.getParameter("categoria").trim();
 				int precio = Integer.parseInt( request.getParameter("precio").trim() );
 	
-				Producto producto = new Producto(nombre, detalle, categoria, precio);
+				Producto producto = new Producto(codigo,nombre, detalle, categoria, precio);
 				
 				ProductDAO.nuevoProducto(producto);
 				

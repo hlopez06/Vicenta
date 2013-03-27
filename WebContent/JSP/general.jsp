@@ -12,6 +12,7 @@
 	Boolean form_provider = (Boolean) request.getAttribute("form_provider");
 	Boolean actionBool = (Boolean) request.getAttribute("actionBool");
 	String actionName = (String)request.getAttribute("actionName");
+
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -107,6 +108,11 @@
 		<% if (pane_left){ %><jsp:include page="templates/pane_left.jsp"></jsp:include><% }%>
 
 		<% if (pane_rigth){ %><jsp:include page="templates/pane_rigth.jsp"></jsp:include><% }%>
+	</div>
+	<div id="properties">
+	<input id="rm-tipoMovimiento" value="<% if (documento.equals("remito"))
+											out.print((String)request.getAttribute("tipoRemito")); %>"/>
+
 	</div>
 
 </body>

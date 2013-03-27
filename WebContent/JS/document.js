@@ -61,13 +61,13 @@ function listPage(pts){
 					++i;
 				};
 				
-				divList += 	'</table>' + '<div id="hoja"><div id="hojaDisplay"></div></div>';
+				divList += 	'</table>' + '<div id="pieListaProductos" ><div id="hojaDisplay"></div></div>';
 				
 				divList += this.pts.divPie;
 				
 				getID(this.pts.bodyList).innerHTML = divList;
 				
-				if (actualPage < lastPage){
+				if (lastPage > 1){
 					var botonBack = "", botonNext = "";
 					if (actualPage != 1)
 						botonBack = '<a onclick="'+this.pts.name+'.loadPage(' + (actualPage - 1) + ')">'+
@@ -90,7 +90,6 @@ function listPage(pts){
 List = {
 		init : function(){
 			Menu.init();
-			List.callStock();
 			
 			var pts = {
 					name : "List",
@@ -107,6 +106,7 @@ List = {
 				};
 				LL = new listPage(pts);
 				
+				List.callStock();
 		},
 
 		callStock : function(){
@@ -167,16 +167,26 @@ Factura = {
 
 Remito = {
 		action : function(){
-			var inTipo = Menu.radioSelect("rm-tipoMovimiento");
-			var tipo = "ingreso";
+
+			var tipo = getID("rm-tipoMovimiento");
 			
-			if (inTipo != null)
-				tipo = inTipo.value;
+			if (tipo == null){
+				alert("Error al setear tipo de remito.");
+				return; 
+			}
+				
+			var persona = null; 
+			if (document.getElementsByName("pr-id") && tipo == "ingreso"){
+				persona = document.getElementsByName("pr-id").item(0).value;
+			} else if (document.getElementsByName("cl-id") && tipo == "egreso"){
+				persona = document.getElementsByName("cl-id").item(0).value;
+			}
 			
-			if ( tipo == "ingreso" || tipo == "egreso" ){
+			if (persona != null && persona != ""){
+
 				$.ajax({
 					url: "document/remito/action",
-					data: "tipoMovimiento=" + tipo,
+					data: "tipoMovimiento=" + tipo + "&persona=" + persona,
 					type: "POST",
 					typedata: "json",
 					async: false,
@@ -191,8 +201,9 @@ Remito = {
 						alert("Error al iniciar facturacion. La tranferencia salio MAL.");
 					}
 				}); // Fin de ajax
+
 			} else {
-				alert("Error en el tipo de movimiento.");
+				alert("Debe ingresar un remitente.");
 			}
 		}
 };
@@ -201,13 +212,14 @@ ElementFactory = {
 		productoAction : function() {
 			var elemento = document.getElementsByName("elemento").item(0).value;
 			if(elemento == "producto"){
+				var codigo = document.getElementsByName("pr-codigo").item(0).value;
 				var nombre = document.getElementsByName("pr-nombre").item(0).value;
 				var detalle = document.getElementsByName("pr-detalle").item(0).value;
 				var categoria = document.getElementsByName("pr-categoria").item(0).value;
 				var precio = document.getElementsByName("pr-precio").item(0).value;
 				
 				var url = "newElement/newProduct";
-				var datos = "elemento=" + elemento + "&nombre=" + nombre + "&detalle=" + detalle +
+				var datos = "elemento=" + elemento + "&codigo=" + codigo + "&nombre=" + nombre + "&detalle=" + detalle +
 																		"&categoria=" + categoria + "&precio=" + precio;
 				
 				var respuesta = ElementFactory.ajaxNewElement(url,datos);
@@ -333,7 +345,7 @@ Product = {
 								'</a></td>' +
 							'</tr>';
 				},
-				divPie : "<div id='pieListaProductos'><a class='bt' onclick='Product.limpiarHojas()'>Limpiar</a></div>"
+				divPie : "<div id='bt-limpiar'><a class='bt' onclick='Product.limpiarHojas()'>Limpiar</a></div>"
 			
 			};
 			LP = new listPage(pts);
@@ -361,8 +373,15 @@ Product = {
 			var detalle = $("#searchProdDetalle").val();
 			var categoria = $("#searchProdCategoria").val();
 
+			var fuente;
+			if ($("#fuente").val()){
+				fuente = $("#SearchProductFuente").val();
+			} else {				
+				fuente = "";
+			}
+			
 			var data = "termino=" + termino + "&nombre=" + nombre + "&detalle=" + detalle +
-						"&categoria=" + categoria  + "&codigo=&deposito=";
+						"&categoria=" + categoria  + "&codigo=&deposito=&fuente=" + fuente;
 			
 			$.ajax({
 				url: "products/searchProducts",

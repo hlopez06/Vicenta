@@ -35,8 +35,8 @@ public class ModeRemito extends HttpServlet {
 		
 		if ( tipoMovimiento.contains("egreso") ){
 			request.setAttribute("documento", "remito");
-			request.setAttribute("tipoRemito", "egreso");
 			request.setAttribute("claseJS", "Remito");
+			request.setAttribute("tipoRemito", "egreso");
 			request.setAttribute("titulo_html", "Vicenta - Remito");
 			request.setAttribute("titulo_mainContent", "Remito de egreso");
 			request.setAttribute("pane_left", true);

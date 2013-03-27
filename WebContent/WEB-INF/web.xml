@@ -104,7 +104,7 @@
     <description>Crear un elemento cliente</description>
     <display-name>NewClient</display-name>
     <servlet-name>NewClient</servlet-name>
-    <servlet-class>com.divingWeb.servlets.NewElement</servlet-class>
+    <servlet-class>com.divingWeb.servlets.ajax.NewElement</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>NewClient</servlet-name>
@@ -114,7 +114,7 @@
     <description>Crear un elemento proveedor</description>
     <display-name>NewProvider</display-name>
     <servlet-name>NewProvider</servlet-name>
-    <servlet-class>com.divingWeb.servlets.NewElement</servlet-class>
+    <servlet-class>com.divingWeb.servlets.ajax.NewElement</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>NewProvider</servlet-name>

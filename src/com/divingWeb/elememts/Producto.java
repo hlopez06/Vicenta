@@ -3,7 +3,7 @@ package com.divingWeb.elememts;
 public class Producto {
 
 	private long id;
-	private int codigo;
+	private long codigo;
 	private String nombre;
 	private String detalle;
 	private String categoria;
@@ -12,11 +12,12 @@ public class Producto {
 
 	public Producto() {}
 
-	public Producto(String strNombre, String strDetalle, String intCategoria, int intPrecio) {
-		nombre = strNombre;
-		detalle = strDetalle;
-		categoria = intCategoria;
-		precio = intPrecio;
+	public Producto(long codigo ,String nombre, String detalle, String categoria, int precio) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.detalle = detalle;
+		this.categoria = categoria;
+		this.precio = precio;
 		
 	}
 	
@@ -42,11 +43,11 @@ public class Producto {
 		this.id = id;
 	}
 
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 	
-	public void setCodigo(int codigo) {
+	public void setCodigo(long codigo) {
 		this.codigo = codigo;
 	}
 	
