@@ -19,6 +19,7 @@ function listPage(pts){
 			'</tr>';
 			},
 			bodyList : "bodyList",
+			divPie : "",
 		};
 		
 		if (pts)
@@ -60,7 +61,9 @@ function listPage(pts){
 					++i;
 				};
 				
-				divList += 	'</table>' + '<dir id="hoja"><div id="hojaDisplay"></div></div>';
+				divList += 	'</table>' + '<div id="hoja"><div id="hojaDisplay"></div></div>';
+				
+				divList += this.pts.divPie;
 				
 				getID(this.pts.bodyList).innerHTML = divList;
 				
@@ -310,6 +313,11 @@ ElementFactory = {
 };
 
 Product = {
+
+		terminoBuscar : "Buscar productos...",
+		
+		listaDeProductos : null,
+		
 		init : function(){
 			Menu.init();
 			
@@ -320,18 +328,23 @@ Product = {
 				bodyList : "listProductsSearched",
 				divContent : function (element, index){
 					return 	'<tr class="listProductsSearched">' + 
-								'<td><a name=' + element.codigo + ' onclick="Product.addProduct('+ index +')" href="#">'
+								'<td><a name=' + element.codigo + ' onclick="Product.addProduct('+ element.codigo +')" href="#">'
 								+ element.codigo + '. ' + element.nombre + 
 								'</a></td>' +
 							'</tr>';
-				}
+				},
+				divPie : "<div id='pieListaProductos'><a class='bt' onclick='Product.limpiarHojas()'>Limpiar</a></div>"
+			
 			};
 			LP = new listPage(pts);
 		},
 		
-		terminoBuscar : "Buscar productos...",
-		
-		listaDeProductos : null,
+		limpiarHojas : function (){
+			getID("listProductsSearched").innerHTML = "";
+			getID("searchProdTermino").value = "";
+			getID("inputCodProducto").focus();
+			Menu.resize();
+		},
 		
 		obtenerProducto : function(numeroDeIndex){
 			var producto = Product.listaDeProductos[numeroDeIndex];
@@ -364,8 +377,6 @@ Product = {
 				success: function(jsResp){
 					if (jsResp.estado == "ok"){
 						
-						
-						
 						Product.listaDeProductos = jsResp.objList;
 						var div;
 						
@@ -380,7 +391,6 @@ Product = {
 							LP.newList(jsResp.objList);
 							LP.pts.divTitulo = div;
 							LP.loadPage(1);
-							
 							
 						}else{
 							div = '<a style="margin: 2px 22px;" >No hay resultados para <i>"' + termino + '"</i><a>';
@@ -398,52 +408,21 @@ Product = {
 					$("#searchingProducts").hide();
 					},
 				error: function(){
-					$("#lupaSearchProduct").show();
-					$("#searchingProducts").hide();
 					alert("Error al iniciar buscar productos. La tranferencia salio MAL.");
 				}	
 			}); //Fin de ajax
+			
+			$("#lupaSearchProduct").show();
+			$("#searchingProducts").hide();
+			Menu.resize();
 		},
 		
-		NO_SE_USA_agregarProduct : function(numeroDeIndex){
-			var cliente = Client.obtenerCliente(numeroDeIndex);
-			
-			document.getElementsByName("cl-id").item(0).value = cliente.id;
-			document.getElementsByName("cl-nombre").item(0).value = cliente.nombre;
-			document.getElementsByName("cl-apellido").item(0).value = cliente.apellido;
-			document.getElementsByName("cl-tipo").item(0).value = cliente.tipo;
-			document.getElementsByName("cl-razonSocial").item(0).value = cliente.razonSocial;
-			document.getElementsByName("cl-credito").item(0).value = cliente.credito;
-			
-			$.ajax({
-				url: "documento/addClient",
-				data: "idCliente=" + cliente.id,
-				type: "GET",
-				typedata: "json",
-				async: false,
-				beforeSend : function () {	},
-				success: function(jsResp){
-		
-				},
-				complete : function () {	},
-				error: function(){
-					alert("Error al iniciar cargar cliente. La tranferencia salio MAL.");
-				}
-			});
-			
-			$("#listClientsSearched").hide();
-			$("#listClientsSearched").empty();
-			$("#searchClients").val(Client.terminoBuscar);
-			
-		},
-		
-		addProduct : function(numeroDeIndex){
+		addProduct : function(codigo){
 			var codProducto;
 			var cantidad;
 			
-			if (numeroDeIndex){
-				var producto = Product.obtenerProducto(numeroDeIndex);
-				codProducto = producto.codigo;
+			if (codigo){
+				codProducto = codigo;
 				cantidad = 1;
 			}else{
 				codProducto = $("#inputCodProducto").val();

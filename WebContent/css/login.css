@@ -1,0 +1,79 @@
+@CHARSET "ISO-8859-1";
+
+body {
+    background: none repeat scroll 0 0 ghostwhite;
+    color: #282828;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 15pt;
+    line-height: 100%;
+    margin: 50px auto;
+    width: 500px;
+}
+*, html {
+    line-height: normal;
+    margin: 0;
+}
+
+h1 {
+	font-size: 25pt;
+	
+}
+
+ul {
+    padding: 0;
+    list-style: none outside none;
+}
+
+li {
+    margin: 0;
+    list-style: none outside none;
+    padding: 2px;
+}
+
+li a {
+    color: gainsboro;
+    font-size: 8pt;
+}
+
+input, select, textarea {
+    background: url("../images/v3.bkInput.png") repeat-x scroll left top transparent;
+    color: #515151;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 1em;
+}
+
+input[type="submit"] {
+    background: url("../images/v3.bkOrangeStandard.gif") repeat-x scroll 0 0 #FF9100;
+    border: 1px solid #FF9100;
+    margin-top: 3px;
+    padding: 1px;
+}
+
+input[type="submit"]:hover, input[type="submit"]:active, input[type="submit"]:focus {
+    background: url("../images/v3.bkOrangeActiveHover.gif") repeat-x scroll left bottom #FF8000;
+    border: 1px solid #FF5900;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#tituloLogin {
+    border-radius: 20px 20px 0 0;
+    color: steelblue;
+    text-align: center;
+}
+
+#loginContent {
+    background: none repeat scroll 0 0 steelblue;
+    border: 6px double white;
+    border-radius: 20px 20px 20px 20px;
+    color: whitesmoke;
+    margin: 30px auto;
+    padding: 35px 15px;
+    text-align: center;
+    width: 300px;
+}
+
+#msjError {
+	color: red;
+	font-size: small;
+}

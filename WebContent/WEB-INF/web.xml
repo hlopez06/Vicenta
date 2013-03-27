@@ -3,6 +3,7 @@
   <display-name>Vicenta</display-name>
   <welcome-file-list>
     <welcome-file>JSP/index.jsp</welcome-file>
+    <welcome-file>JSP/login.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>indexError.html</welcome-file>
   </welcome-file-list>
@@ -12,7 +13,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/mode/inicio</url-pattern>
+    <url-pattern>/mode/login</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>mode</servlet-name>

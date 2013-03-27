@@ -2,7 +2,6 @@ package com.divingWeb.conexionDAO;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.HibernateException;
 
@@ -12,8 +11,6 @@ import com.divingWeb.elememts.StockProducto;
 
 public class DepositoDAO extends ConexionDAO {
 	
-	private static String nombreDeposito = "stock";
-	
 	public static List<StockProducto> SelectStock(int lineMax ){
 		
 		List<StockProducto> stock = null;
@@ -22,7 +19,7 @@ public class DepositoDAO extends ConexionDAO {
         { 
 			iniciaOperacion();
             
-            stock = sesion.createCriteria(StockProducto.class).list();
+            stock = (List<StockProducto>) sesion.createCriteria(StockProducto.class).list();
         
             tx.commit();
 	
@@ -40,7 +37,7 @@ public class DepositoDAO extends ConexionDAO {
 		
 		int updateEntities = 0;
 		
-		Set<Producto> lProductos = remito.getlProductos();
+		List<Producto> lProductos = remito.getlProductos();
 		
 		if (!lProductos.isEmpty() && !(remito.getProveedor() == null && remito.getCliente() == null ) ){
 			String accion = remito.signoMovimiento();

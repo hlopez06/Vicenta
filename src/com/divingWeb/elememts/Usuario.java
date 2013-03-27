@@ -16,10 +16,11 @@ public class Usuario {
 	private long idDepositoDefault;
 	private Deposito objDepositoDefault;
 	private boolean administrador;
+	private int estado;
 	List<Cliente> lClFavoritos;
 	List<Cliente> lClHistorico;
 	
-	private Usuario(){}
+	public Usuario(){}
 	
 	public void newUsuario(String nombre, String apellido, String categoria, String sucursal,String supervisor){
 		
@@ -66,7 +67,15 @@ public class Usuario {
 
 		return nombreDeposito;
 	}
-	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -81,14 +90,6 @@ public class Usuario {
 
 	public void setPass(String pass) {
 		this.pass = pass;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
@@ -161,6 +162,14 @@ public class Usuario {
 
 	public void setAdministrador(boolean administrador) {
 		this.administrador = administrador;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 
 	public List<Cliente> getlClFavoritos() {

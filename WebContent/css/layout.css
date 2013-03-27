@@ -102,14 +102,29 @@ td {
 a.boton:link, a.boton:visited, a.boton {
     background: url("../images/v3.bkOrangeStandard.gif") repeat-x scroll 0 0 #FF9100;
     border: 1px solid #FF9100;
-    padding: 4px;
+    padding: 3px;
 }
 
 a.boton:hover, a.boton:active, a.boton:focus {
     background: url("../images/v3.bkOrangeActiveHover.gif") repeat-x scroll left bottom #FF8000;
     border: 1px solid #FF5900;
     text-decoration: none;
-    padding: 2px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+a.bt {
+    background: url("../images/v3.bkOrangeStandard.gif") repeat-x scroll 0 0 #FF9100;
+    border: 1px solid #FF9100;
+    padding: 1px;
+}
+
+a.bt:hover, a.bt:active, a.bt:focus {
+    background: url("../images/v3.bkOrangeActiveHover.gif") repeat-x scroll left bottom #FF8000;
+    border: 1px solid #FF5900;
+    text-decoration: none;
+    padding: 1px;
+    cursor: pointer;
 }
 
 div.botonera input, div.botonera a {
@@ -271,19 +286,13 @@ div.outer-center div.ui-layout-north {
 div#pie {
     border-top: 3px double #CCCCCC;
     clear: both;
-    float: right;
     margin: 1em 0 0;
     padding: 0.5em 0 0;
     bottom: 0;
     position: absolute;
     width: 300px;
 }
-/* div#pie { */
-/*     border-top: 3px double #CCCCCC; */
-/*     clear: both; */
-/*     margin: 1em 0 0; */
-/*     padding: 0.5em 1em 1.75em; */
-/* } */
+
 div#pie ul {
     margin: 0.5em 0 0;
 /*     width: 62%; */
@@ -316,24 +325,17 @@ h3.titulo-subpanel a, h3.titulo-subpanel span {
     padding: 0.5em 0em 0.4em;
     text-transform: uppercase;
 }
-h3.titulo-subpanel a:hover {
-    background: none repeat scroll 0 0 #FFFFFF;
-    text-decoration: none;
-}
+
 h3.titulo-subpanel a.opened {
     background: url("../images/bk.opened.png") no-repeat scroll 0.1em 0.4em #F1F1F1;
     padding: 0.4em 0 0.4em 1.3em;
 }
-h3.titulo-subpanel a.opened:hover {
-    background: url("../images/bk.opened.png") no-repeat scroll 0.1em 0.4em #FFFFFF;
-}
+
 h3.titulo-subpanel a.closed {
     background: url("../images/bk.closed.png") no-repeat scroll 0.1em 0.4em #F1F1F1;
     padding: 0.4em 0 0.4em 1.3em;
 }
-h3.titulo-subpanel a.closed:hover {
-    background: url("../images/bk.closed.png") no-repeat scroll 0.1em 0.4em #FFFFFF;
-}
+
 h3.titulo-subpanel span {
     color: #282828;
 }
@@ -362,6 +364,7 @@ div#panel-izquierdo {
 	width: 239px;
 	visibility: visible;
 	display: block;
+	overflow: auto;
 }
 
 div#panel-derecho {
@@ -376,6 +379,7 @@ div#panel-derecho {
 	width: 239px;
 	visibility: visible;
 	display: none;
+	overflow: auto;
 }
 
 /* hernan */
@@ -502,7 +506,16 @@ ul.formTotal li {
 	float: right;
 }
 
+div#listProductsSearched {
+	overflow: hidden;
+}
+
 tr.listProductsSearched td {
 	padding: 2px;
+}
+
+#pieListaProductos {
+	float: right;
+	padding-right: 10px;
 }
 

@@ -1,41 +1,51 @@
 package com.divingWeb.conexionDAO;
 
+import java.math.BigInteger;
+import java.sql.Types;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.divingWeb.elememts.Usuario;
+import com.mysql.jdbc.CallableStatement;
+import com.mysql.jdbc.Connection;
 
 public class UserDAO extends ConexionDAO{
 	
-	public static long getIdUsuario(String usuario, String pass){
+	public static Object[] getIdUsuario(String usuario, String pass){
 		
-		long id = 1;
+		BigInteger id;
+		
+		Object[] lResp;
+		
+		String qry = "SELECT idUsuario,estado FROM pws WHERE pws.usuario='" + usuario + "' AND pws.password='" + pass + "'";
 		
 		try 
         { 
-            iniciaOperacion(); 
+            iniciaOperacion();
 
-            Criteria criterio = sesion.createCriteria(Usuario.class);
-    		criterio.add(Restrictions.like("usuario",usuario));
-    		criterio.add(Restrictions.like("pass",pass));
-    		
-    		Usuario objUsuario = (Usuario) criterio.uniqueResult();
-    		id = objUsuario.getId();
+            lResp = (Object[]) sesion.createSQLQuery(qry).uniqueResult();
             
             tx.commit(); 
         } catch (HibernateException he) 
         { 
             manejaExcepcion(he); 
-            throw he; 
+            throw he;
+
         } finally 
         { 
             sesion.close(); 
         }  
 		
-		return id;
+		
+		return lResp;
+//		if (id == null)
+//			return 0;
+//			
+//		return id.longValue();
 	}
 	
 	public static long nuevoUsuario(Usuario usuario){

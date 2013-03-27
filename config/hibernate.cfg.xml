@@ -24,6 +24,7 @@
         <mapping resource="mappings/Proveedor.hbm.xml"/>
  		<mapping resource="mappings/StockProducto.hbm.xml"/>
  		<mapping resource="mappings/Factura.hbm.xml"/>
+        <mapping resource="mappings/Usuario.hbm.xml"/>
  		
     </session-factory>
 

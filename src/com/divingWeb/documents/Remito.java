@@ -2,6 +2,8 @@ package com.divingWeb.documents;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import com.divingWeb.conexionDAO.TransactionDAO;
@@ -17,7 +19,7 @@ public class Remito extends Documento {
 	private String tipoMovimiento;
 	
 	public Remito(){
-		lProductos = new HashSet<Producto>();
+		lProductos = new LinkedList<Producto>();
 		cliente = null;
 		proveedor = null;
 		cantTotalProductos = 0;
@@ -85,10 +87,10 @@ public class Remito extends Documento {
 		this.id = id;
 	}
 
-	public Set<Producto> getlProductos() {
+	public List<Producto> getlProductos() {
 		return lProductos;
 	}
-	public void setlProductos(Set<Producto> lProductos) {
+	public void setlProductos(LinkedList<Producto> lProductos) {
 		this.lProductos = lProductos;
 	}
 	public Usuario getUsuario() {

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.divingWeb.elememts.Usuario" table="usuario">
+
+        <id name="id">
+            <generator class="native" />
+        </id>
+
+        <property name="usuario" />
+        <property name="pass" />
+        <property name="nombre" />
+        <property name="apellido" />
+        
+        <property name="categoria" />
+        <property name="sucursal" />
+        
+<!--         <property name="objSupervisor" /> -->
+        
+        <property name="supervisor" />
+        <property name="administrador" />
+        <property name="estado" />
+
+<!-- 	List<Cliente> lClFavoritos; -->
+<!-- 	List<Cliente> lClHistorico; -->
+
+    </class>
+    
+    <sql-query name="call_sp_login">
+    	<return alias="newUsuario" class="com.divingWeb.elememts.Usuario">
+        	<return-property name="id" column="@idUsuario"/>
+         	<return-property name="estado" column="@estado"/>
+          	<return-property name="supervisor" column="@msj"/>
+         </return> 
+	      { CALL sp_login ('hernan','hernan',@idUsuario,@estado,@msj)}
+	      {SELECT @idUsuario,@estado,@msj }
+	</sql-query>
+    
+</hibernate-mapping>

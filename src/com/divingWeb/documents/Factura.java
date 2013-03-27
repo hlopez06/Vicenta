@@ -1,8 +1,10 @@
 package com.divingWeb.documents;
 
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import com.divingWeb.conexionDAO.TransactionDAO;
 import com.divingWeb.elememts.Producto;
@@ -15,7 +17,7 @@ public class Factura extends Documento{
 	
 	public Factura()
 	{
-		lProductos = new HashSet<Producto>();
+		lProductos = new LinkedList<Producto>();
 		cliente = null;
 		totalBruto = 0;
 		totalMasIva = 0;
@@ -70,9 +72,15 @@ public class Factura extends Documento{
 	
 	public void clearProductos(){
 		super.clearProductos();
+		
+		totalBruto = 0;
+		totalMasIva = 0;
+		cantTotalProductos = 0;
+		cantElemProductos = 0;
+		
 	}
 	
-	public Set<Producto> listProductos()
+	public List<Producto> listProductos()
 	{	
 		return lProductos;
 	}
@@ -93,11 +101,11 @@ public class Factura extends Documento{
 		this.totalMasIva = totalMasIva;
 	}
 
-	public Set<Producto> getlProductos() {
+	public List<Producto> getlProductos() {
 		return lProductos;
 	}
 
-	public void setlProductos(Set<Producto> lProductos) {
+	public void setlProductos(List<Producto> lProductos) {
 		this.lProductos = lProductos;
 	}
 

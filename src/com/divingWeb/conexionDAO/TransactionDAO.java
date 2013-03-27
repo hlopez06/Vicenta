@@ -1,6 +1,7 @@
 package com.divingWeb.conexionDAO;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.HibernateException;
@@ -19,7 +20,7 @@ public static int remitoAction(Remito remito){
 		
 		int updateEntities = 0;
 		
-		Set<Producto> lProductos = remito.getlProductos();
+		List<Producto> lProductos = remito.getlProductos();
 		
 		if (!lProductos.isEmpty() && !(remito.getProveedor() == null && remito.getCliente() == null ) ){
 			String accion = remito.signoMovimiento();
@@ -57,7 +58,7 @@ public static int remitoAction(Remito remito){
 
 	public static void actionFactura(Factura factura){
 	
-		Set<Producto> lProductos = factura.getlProductos();
+		List<Producto> lProductos = factura.getlProductos();
 		String qry = "";
 		
 		if (!lProductos.isEmpty() && factura.getCliente() != null ){

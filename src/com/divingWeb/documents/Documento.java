@@ -1,7 +1,9 @@
 package com.divingWeb.documents;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import com.divingWeb.conexionDAO.ProductDAO;
 import com.divingWeb.elememts.Cliente;
@@ -14,7 +16,7 @@ public abstract class Documento {
 	static float IVA = 0.21F;
 	
 	protected long id;
-	protected Set<Producto> lProductos;
+	protected List<Producto> lProductos;
 	protected Usuario usuario;
 	protected int nroDocumento;
 	protected int cantTotalProductos;
@@ -112,10 +114,10 @@ public abstract class Documento {
 		this.id = id;
 	}
 
-	public Set<Producto> getlProductos() {
+	public List<Producto> getlProductos() {
 		return lProductos;
 	}
-	public void setlProductos(Set<Producto> lProductos) {
+	public void setlProductos(List<Producto> lProductos) {
 		this.lProductos = lProductos;
 	}
 	public Usuario getUsuario() {
