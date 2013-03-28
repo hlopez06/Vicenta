@@ -37,25 +37,31 @@ public class ProductDAO extends ConexionDAO{
 		
 		List<Producto> lproductos = null;
 		String query = " FROM com.divingWeb.elememts.Producto ";
+		String qryOR = "(";
+		String qryAND = "";
 		
 		if (termino.length() > 0 ){
 			query = query.concat("WHERE");
 		
 			if(nombre.length() > 0){
-				query = query.concat(" nombre like '%" + nombre + "%'");
+				qryAND = qryAND.concat(" AND nombre like '%" + nombre + "%'");
 			} else {
-				query = query.concat(" nombre like '%" + termino + "%'");
+				qryOR = qryOR.concat(" nombre like '%" + termino + "%'");
 			}
 			if(detalle.length() > 0){
-				query = query.concat(" OR detalle like '%" + detalle + "%'");
+				qryAND = qryAND.concat(" AND detalle like '%" + detalle + "%'");
 			} else {
-				query = query.concat(" OR detalle like '%" + termino + "%'");
+				qryOR = qryOR.concat(" OR detalle like '%" + termino + "%'");
 			}
 			if(categoria.length() > 0){
-				query = query.concat(" OR categoria like '%" + categoria + "%'");
+				qryAND = qryAND.concat(" AND categoria like '%" + categoria + "%'");
 			} else {
-				query = query.concat(" OR categoria like '%" + termino + "%'");
+				qryOR = qryOR.concat(" OR categoria like '%" + termino + "%'");
 			}
+			qryOR = qryOR.concat(")");
+			
+			query = query.concat(qryOR).concat(qryAND).replace("( OR", "(");
+			
 		} else {
 			query = query.concat("WHERE nombre like '%" + nombre + "%' AND detalle like '%" + detalle + "%' AND categoria like '%" + categoria + "%'");
 		}

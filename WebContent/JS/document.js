@@ -414,7 +414,7 @@ Product = {
 						}else{
 							div = '<a style="margin: 2px 22px;" >No hay resultados para <i>"' + termino + '"</i><a>';
 							$("#listProductsSearched").empty;
-							$("#listProductsSearched").add(div);
+							$("#listProductsSearched").append(div);
 						}
 						$("#listProductsSearched").show();
 	
