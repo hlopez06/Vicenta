@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.divingWeb.documents.RemitoIngreso" table="remitosIngreso" >
+
+        <id name="id" column="id_Remito">  
+            <generator class="native" />
+        </id>
+        
+        <property name="claseDocumento" /> 
+        <property name="tipoDocumento" />
+        <property name="nroDocumento" />  
+        <property name="tipoMovimiento" /> 
+        <property name="signo" /> 
+        <property name="cantTotalProductos" /> 
+        <property name="cantElemProductos" />
+        <property name="dia" />
+        
+		<many-to-one name="proveedor" cascade="persist,merge,save-update"/> 
+        
+        <list name="lProductos" table="productosRemitoIngreso" cascade="all">
+			<key column="id_Remito" />
+			<list-index/>
+			<many-to-many column="idProducto" class="com.divingWeb.elememts.Producto" />
+		</list>
+    </class>
+</hibernate-mapping>

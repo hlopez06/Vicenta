@@ -80,11 +80,6 @@ public class Factura extends Documento{
 		
 	}
 	
-	public List<Producto> listProductos()
-	{	
-		return lProductos;
-	}
-	
 	public float getTotalBruto(){
 		return this.totalBruto;
 	}

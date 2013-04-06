@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.divingWeb.documents.Remito;
+import com.divingWeb.documents.RemitoEgreso;
+import com.divingWeb.documents.RemitoIngreso;
 
 /**
  * Servlet implementation class ModeRemito
@@ -29,6 +30,7 @@ public class ModeRemito extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		RequestDispatcher disp;
 		
 		String tipoMovimiento = request.getParameter("tm" ).trim();
@@ -48,6 +50,10 @@ public class ModeRemito extends HttpServlet {
 			request.setAttribute("pane_left_product", true);
 			request.setAttribute("actionBool", true);
 			request.setAttribute("actionName", "Ejecutar");
+			
+			session.setAttribute("documento", new RemitoEgreso());
+
+			
 		} else {
 			request.setAttribute("documento", "remito");
 			request.setAttribute("claseJS", "Remito");
@@ -63,9 +69,9 @@ public class ModeRemito extends HttpServlet {
 			request.setAttribute("pane_left_product", true);
 			request.setAttribute("actionBool", true);
 			request.setAttribute("actionName", "Ejecutar");
+
+			session.setAttribute("documento", new RemitoIngreso());
 		}
-		HttpSession session = request.getSession();
-		session.setAttribute("documento", new Remito());
 		
 		disp = getServletContext().getRequestDispatcher("/JSP/general.jsp");
 		

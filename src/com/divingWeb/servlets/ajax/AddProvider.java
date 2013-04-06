@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.divingWeb.conexionDAO.ClientDAO;
-import com.divingWeb.conexionDAO.ProviderDAO;
-import com.divingWeb.documents.Documento;
 import com.divingWeb.documents.Remito;
 import com.google.gson.Gson;
 
@@ -33,13 +30,13 @@ public class AddProvider extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		
-		int idProveedor = Integer.parseInt( request.getParameter("idProveedor").trim() );
+		int idPersona = Integer.parseInt( request.getParameter("idProveedor").trim() );
 		
-		if ( idProveedor > 0 ) {
+		if ( idPersona > 0 ) {
 			
 			Remito documento = (Remito)request.getSession().getAttribute("documento");
 			
-			documento.setProveedor(ProviderDAO.buscarProveedor(idProveedor));
+			documento.setRemitentePorID(idPersona);
 			
 			Gson gson = new Gson();
 			String jsonOutput = gson.toJson(documento);

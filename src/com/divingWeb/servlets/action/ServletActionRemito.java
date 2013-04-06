@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.divingWeb.conexionDAO.DepositoDAO;
 import com.divingWeb.documents.Remito;
 
 /**
@@ -37,16 +36,14 @@ public class ServletActionRemito extends HttpServlet {
 		
 		response.setContentType("application/json");
 		
-		String tipoMovimiento = request.getParameter("tipoMovimiento").trim();
+		Long persona = Long.parseLong( request.getParameter("idPersona").trim() );
 		
 		Remito remito = (Remito)request.getSession().getAttribute("documento");
+				
+		remito.setRemitentePorID(persona);
 		
-		remito.setTipoMovimiento(tipoMovimiento);
-		
-		DepositoDAO.remitoAction(remito);
-		
-		remito.clearProductos();
-		
+		remito.action();
+				
 		PrintWriter pw = response.getWriter();
 		
 		pw.print("{\"objDocumento\":{\"estado\":\"ok\",\"msj\":\"ninguno\"}}");

@@ -1,36 +1,36 @@
 package com.divingWeb.documents;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import com.divingWeb.conexionDAO.TransactionDAO;
 import com.divingWeb.elememts.Cliente;
 import com.divingWeb.elememts.Deposito;
-import com.divingWeb.elememts.Proveedor;
 import com.divingWeb.elememts.Producto;
 import com.divingWeb.elememts.Usuario;
 
-public class Remito extends Documento {
+public abstract class Remito extends Documento {
 	
-	private Proveedor proveedor;
-	private String tipoMovimiento;
+	public String tipoMovimiento;
+	public String signo;
 	
 	public Remito(){
+		tipoDocumento = "remito";
 		lProductos = new LinkedList<Producto>();
 		cliente = null;
-		proveedor = null;
 		cantTotalProductos = 0;
 		cantElemProductos = 0;
-		tipoDocumento = "remito";
-		tipoMovimiento = "ingreso";
 	}
 	
 	public boolean action(){
 		
-		TransactionDAO.remitoAction(this);
+		if (existsRemitente()){
+		
+			TransactionDAO.remitoAction(this);
+		
+			clearProductos();
+		}
 		
 		return true;
 	}
@@ -40,32 +40,13 @@ public class Remito extends Documento {
 		
 	}
 	
-	public String signoMovimiento(){
-		String signo;
-		
-		if (tipoMovimiento.contains("ingreso"))
-		{
-			signo = "+";
-		} else if (tipoMovimiento.contains("egreso")){
-			signo = "-";
-		} else {
-			signo = "error";
-		}
-		
-		return signo;
-	}
-	
 	public void clearProductos(){
 		super.clearProductos();
 	}
-
-	public Proveedor getProveedor() {
-		return proveedor;
-	}
 	
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
-	}
+	public abstract Boolean setRemitentePorID (long idProveedor);
+		
+	public abstract Boolean existsRemitente();
 	
 	public String getTipoMovimiento() {
 		return tipoMovimiento;
@@ -93,6 +74,7 @@ public class Remito extends Documento {
 	public void setlProductos(LinkedList<Producto> lProductos) {
 		this.lProductos = lProductos;
 	}
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -160,5 +142,12 @@ public class Remito extends Documento {
 		this.deposito = deposito;
 	}
 
+	public String getSigno() {
+		return signo;
+	}
+
+	public void setSigno(String signo) {
+		this.signo = signo;
+	}
 	
 }

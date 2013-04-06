@@ -2,7 +2,6 @@ package com.divingWeb.conexionDAO;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.HibernateException;
 
@@ -22,8 +21,8 @@ public static int remitoAction(Remito remito){
 		
 		List<Producto> lProductos = remito.getlProductos();
 		
-		if (!lProductos.isEmpty() && !(remito.getProveedor() == null && remito.getCliente() == null ) ){
-			String accion = remito.signoMovimiento();
+		if (!lProductos.isEmpty() && remito.existsRemitente() ){
+			String accion = remito.getSigno();
 			Iterator<Producto> listIterator = lProductos.iterator();
 			
 			try 
@@ -44,6 +43,8 @@ public static int remitoAction(Remito remito){
 		            		            	
 	            	++updateEntities;
 	            }
+	            sesion.save(remito);
+	            
 	            tx.commit();
 		
 	        } catch (HibernateException he) { 
@@ -90,37 +91,4 @@ public static int remitoAction(Remito remito){
 	        }
 		}
 	}
-	
-	public static int facturarProductos(Factura factura){
-		
-		int updateEntities = 0;
-		String qryUpdate = "";
-		
-		Iterator<Producto> listIterator = factura.getlProductos().iterator();
-		
-		while( listIterator.hasNext() ) {
-			Producto pr = (Producto) listIterator.next();
-	     
-	          qryUpdate += " UPDATE stock stk SET stk.cantidad=cantidad - " + pr.getCantidad() + " WHERE stk.id =" + pr.getId() + ";";
-		}
-		
-		try 
-        { 
-            iniciaOperacion();
-
-	         updateEntities = sesion.createQuery( qryUpdate ).executeUpdate();
-            
-            tx.commit(); 
-        } catch (HibernateException he) 
-        { 
-            manejaExcepcion(he); 
-            throw he; 
-        } finally 
-        { 
-            sesion.close(); 
-        }
-		
-		return updateEntities;
-	}
-
 }

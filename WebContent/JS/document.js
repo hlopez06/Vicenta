@@ -92,7 +92,7 @@ List = {
 			Menu.init();
 			
 			var pts = {
-					name : "List",
+					name : "LS",
 		 			lineMax : "lineMax",
 					divTitulo : '<table>'+'<tr>'+'<th>Codigo </th>'+'<th>Precio</th>'+'<th>Cantidad</th>'+'</tr>',
 					divContent : function (element, index ) {
@@ -102,14 +102,15 @@ List = {
 						'<td class="prStock">' + '<input value="' + element.cantidad + '" /></td>' +
 					'</tr>';
 					},
-					bodyList : "bodyList"
+					bodyList : "bodyList",
+					divPie : ""
 				};
-				LL = new listPage(pts);
+				LS = new listPage(pts);
 				
-				List.callStock();
+				List.callStock(LS);
 		},
 
-		callStock : function(){
+		callStock : function(objLista){
 
 				$.ajax({
 					url: "product/selectStock",
@@ -121,8 +122,8 @@ List = {
 					success: function(jsResp){
 						if (jsResp.estado == "ok"){
 
-							LL.newList(jsResp.list);
-							LL.loadPage(1);
+							objLista.newList(jsResp.list);
+							objLista.loadPage(1);
 							
 						}else{
 							alert(jsResp.msj);
@@ -168,25 +169,22 @@ Factura = {
 Remito = {
 		action : function(){
 
-			var tipo = getID("rm-tipoMovimiento");
-			
-			if (tipo == null){
-				alert("Error al setear tipo de remito.");
-				return; 
-			}
+			var tipo = getID("rm-tipoMovimiento").value;
 				
 			var persona = null; 
 			if (document.getElementsByName("pr-id") && tipo == "ingreso"){
 				persona = document.getElementsByName("pr-id").item(0).value;
 			} else if (document.getElementsByName("cl-id") && tipo == "egreso"){
 				persona = document.getElementsByName("cl-id").item(0).value;
+			} else {
+				alert("");
 			}
 			
-			if (persona != null && persona != ""){
+			if (persona != null && persona > 0){
 
 				$.ajax({
 					url: "document/remito/action",
-					data: "tipoMovimiento=" + tipo + "&persona=" + persona,
+					data: "tipoMovimiento=" + tipo + "&idPersona=" + persona,
 					type: "POST",
 					typedata: "json",
 					async: false,

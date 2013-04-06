@@ -9,7 +9,8 @@ import org.hibernate.criterion.Restrictions;
 import com.divingWeb.elememts.Proveedor;
 
 public abstract class ProviderDAO extends ConexionDAO{
-public static long getIdProveedor(String proveedor, String pass){
+
+	public static long getIdProveedor(String proveedor, String pass){
 		
 		long id = 1;
 		
